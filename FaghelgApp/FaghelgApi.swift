@@ -1,6 +1,5 @@
 import UIKit
 import CoreData
-import BrightFutures
 
 protocol FaghelgApiProtocol {
     func didRecieveResponse(results: NSDictionary)
@@ -16,12 +15,14 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     
     var programDAO: ProgramDAO!
     var personDAO: PersonDAO!
+    var imageDAO: ImageDAO!
 
     init(managedObjectContext: NSManagedObjectContext) {
         super.init()
         self.managedObjectContext = managedObjectContext
         self.programDAO = ProgramDAO(managedObjectContext: managedObjectContext)
         self.personDAO = PersonDAO(managedObjectContext: managedObjectContext)
+        self.imageDAO = ImageDAO(managedObjectContext: managedObjectContext)
     }
     
     func getProgram(programViewController: ProgramViewController) {
@@ -87,5 +88,38 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             var sortedEmployees = sorted(employees!){ $0.fullName < $1.fullName }
             employeeViewController.showEmployees(sortedEmployees)
         })
+    }
+    
+    func getImage(imageUrl: String) -> UIImage? {
+        var managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        
+        let shortName = imageUrl.componentsSeparatedByString("/").last!
+        
+        if let imageFromDatabase = imageDAO.getImage(shortName) {
+            return UIImage(data: imageFromDatabase.imageData)
+        }
+        
+        if let newBilde = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
+            newBilde.save()
+            return UIImage(data: newBilde.imageData)!
+        }
+        
+        return nil
+    }
+    
+    func downloadImageFromWeb(imageUrl: String, shortName: String, managedObjectContext: NSManagedObjectContext) -> Bilde? {
+        let url = NSURL(string:imageUrl);
+        var err: NSError? = nil
+        
+        if let imageData = NSData(contentsOfURL: url!,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err) {
+            
+            var bilde: Bilde = Bilde(entity: NSEntityDescription.entityForName("Bilde", inManagedObjectContext: managedObjectContext)!, insertIntoManagedObjectContext: managedObjectContext)
+            
+            bilde.shortName = shortName
+            bilde.imageData = imageData
+            return bilde
+        }
+        
+        return nil
     }
 }

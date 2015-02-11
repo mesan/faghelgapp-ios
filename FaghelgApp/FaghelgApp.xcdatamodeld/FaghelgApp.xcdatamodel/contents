@@ -7,6 +7,7 @@
     <entity name="Event" representedClassName="FaghelgApp.Event" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="hostNames" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,7 +22,7 @@
     </entity>
     <elements>
         <element name="Bilde" positionX="-36" positionY="99" width="128" height="30"/>
-        <element name="Event" positionX="36" positionY="108" width="128" height="28"/>
+        <element name="Event" positionX="36" positionY="108" width="128" height="165"/>
         <element name="Person" positionX="169" positionY="-27" width="128" height="105"/>
     </elements>
 </model>

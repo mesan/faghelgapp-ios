@@ -224,10 +224,10 @@
                                         <connections>
                                             <outlet property="abstractLabel" destination="wFn-SL-8tR" id="cAm-B9-MZ9"/>
                                             <outlet property="durationLabel" destination="h7v-hE-bpJ" id="RRs-yz-T42"/>
+                                            <outlet property="eventImage" destination="5yD-cu-riy" id="UbZ-SE-fph"/>
                                             <outlet property="extraInfoView" destination="ezT-QI-5gh" id="HUp-U8-d6k"/>
                                             <outlet property="extraInfoViewHeight" destination="gaa-Ns-xSr" id="04q-sw-r4T"/>
                                             <outlet property="nameLabel" destination="OXG-Tt-EkP" id="GIH-zg-Ede"/>
-                                            <outlet property="personImage" destination="5yD-cu-riy" id="1oL-Pr-DtC"/>
                                             <outlet property="timeLabel" destination="W3G-1R-l16" id="Qza-sM-TWJ"/>
                                             <outlet property="titleLabel" destination="5GC-hv-T71" id="Vfo-ip-Iud"/>
                                         </connections>

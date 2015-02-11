@@ -1,5 +1,4 @@
 import UIKit
-import BrightFutures
 
 class EmployeeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -38,7 +37,7 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
 
         let person = employees[indexPath.row]
 
-        employeeCell.setCell(person.fullName!, shortName: person.shortName!)
+        employeeCell.setEmployee(person)
 
         // return the cell
         return employeeCell

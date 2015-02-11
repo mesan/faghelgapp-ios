@@ -15,7 +15,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var abstractLabel: UILabel!
-    @IBOutlet weak var personImage: UIImageView!
+    @IBOutlet weak var eventImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var extraInfoView: UIView!
     
@@ -29,11 +29,11 @@ class EventTableViewCell: UITableViewCell {
     
         self.extraInfoViewHeightConstraintConstant = self.extraInfoViewHeight.constant
         
-        // Rounding employee image
-        personImage.layer.cornerRadius = personImage.frame.size.width / 2
-        personImage.clipsToBounds = true
-        personImage.layer.borderWidth = 1.0
-        personImage.layer.borderColor = UIColor.whiteColor().CGColor
+        // Rounding event image
+        eventImage.layer.cornerRadius = eventImage.frame.size.width / 2
+        eventImage.clipsToBounds = true
+        eventImage.layer.borderWidth = 1.0
+        eventImage.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     func setEvent(event: Event) {
@@ -58,17 +58,11 @@ class EventTableViewCell: UITableViewCell {
         
         abstractLabel.text = event.desc
         titleLabel.text = event.title
-        if (event.responsible == nil && event.hostNames != nil && event.hostNames.lowercaseString == "faggruppen") {
-            var bgImage = getImage(event.hostNames.lowercaseString, profileImageUrl: "http://faghelg.s3-website-eu-west-1.amazonaws.com/" + event.hostNames.lowercaseString + ".png");
-            personImage.image = bgImage
-        }
-        else if (event.responsible != nil && event.responsible?.profileImageUrl != nil && event.responsible?.shortName != nil) {
-            var bgImage = getImage(event.responsible!.shortName!, profileImageUrl: event.responsible!.profileImageUrl!);
-            personImage.image = bgImage
-        }
-        else {
-            personImage.image = UIImage(named: "ukjent");
-        }
+        
+        var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        var image = faghelgApi.getImage(event.eventImageUrl)
+        eventImage.image = image
     }
     
     func showExtraInfoView(show: Bool) {
@@ -80,43 +74,5 @@ class EventTableViewCell: UITableViewCell {
         
         self.extraInfoView.hidden = !show
         self.layoutIfNeeded()
-    }
-    
-    func getImage(shortName: String, profileImageUrl: String) -> UIImage? {
-        var managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-        
-        var nsFetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Bilde")
-        nsFetchRequest.includesPendingChanges = false
-        nsFetchRequest.predicate = NSPredicate(format: "shortName = %@", shortName)
-        var existingBildes: NSArray = managedObjectContext?.executeFetchRequest(nsFetchRequest, error: nil) as NSArray!
-        var existingBilde: Bilde? = existingBildes.firstObject as? Bilde
-        
-        if (existingBilde != nil) {
-            return UIImage(data: existingBilde!.imageData)!
-        }
-        
-
-        if let newBilde = getImageFromWeb(profileImageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
-            newBilde.save()
-            return UIImage(data: newBilde.imageData)!
-        }
-        
-        return nil
-    }
-    
-    func getImageFromWeb(profileImageUrl: String, shortName: String, managedObjectContext: NSManagedObjectContext) -> Bilde? {
-        let url = NSURL(string:profileImageUrl);
-        var err: NSError? = nil
-        
-        if let imageData = NSData(contentsOfURL: url!,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err) {
-        
-            var bilde: Bilde = Bilde(entity: NSEntityDescription.entityForName("Bilde", inManagedObjectContext: managedObjectContext)!, insertIntoManagedObjectContext: managedObjectContext)
-        
-            bilde.shortName = shortName
-            bilde.imageData = imageData
-            return bilde
-        }
-        
-        return nil
     }
 }

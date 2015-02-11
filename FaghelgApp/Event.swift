@@ -7,6 +7,7 @@ class Event: NSManagedObject {
     @NSManaged var desc: String!
     @NSManaged var title: String!
     @NSManaged var hostNames: String!
+    @NSManaged var eventImageUrl: String!
     @NSManaged var tags: String?
     @NSManaged var responsible: Person?
 }

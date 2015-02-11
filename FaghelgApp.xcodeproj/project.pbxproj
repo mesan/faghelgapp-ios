@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		1D1AC15119D0804500628488 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1AC15019D0804500628488 /* EmployeeCell.swift */; };
 		4524AAAE19D083A900CCF884 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */; };
-		4524AAB219D08C7900CCF884 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1AC14A19D07CAC00628488 /* BrightFutures.framework */; };
-		4524AAB319D08C7900CCF884 /* BrightFutures.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D1AC14A19D07CAC00628488 /* BrightFutures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		96234E7719C88905006811D5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96234E7619C88905006811D5 /* CoreData.framework */; };
 		963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 963636AA19D06E1500021DA1 /* FaghelgApp.xcdatamodeld */; };
+		9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */; };
 		9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */; };
 		9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7824531A8A77EA00208C2D /* BaseDAO.swift */; };
 		9F78245D1A8A7FBD00208C2D /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F78245C1A8A7FBD00208C2D /* JsonParser.swift */; };
-		9F78245F1A8A819500208C2D /* EventDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F78245E1A8A819500208C2D /* EventDAO.swift */; };
 		9F8D4CB319BE4A6100DA5A61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D4CB219BE4A6100DA5A61 /* AppDelegate.swift */; };
 		9F8D4CBE19BE4A6100DA5A61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F8D4CBD19BE4A6100DA5A61 /* Images.xcassets */; };
 		9F8D4CCA19BE4A6100DA5A61 /* FaghelgAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D4CC919BE4A6100DA5A61 /* FaghelgAppTests.swift */; };
@@ -32,20 +30,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1D1AC14919D07CAC00628488 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D1AC14319D07CAC00628488 /* BrightFutures.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9DF0815194470060083F7F2;
-			remoteInfo = BrightFutures;
-		};
-		1D1AC14B19D07CAC00628488 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D1AC14319D07CAC00628488 /* BrightFutures.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E9DF0820194470060083F7F2;
-			remoteInfo = BrightFuturesTests;
-		};
 		9F8D4CC419BE4A6100DA5A61 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F8D4CA519BE4A6100DA5A61 /* Project object */;
@@ -62,7 +46,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4524AAB319D08C7900CCF884 /* BrightFutures.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,16 +53,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1D1AC14319D07CAC00628488 /* BrightFutures.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BrightFutures.xcodeproj; path = lib/BrightFutures/BrightFutures.xcodeproj; sourceTree = "<group>"; };
 		1D1AC15019D0804500628488 /* EmployeeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
 		96234E7619C88905006811D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		96234EF519C8B11D006811D5 /* FaghelgApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FaghelgApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		963636AB19D06E1500021DA1 /* FaghelgApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FaghelgApp.xcdatamodel; sourceTree = "<group>"; };
+		9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
 		9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9F7824531A8A77EA00208C2D /* BaseDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
 		9F78245C1A8A7FBD00208C2D /* JsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
-		9F78245E1A8A819500208C2D /* EventDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDAO.swift; sourceTree = "<group>"; };
 		9F8D4CAD19BE4A6100DA5A61 /* FaghelgApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaghelgApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8D4CB119BE4A6100DA5A61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F8D4CB219BE4A6100DA5A61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,7 +86,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4524AAB219D08C7900CCF884 /* BrightFutures.framework in Frameworks */,
 				96234E7719C88905006811D5 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,15 +100,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D1AC14419D07CAC00628488 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				1D1AC14A19D07CAC00628488 /* BrightFutures.framework */,
-				1D1AC14C19D07CAC00628488 /* BrightFuturesTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9F70970919C8A85200D805CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				9FF4906919DD91F000A42749 /* CoreImage.framework */,
-				1D1AC14319D07CAC00628488 /* BrightFutures.xcodeproj */,
 				96234E7619C88905006811D5 /* CoreData.framework */,
 				9F8D4CAF19BE4A6100DA5A61 /* FaghelgApp */,
 				9F8D4CC619BE4A6100DA5A61 /* FaghelgAppTests */,
@@ -225,7 +196,7 @@
 				9F9A43741A8A6E3500E678F1 /* ProgramDAO.swift */,
 				9F9A43761A8A774300E678F1 /* PersonDAO.swift */,
 				9F7824531A8A77EA00208C2D /* BaseDAO.swift */,
-				9F78245E1A8A819500208C2D /* EventDAO.swift */,
+				9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */,
 			);
 			name = DAO;
 			sourceTree = "<group>";
@@ -310,12 +281,6 @@
 			mainGroup = 9F8D4CA419BE4A6100DA5A61;
 			productRefGroup = 9F8D4CAE19BE4A6100DA5A61 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 1D1AC14419D07CAC00628488 /* Products */;
-					ProjectRef = 1D1AC14319D07CAC00628488 /* BrightFutures.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				9F8D4CAC19BE4A6100DA5A61 /* FaghelgApp */,
@@ -323,23 +288,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		1D1AC14A19D07CAC00628488 /* BrightFutures.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BrightFutures.framework;
-			remoteRef = 1D1AC14919D07CAC00628488 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		1D1AC14C19D07CAC00628488 /* BrightFuturesTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = BrightFuturesTests.xctest;
-			remoteRef = 1D1AC14B19D07CAC00628488 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9F8D4CAB19BE4A6100DA5A61 /* Resources */ = {
@@ -365,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */,
 				9F78245D1A8A7FBD00208C2D /* JsonParser.swift in Sources */,
 				9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */,
 				963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */,
@@ -376,7 +325,6 @@
 				9F9A43751A8A6E3500E678F1 /* ProgramDAO.swift in Sources */,
 				9FF6491119C87FDB004BCFEB /* Person.swift in Sources */,
 				9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */,
-				9F78245F1A8A819500208C2D /* EventDAO.swift in Sources */,
 				9F9A43771A8A774300E678F1 /* PersonDAO.swift in Sources */,
 				9F8D4CB319BE4A6100DA5A61 /* AppDelegate.swift in Sources */,
 				9FF648FC19C87424004BCFEB /* ProgramViewController.swift in Sources */,

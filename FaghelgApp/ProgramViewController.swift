@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import BrightFutures
 import CoreData
 
 class ProgramViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {

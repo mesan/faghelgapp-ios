@@ -22,6 +22,7 @@ class JsonParser {
         let endTime = jsonDict["end"] as Double
         event.end = NSDate(timeIntervalSince1970: endTime)
         event.title = jsonDict["title"] as String
+        event.eventImageUrl = jsonDict["eventImageUrl"] as String
         event.desc = jsonDict["description"] as? String
         event.hostNames = jsonDict["hostNames"] as? String
         

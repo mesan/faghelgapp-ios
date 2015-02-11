@@ -1,11 +1,3 @@
-//
-//  EmployeeCell.swift
-//  FaghelgApp
-//
-//  Created by Patrick Romstad on 16/09/14.
-//  Copyright (c) 2014 Mesan. All rights reserved.
-//
-
 import UIKit
 
 class EmployeeCell: UITableViewCell {
@@ -38,10 +30,14 @@ class EmployeeCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCell(fullName: String, shortName: String) {
-        self.employeeImage.image = UIImage(named: "\(shortName).png")
-        self.fullName.text = fullName
-        self.shortName = shortName
+    func setEmployee(employee: Person) {
+        var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        var image = faghelgApi.getImage(employee.profileImageUrl!)
+        
+        self.employeeImage.image = image
+        self.fullName.text = employee.fullName
+        self.shortName = employee.shortName
     }
 
 }
