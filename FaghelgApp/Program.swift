@@ -1,21 +1,18 @@
 import Foundation
-import CoreData
 
-class Program: NSManagedObject {
-    @NSManaged var numberOfEvents: NSNumber!
-    @NSManaged var events: NSSet
-}
-
-extension Program {
+class Program: NSObject {
+    var numberOfEvents: NSNumber!
+    var events: NSMutableSet!
+    
+    override init() {
+        numberOfEvents = NSNumber()
+        events = NSMutableSet()
+    }
     func addEvent(event: Event) {
-        self.mutableSetValueForKey("events").addObject(event)
+        events.addObject(event)
     }
     
     func addEvents(events: [Event]) {
-        self.mutableSetValueForKey("events").addObjectsFromArray(events);
-    }
-    
-    func getAllEvents() -> [Event]{
-        return self.events.allObjects as [Event]
+        self.events.addObjectsFromArray(events)
     }
 }

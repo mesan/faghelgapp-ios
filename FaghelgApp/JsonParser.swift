@@ -37,7 +37,7 @@ class JsonParser {
     }
     
     class func programFromJson(jsonDict: NSDictionary, managedObjectContext: NSManagedObjectContext) -> Program {
-        var program = Program(entity: NSEntityDescription.entityForName("Program", inManagedObjectContext: managedObjectContext)!, insertIntoManagedObjectContext: nil)
+        var program = Program()
         
         program.numberOfEvents = jsonDict["numberOfEvents"] as? Int
         

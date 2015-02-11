@@ -84,7 +84,8 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                 employees = self.personDAO.getPersons()
             }
             
-            employeeViewController.showEmployees(employees)
+            var sortedEmployees = sorted(employees!){ $0.fullName < $1.fullName }
+            employeeViewController.showEmployees(sortedEmployees)
         })
     }
 }

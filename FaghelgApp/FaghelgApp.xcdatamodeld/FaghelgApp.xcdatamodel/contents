@@ -19,14 +19,9 @@
         <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Program" representedClassName="FaghelgApp.Program" syncable="YES">
-        <attribute name="numberOfEvents" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="events" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Event" syncable="YES"/>
-    </entity>
     <elements>
         <element name="Bilde" positionX="-36" positionY="99" width="128" height="30"/>
         <element name="Event" positionX="36" positionY="108" width="128" height="28"/>
         <element name="Person" positionX="169" positionY="-27" width="128" height="105"/>
-        <element name="Program" positionX="-243" positionY="53" width="128" height="73"/>
     </elements>
 </model>

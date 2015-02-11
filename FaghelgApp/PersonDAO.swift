@@ -11,10 +11,10 @@ class PersonDAO: BaseDAO {
         let fetchRequest = NSFetchRequest(entityName: "Person")
         fetchRequest.includesPendingChanges = true
         
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Person] {
-            return fetchResults
-            
-            // TODO: Sort by fullName
+        if let persons = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Person] {
+            var sortedPersons = sorted(persons){ $0.fullName < $1.fullName }
+            return sortedPersons
+
         }
         else {
             return nil

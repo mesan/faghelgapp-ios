@@ -11,7 +11,7 @@ class ProgramDAO : BaseDAO {
     }
     
     func getProgram() -> Program? {
-        var program = Program(entity: NSEntityDescription.entityForName("Program", inManagedObjectContext: managedObjectContext)!, insertIntoManagedObjectContext: nil)
+        var program = Program()
         let fetchRequest = NSFetchRequest(entityName: "Event")
         fetchRequest.includesPendingChanges = true
         
