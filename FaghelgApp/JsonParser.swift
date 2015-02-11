@@ -28,7 +28,7 @@ class JsonParser {
         if (jsonDict["responsible"] != nil) {
             var responsibleDict: NSDictionary? = jsonDict["responsible"] as? NSDictionary
             
-            event.responsible = personFromJson(jsonDict, managedObjectContext: managedObjectContext)
+            event.responsible = personFromJson(responsibleDict!, managedObjectContext: managedObjectContext)
         }
         
         event.tags = jsonDict["tags"] as? String

@@ -1,5 +1,4 @@
 import UIKit
-import Alamofire
 import CoreData
 import BrightFutures
 
@@ -44,7 +43,6 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
             
             if (jsonResult != nil) {
-                self.programDAO.clearProgram()
                 program = JsonParser.programFromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
                 self.programDAO.saveProgram(program!)
             } else {
@@ -55,7 +53,6 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         })
     }
     
-    // returns a promise of a list of employees
     func getEmployees(employeeViewController: EmployeeViewController) {
         var url : String = HOST + "/persons"
         var request : NSMutableURLRequest = NSMutableURLRequest()
@@ -81,6 +78,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                     let employee = JsonParser.personFromJson(jsonDict, managedObjectContext: self.managedObjectContext!)
                     employees!.append(employee)
                     self.personDAO.savePerson(employee)
+                    self.managedObjectContext?.save(nil);
                 }
             } else {
                 employees = self.personDAO.getPersons()

@@ -13,6 +13,8 @@ class PersonDAO: BaseDAO {
         
         if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Person] {
             return fetchResults
+            
+            // TODO: Sort by fullName
         }
         else {
             return nil
