@@ -284,32 +284,35 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FiS-gz-pLG">
                                 <rect key="frame" x="0.0" y="285" width="320" height="234"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jQV-03-QCd">
-                                        <rect key="frame" x="0.0" y="5" width="320" height="134"/>
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jQV-03-QCd">
+                                        <rect key="frame" x="0.0" y="5" width="320" height="155"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION NAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-oG-brm">
-                                                <rect key="frame" x="20" y="0.0" width="280" height="21"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION NAME" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-oG-brm">
+                                                <rect key="frame" x="20" y="0.0" width="280" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="VcV-Vb-eyr"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFI-5K-DaX">
-                                                <rect key="frame" x="20" y="39" width="280" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFI-5K-DaX">
+                                                <rect key="frame" x="20" y="48" width="280" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="ka1-92-dlN"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOTEL NAME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-TV-9ma">
-                                                <rect key="frame" x="20" y="68" width="280" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="HOTEL NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-TV-9ma">
+                                                <rect key="frame" x="20" y="89" width="280" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HotelDescription" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4U7-GS-m4f">
-                                                <rect key="frame" x="20" y="97" width="280" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="HotelDescription" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4U7-GS-m4f">
+                                                <rect key="frame" x="20" y="118" width="280" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="Nqa-5D-Fw3"/>
                                                 </constraints>
@@ -324,13 +327,13 @@
                                             <constraint firstAttribute="trailing" secondItem="YHf-oG-brm" secondAttribute="trailing" constant="20" id="4fe-us-tie"/>
                                             <constraint firstItem="ZK1-TV-9ma" firstAttribute="leading" secondItem="jQV-03-QCd" secondAttribute="leading" constant="20" id="7PC-s2-UcQ"/>
                                             <constraint firstItem="4U7-GS-m4f" firstAttribute="top" secondItem="ZK1-TV-9ma" secondAttribute="bottom" constant="8" id="BhE-bE-QnZ"/>
-                                            <constraint firstItem="ZK1-TV-9ma" firstAttribute="top" secondItem="NFI-5K-DaX" secondAttribute="bottom" constant="8" id="CB1-KO-DbD"/>
+                                            <constraint firstItem="ZK1-TV-9ma" firstAttribute="top" secondItem="NFI-5K-DaX" secondAttribute="bottom" constant="20" id="CB1-KO-DbD"/>
                                             <constraint firstAttribute="trailing" secondItem="ZK1-TV-9ma" secondAttribute="trailing" constant="20" id="Hsi-mI-CYa"/>
                                             <constraint firstItem="YHf-oG-brm" firstAttribute="top" secondItem="jQV-03-QCd" secondAttribute="top" id="IIt-fM-tpo"/>
                                             <constraint firstItem="4U7-GS-m4f" firstAttribute="leading" secondItem="jQV-03-QCd" secondAttribute="leading" constant="20" id="Rh0-cK-kzr"/>
                                             <constraint firstAttribute="trailing" secondItem="4U7-GS-m4f" secondAttribute="trailing" constant="20" id="WcW-sx-mqp"/>
                                             <constraint firstAttribute="width" constant="320" id="YGJ-pL-Uj3"/>
-                                            <constraint firstItem="NFI-5K-DaX" firstAttribute="top" secondItem="YHf-oG-brm" secondAttribute="bottom" constant="18" id="bod-99-g7G"/>
+                                            <constraint firstItem="NFI-5K-DaX" firstAttribute="top" secondItem="YHf-oG-brm" secondAttribute="bottom" constant="10" id="bod-99-g7G"/>
                                             <constraint firstAttribute="bottom" secondItem="4U7-GS-m4f" secondAttribute="bottom" constant="20" id="eXe-4p-KgM"/>
                                             <constraint firstAttribute="trailing" secondItem="NFI-5K-DaX" secondAttribute="trailing" constant="20" id="wAo-3F-XK1"/>
                                             <constraint firstItem="YHf-oG-brm" firstAttribute="leading" secondItem="jQV-03-QCd" secondAttribute="leading" constant="20" id="yzI-7r-4Je"/>
