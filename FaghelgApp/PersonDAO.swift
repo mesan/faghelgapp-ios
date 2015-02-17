@@ -8,28 +8,18 @@ class PersonDAO: BaseDAO {
     }
     
     func getPersons() -> [Person]? {
-        let fetchRequest = NSFetchRequest(entityName: "Person")
-        fetchRequest.includesPendingChanges = true
         
-        if let persons = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Person] {
+        if let persons = getEntities("Person") as? [Person] {
             var sortedPersons = sorted(persons){ $0.fullName < $1.fullName }
             return sortedPersons
+        }
 
-        }
-        else {
-            return nil
-        }
+        return nil
+
     }
     
     func getPerson(shortName: String) -> Person? {
-        let fetchRequest = NSFetchRequest(entityName: "Person")
-        fetchRequest.predicate = NSPredicate(format: "shortName = %@", shortName)
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Person] {
-            return fetchResults.first
-        }
-        else {
-            return nil
-        }
+        return getEntities("Person", predicate: NSPredicate(format: "shortName = %@", shortName))?.first as? Person
     }
     
     func savePerson(person: Person) -> Person? {

@@ -52,4 +52,22 @@ class JsonParser {
         
         return program
     }
+    
+    class func infoFromJson(jsonDict: NSDictionary, managedObjectContext: NSManagedObjectContext) -> Info {
+        var info = initObject("Info", managedObjectContext: managedObjectContext) as Info
+        info.imageUrl = jsonDict["imageUrl"] as String
+        info.locationName = jsonDict["locationName"] as String
+        info.locationDescription = jsonDict["locationDescription"] as String
+        info.address = jsonDict["address"] as String
+        info.lat = jsonDict["lat"] as String
+        info.lng = jsonDict["lng"] as String
+        info.hotelName = (jsonDict["hotelName"] as String).capitalizedString
+        info.hotelDescription = jsonDict["hotelDescription"] as String
+        
+        return info
+    }
+    
+    class func initObject<T : NSManagedObject>(name: String, managedObjectContext: NSManagedObjectContext) -> T {
+        return T(entity: NSEntityDescription.entityForName(name, inManagedObjectContext: managedObjectContext)!, insertIntoManagedObjectContext: nil)
+    }
 }

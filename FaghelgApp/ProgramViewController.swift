@@ -25,7 +25,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
     }
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var faghelgApi: FaghelgApi!
     
     @IBOutlet weak var tableView: UITableView!
@@ -44,7 +44,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         self.tableView.rowHeight = UITableViewAutomaticDimension
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
 
-        faghelgApi.getProgram(self)
+        faghelgApi.getProgram(showProgram)
     }
     
     func showProgram(program: Program?) {

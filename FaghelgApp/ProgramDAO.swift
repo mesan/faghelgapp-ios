@@ -12,16 +12,13 @@ class ProgramDAO : BaseDAO {
     
     func getProgram() -> Program? {
         var program = Program()
-        let fetchRequest = NSFetchRequest(entityName: "Event")
-        fetchRequest.includesPendingChanges = true
-        
-        if let fetchResults = managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Event] {
-            program.addEvents(fetchResults)
+    
+        if let events = getEntities("Event") as? [Event] {
+            program.addEvents(events)
             return program
         }
-        else {
-            return nil
-        }
+    
+        return nil
     }
     
     func clearProgram() {
@@ -42,13 +39,12 @@ class ProgramDAO : BaseDAO {
         var error: NSError? = nil
         var success = managedObjectContext.save(&error)
         if !success {
-            println(error!.localizedDescription)
+            println("Error while saving program: \(error!.description)")
         }
     }
     
     func saveEvent(event: Event) {
         managedObjectContext.insertObject(event)
-        managedObjectContext.save(nil)
         if let responsible = event.responsible {
             var person = savePerson(responsible)
             event.responsible = person

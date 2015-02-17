@@ -13,7 +13,7 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
 
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        faghelgApi.getEmployees(self)
+        faghelgApi.getEmployees(showEmployees)
     }
 
     override func didReceiveMemoryWarning() {

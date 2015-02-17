@@ -16,6 +16,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     var programDAO: ProgramDAO!
     var personDAO: PersonDAO!
     var imageDAO: ImageDAO!
+    var infoDAO: InfoDAO!
 
     init(managedObjectContext: NSManagedObjectContext) {
         super.init()
@@ -23,20 +24,18 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         self.programDAO = ProgramDAO(managedObjectContext: managedObjectContext)
         self.personDAO = PersonDAO(managedObjectContext: managedObjectContext)
         self.imageDAO = ImageDAO(managedObjectContext: managedObjectContext)
+        self.infoDAO = InfoDAO(managedObjectContext: managedObjectContext)
     }
     
-    func getProgram(programViewController: ProgramViewController) {
-        var url : String = HOST + "/program"
-        var request : NSMutableURLRequest = NSMutableURLRequest()
-        request.URL = NSURL(string: url)
-        request.HTTPMethod = "GET"
+    func getProgram(callback: (Program?) -> Void) {
+        var request = makeRequest("/program")
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var program: Program?
             
             if error != nil {
                 program = self.programDAO.getProgram()
-                programViewController.showProgram(program)
+                callback(program)
                 return
             }
             
@@ -50,22 +49,21 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                 program = self.programDAO.getProgram()
             }
             
-            programViewController.showProgram(program)
+            callback(program)
         })
     }
     
-    func getEmployees(employeeViewController: EmployeeViewController) {
-        var url : String = HOST + "/persons"
-        var request : NSMutableURLRequest = NSMutableURLRequest()
-        request.URL = NSURL(string: url)
-        request.HTTPMethod = "GET"
+    func getEmployees(callback: ([Person]) -> Void) {
+        var request = makeRequest("/persons")
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
             var employees: [Person]?
             
             if error != nil {
+                
                 employees = self.personDAO.getPersons()
-                employeeViewController.showEmployees(employees)
+                var sortedEmployees = sorted(employees!){ $0.fullName < $1.fullName }
+                callback(sortedEmployees)
                 return
             }
             
@@ -86,8 +84,44 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             }
             
             var sortedEmployees = sorted(employees!){ $0.fullName < $1.fullName }
-            employeeViewController.showEmployees(sortedEmployees)
+            callback(sortedEmployees)
         })
+    }
+
+    func getInfo(callback: (Info?) -> Void) {
+        var request = makeRequest("/info")
+        
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            var info: Info?
+            
+            if error != nil {
+                info = self.infoDAO.getInfo()
+                callback(info)
+                return
+            }
+            
+            var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
+            let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
+            
+            if (jsonResult != nil) {
+                info = JsonParser.infoFromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
+                self.infoDAO.persist(info!)
+            } else {
+                info = self.infoDAO.getInfo()
+            }
+            
+            callback(info)
+        })
+
+        
+    }
+    
+    func makeRequest(path: String) -> NSMutableURLRequest {
+        var url = HOST + path
+        var request = NSMutableURLRequest()
+        request.URL = NSURL(string: url)
+        request.HTTPMethod = "GET"
+        return request
     }
     
     func getImage(imageUrl: String) -> UIImage? {
@@ -100,7 +134,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         }
         
         if let newBilde = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
-            newBilde.save()
+            imageDAO.persist(newBilde)
             return UIImage(data: newBilde.imageData)!
         }
         
@@ -122,4 +156,6 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         
         return nil
     }
+    
+
 }
