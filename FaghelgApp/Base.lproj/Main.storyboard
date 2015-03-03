@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ASg-Ih-XTD">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -371,7 +372,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDA-eK-Nc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1034" y="673"/>
+            <point key="canvasLocation" x="-1574" y="701"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="TAP-K7-Ynf">
+            <objects>
+                <viewController id="C3R-gn-uol" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7cl-nG-bSa"/>
+                        <viewControllerLayoutGuide type="bottom" id="DBh-J4-kAH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="IIi-oZ-ufD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="ozi-vc-p8e"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MPg-RC-jxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1034" y="701"/>
         </scene>
         <!--Faghelgapp-->
         <scene sceneID="AX7-Sl-eHz">
@@ -389,6 +409,7 @@
                         <segue destination="aJl-tZ-Sgq" kind="relationship" relationship="viewControllers" id="Pqf-yF-uVW"/>
                         <segue destination="L0a-cQ-NrB" kind="relationship" relationship="viewControllers" id="BS5-rb-O5k"/>
                         <segue destination="VhI-lo-fFU" kind="relationship" relationship="viewControllers" id="nCA-sL-lWy"/>
+                        <segue destination="C3R-gn-uol" kind="relationship" relationship="viewControllers" id="zVw-Fb-AUA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BT8-NZ-eOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

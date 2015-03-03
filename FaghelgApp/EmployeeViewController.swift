@@ -11,7 +11,7 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         faghelgApi.getEmployees(showEmployees)
     }

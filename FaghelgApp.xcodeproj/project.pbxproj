@@ -13,6 +13,9 @@
 		963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 963636AA19D06E1500021DA1 /* FaghelgApp.xcdatamodeld */; };
 		9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */; };
 		9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D61A938EF300781E60 /* InfoDAO.swift */; };
+		9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7061AA5E1DE001C161E /* Crashlytics.framework */; };
+		9F42F7091AA5E1DE001C161E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7071AA5E1DE001C161E /* Fabric.framework */; };
+		9F42F70B1AA5FD4B001C161E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42F70A1AA5FD4B001C161E /* LogInViewController.swift */; };
 		9F7031841A93B0CD00B44342 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7031831A93B0CD00B44342 /* InfoViewController.swift */; };
 		9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */; };
 		9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7824531A8A77EA00208C2D /* BaseDAO.swift */; };
@@ -63,6 +66,9 @@
 		9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
 		9F0B07D51A9389F800781E60 /* FaghelgApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FaghelgApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9F0B07D61A938EF300781E60 /* InfoDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDAO.swift; sourceTree = "<group>"; };
+		9F42F7061AA5E1DE001C161E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		9F42F7071AA5E1DE001C161E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		9F42F70A1AA5FD4B001C161E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		9F7031831A93B0CD00B44342 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9F7824531A8A77EA00208C2D /* BaseDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
@@ -92,7 +98,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */,
 				96234E7719C88905006811D5 /* CoreData.framework in Frameworks */,
+				9F42F7091AA5E1DE001C161E /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +120,7 @@
 				9FF648FB19C87424004BCFEB /* ProgramViewController.swift */,
 				4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */,
 				9F7031831A93B0CD00B44342 /* InfoViewController.swift */,
+				9F42F70A1AA5FD4B001C161E /* LogInViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -137,6 +146,8 @@
 		9F8D4CA419BE4A6100DA5A61 = {
 			isa = PBXGroup;
 			children = (
+				9F42F7061AA5E1DE001C161E /* Crashlytics.framework */,
+				9F42F7071AA5E1DE001C161E /* Fabric.framework */,
 				9FF4906919DD91F000A42749 /* CoreImage.framework */,
 				96234E7619C88905006811D5 /* CoreData.framework */,
 				9F8D4CAF19BE4A6100DA5A61 /* FaghelgApp */,
@@ -232,6 +243,7 @@
 				9F8D4CAA19BE4A6100DA5A61 /* Frameworks */,
 				9F8D4CAB19BE4A6100DA5A61 /* Resources */,
 				4524AAB619D08C7900CCF884 /* Embed Frameworks */,
+				9F42F7051AA5E17F001C161E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -275,6 +287,7 @@
 					};
 					9F8D4CC219BE4A6100DA5A61 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 74XXV957HC;
 						TestTargetID = 9F8D4CAC19BE4A6100DA5A61;
 					};
 				};
@@ -317,6 +330,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9F42F7051AA5E17F001C161E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run f050be13fe81907b41f0db98e604b954e6425c9e 47434df77af9aeb43729252565230534ebed102d0fc7a1d42065ebd08f15428b";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9F8D4CA919BE4A6100DA5A61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -330,6 +359,7 @@
 				9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */,
 				9FF4906819DD90B800A42749 /* Bilde.swift in Sources */,
 				9F8D4CD419BE4B2000DA5A61 /* FaghelgApi.swift in Sources */,
+				9F42F70B1AA5FD4B001C161E /* LogInViewController.swift in Sources */,
 				9FF6490F19C87EA9004BCFEB /* Event.swift in Sources */,
 				9FF6490D19C87E3E004BCFEB /* Program.swift in Sources */,
 				1D1AC15119D0804500628488 /* EmployeeCell.swift in Sources */,
@@ -460,14 +490,24 @@
 		9F8D4CCE19BE4A6100DA5A61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FaghelgApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
@@ -479,14 +519,23 @@
 		9F8D4CCF19BE4A6100DA5A61 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = FaghelgApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
@@ -498,6 +547,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -509,6 +560,7 @@
 				INFOPLIST_FILE = FaghelgAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FaghelgApp.app/FaghelgApp";
 			};
 			name = Debug;
@@ -517,6 +569,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -524,6 +578,7 @@
 				INFOPLIST_FILE = FaghelgAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FaghelgApp.app/FaghelgApp";
 			};
 			name = Release;

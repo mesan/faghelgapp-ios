@@ -61,8 +61,13 @@ class EventTableViewCell: UITableViewCell {
         
         var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         var faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        var image = faghelgApi.getImage(event.eventImageUrl)
-        eventImage.image = image
+        
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            faghelgApi.getImage(event.eventImageUrl, self.showImage)
+        })
+        
     }
     
     func showExtraInfoView(show: Bool) {
@@ -74,5 +79,11 @@ class EventTableViewCell: UITableViewCell {
         
         self.extraInfoView.hidden = !show
         self.layoutIfNeeded()
+    }
+    
+    func showImage(image: UIImage?) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.eventImage.image = image
+        })
     }
 }
