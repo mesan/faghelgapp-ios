@@ -11,8 +11,8 @@ class BaseDAO {
     func persist(entity: NSManagedObject) {
         var err: NSError? = nil
         
-        managedObjectContext.insertObject(entity)
-        managedObjectContext.save(&err)
+        self.managedObjectContext.insertObject(entity)
+        self.managedObjectContext.save(&err)
         
         if (err != nil) {
             println("Error in persist: \(err!.description)")

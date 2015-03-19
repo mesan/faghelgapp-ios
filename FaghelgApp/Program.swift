@@ -2,17 +2,19 @@ import Foundation
 
 class Program: NSObject {
     var numberOfEvents: NSNumber!
-    var events: NSMutableSet!
+    var events: [Event]!
     
     override init() {
         numberOfEvents = NSNumber()
-        events = NSMutableSet()
+        events = [Event]()
     }
     func addEvent(event: Event) {
-        events.addObject(event)
+        events.append(event)
     }
     
     func addEvents(events: [Event]) {
-        self.events.addObjectsFromArray(events)
+        for event in events {
+            addEvent(event)
+        }
     }
 }

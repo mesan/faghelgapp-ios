@@ -32,7 +32,7 @@ class ProgramDAO : BaseDAO {
     
     func saveProgram(program: Program) {
         clearProgram()
-        for event in program.events.allObjects as [Event] {
+        for event in program.events {
             saveEvent(event)
         }
         

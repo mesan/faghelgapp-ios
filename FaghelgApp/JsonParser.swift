@@ -42,8 +42,6 @@ class JsonParser {
         
         program.numberOfEvents = jsonDict["numberOfEvents"] as? Int
         
-        program.events = NSMutableSet()
-        
         var eventsDict: NSArray = jsonDict["events"] as NSArray
         for eventDict in eventsDict as [NSDictionary] {
             var event = eventFromJson(eventDict, managedObjectContext: managedObjectContext)

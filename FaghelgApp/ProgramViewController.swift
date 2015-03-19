@@ -52,7 +52,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
             return
         }
         
-        self.allEvents = program!.events.allObjects as [Event]
+        self.allEvents = program!.events
         self.allEvents.sort { (event1, event2) -> Bool in
             return event1.start.compare(event2.start) == NSComparisonResult.OrderedAscending
         }

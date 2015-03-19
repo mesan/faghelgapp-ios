@@ -127,6 +127,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     func getImage(imageUrl: String, callback: (UIImage?) -> Void) {
         var managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         
+
         let shortName = imageUrl.componentsSeparatedByString("/").last!
         
         if let imageFromDatabase = imageDAO.getImage(shortName) {
@@ -134,29 +135,37 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             return
         }
         
-        if let newBilde = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
-            imageDAO.persist(newBilde)
-            callback(UIImage(data: newBilde.imageData)!)
+        
+        
+        if let imageData = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
+            callback(UIImage(data: imageData)!)
             return
         }
         
         callback(UIImage(named: "ukjent"))
     }
     
-    func downloadImageFromWeb(imageUrl: String, shortName: String, managedObjectContext: NSManagedObjectContext) -> Bilde? {
+    func downloadImageFromWeb(imageUrl: String, shortName: String, managedObjectContext: NSManagedObjectContext) -> NSData? {
         let url = NSURL(string:imageUrl);
         var err: NSError? = nil
         
         if let imageData = NSData(contentsOfURL: url!,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err) {
-            
-            var bilde: Bilde = Bilde(entity: NSEntityDescription.entityForName("Bilde", inManagedObjectContext: managedObjectContext)!, insertIntoManagedObjectContext: managedObjectContext)
-            
-            bilde.shortName = shortName
-            bilde.imageData = imageData
-            return bilde
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.saveBilde(imageData, shortName: shortName)
+            })
+
+            return imageData
         }
         
         return nil
+    }
+    
+    func saveBilde(imageData: NSData, shortName: String) {
+        var bilde: Bilde = Bilde(entity: NSEntityDescription.entityForName("Bilde", inManagedObjectContext: managedObjectContext!)!, insertIntoManagedObjectContext: managedObjectContext)
+        
+        bilde.shortName = shortName
+        bilde.imageData = imageData
+        imageDAO.persist(bilde)
     }
     
 

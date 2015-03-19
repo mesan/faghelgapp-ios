@@ -13,9 +13,12 @@
 		963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 963636AA19D06E1500021DA1 /* FaghelgApp.xcdatamodeld */; };
 		9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */; };
 		9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D61A938EF300781E60 /* InfoDAO.swift */; };
+		9F3BED5A1ABAC17900D2C8BA /* libADALiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3BED581ABAC16200D2C8BA /* libADALiOS.a */; };
 		9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7061AA5E1DE001C161E /* Crashlytics.framework */; };
 		9F42F7091AA5E1DE001C161E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7071AA5E1DE001C161E /* Fabric.framework */; };
 		9F42F70B1AA5FD4B001C161E /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42F70A1AA5FD4B001C161E /* LogInViewController.swift */; };
+		9F42F7261AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F42F7241AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard */; };
+		9F42F7271AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F42F7251AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard */; };
 		9F7031841A93B0CD00B44342 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7031831A93B0CD00B44342 /* InfoViewController.swift */; };
 		9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */; };
 		9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7824531A8A77EA00208C2D /* BaseDAO.swift */; };
@@ -66,9 +69,25 @@
 		9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
 		9F0B07D51A9389F800781E60 /* FaghelgApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FaghelgApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9F0B07D61A938EF300781E60 /* InfoDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDAO.swift; sourceTree = "<group>"; };
+		9F3BED581ABAC16200D2C8BA /* libADALiOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libADALiOS.a; sourceTree = "<group>"; };
 		9F42F7061AA5E1DE001C161E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		9F42F7071AA5E1DE001C161E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		9F42F70A1AA5FD4B001C161E /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		9F42F7241AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ADAL_iPhone_Storyboard.storyboard; sourceTree = "<group>"; };
+		9F42F7251AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ADAL_iPad_Storyboard.storyboard; sourceTree = "<group>"; };
+		9F42F7461AA6123E001C161E /* ADAuthenticationBroker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAuthenticationBroker.h; sourceTree = "<group>"; };
+		9F42F7471AA6123E001C161E /* ADAuthenticationContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAuthenticationContext.h; sourceTree = "<group>"; };
+		9F42F7481AA6123E001C161E /* ADAuthenticationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAuthenticationError.h; sourceTree = "<group>"; };
+		9F42F7491AA6123E001C161E /* ADAuthenticationParameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAuthenticationParameters.h; sourceTree = "<group>"; };
+		9F42F74A1AA6123E001C161E /* ADAuthenticationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAuthenticationResult.h; sourceTree = "<group>"; };
+		9F42F74B1AA6123E001C161E /* ADAuthenticationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADAuthenticationSettings.h; sourceTree = "<group>"; };
+		9F42F74C1AA6123E001C161E /* ADErrorCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADErrorCodes.h; sourceTree = "<group>"; };
+		9F42F74D1AA6123E001C161E /* ADInstanceDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADInstanceDiscovery.h; sourceTree = "<group>"; };
+		9F42F74E1AA6123E001C161E /* ADLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADLogger.h; sourceTree = "<group>"; };
+		9F42F74F1AA6123E001C161E /* ADTokenCacheStoreItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTokenCacheStoreItem.h; sourceTree = "<group>"; };
+		9F42F7501AA6123E001C161E /* ADTokenCacheStoreKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTokenCacheStoreKey.h; sourceTree = "<group>"; };
+		9F42F7511AA6123E001C161E /* ADTokenCacheStoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTokenCacheStoring.h; sourceTree = "<group>"; };
+		9F42F7521AA6123E001C161E /* ADUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADUserInformation.h; sourceTree = "<group>"; };
 		9F7031831A93B0CD00B44342 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9F7824531A8A77EA00208C2D /* BaseDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
@@ -101,6 +120,7 @@
 				9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */,
 				96234E7719C88905006811D5 /* CoreData.framework in Frameworks */,
 				9F42F7091AA5E1DE001C161E /* Fabric.framework in Frameworks */,
+				9F3BED5A1ABAC17900D2C8BA /* libADALiOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +134,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F42F7361AA611A0001C161E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9F3BED581ABAC16200D2C8BA /* libADALiOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F42F7451AA6123E001C161E /* ADALiOS */ = {
+			isa = PBXGroup;
+			children = (
+				9F42F7461AA6123E001C161E /* ADAuthenticationBroker.h */,
+				9F42F7471AA6123E001C161E /* ADAuthenticationContext.h */,
+				9F42F7481AA6123E001C161E /* ADAuthenticationError.h */,
+				9F42F7491AA6123E001C161E /* ADAuthenticationParameters.h */,
+				9F42F74A1AA6123E001C161E /* ADAuthenticationResult.h */,
+				9F42F74B1AA6123E001C161E /* ADAuthenticationSettings.h */,
+				9F42F74C1AA6123E001C161E /* ADErrorCodes.h */,
+				9F42F74D1AA6123E001C161E /* ADInstanceDiscovery.h */,
+				9F42F74E1AA6123E001C161E /* ADLogger.h */,
+				9F42F74F1AA6123E001C161E /* ADTokenCacheStoreItem.h */,
+				9F42F7501AA6123E001C161E /* ADTokenCacheStoreKey.h */,
+				9F42F7511AA6123E001C161E /* ADTokenCacheStoring.h */,
+				9F42F7521AA6123E001C161E /* ADUserInformation.h */,
+			);
+			path = ADALiOS;
+			sourceTree = "<group>";
+		};
 		9F70970919C8A85200D805CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +194,7 @@
 		9F8D4CA419BE4A6100DA5A61 = {
 			isa = PBXGroup;
 			children = (
+				9F42F7451AA6123E001C161E /* ADALiOS */,
 				9F42F7061AA5E1DE001C161E /* Crashlytics.framework */,
 				9F42F7071AA5E1DE001C161E /* Fabric.framework */,
 				9FF4906919DD91F000A42749 /* CoreImage.framework */,
@@ -168,6 +217,7 @@
 		9F8D4CAF19BE4A6100DA5A61 /* FaghelgApp */ = {
 			isa = PBXGroup;
 			children = (
+				9F42F7361AA611A0001C161E /* Frameworks */,
 				9F78245B1A8A7FAF00208C2D /* Util */,
 				9F9A43731A8A6E1200E678F1 /* DAO */,
 				963636AA19D06E1500021DA1 /* FaghelgApp.xcdatamodeld */,
@@ -186,6 +236,8 @@
 		9F8D4CB019BE4A6100DA5A61 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9F42F7241AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard */,
+				9F42F7251AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard */,
 				9F8D4CB119BE4A6100DA5A61 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -284,6 +336,11 @@
 					9F8D4CAC19BE4A6100DA5A61 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = 74XXV957HC;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					9F8D4CC219BE4A6100DA5A61 = {
 						CreatedOnToolsVersion = 6.0;
@@ -317,6 +374,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F8E0F3219DDC023006E12AA /* Main.storyboard in Resources */,
+				9F42F7271AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard in Resources */,
+				9F42F7261AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard in Resources */,
 				9F8D4CBE19BE4A6100DA5A61 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -494,8 +553,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -506,10 +566,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/FaghelgApp",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3c9db755-1bb0-4849-8d81-7c9de1f270fb";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -523,7 +585,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -535,9 +597,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/FaghelgApp",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3c9db755-1bb0-4849-8d81-7c9de1f270fb";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
