@@ -20,6 +20,7 @@ class LogInViewController: UIViewController {
             }
             else {
                 println(result.accessToken)
+                self.registerForPush()
             }
         })
     }
@@ -27,6 +28,16 @@ class LogInViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func registerForPush() {
+        var types: UIUserNotificationType = UIUserNotificationType.Badge |
+            UIUserNotificationType.Alert |
+            UIUserNotificationType.Sound
+        
+        var settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
+        
+        UIApplication.sharedApplication().registerUserNotificationSettings( settings )
     }
 
 }

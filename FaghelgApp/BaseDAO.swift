@@ -20,17 +20,21 @@ class BaseDAO {
     }
     
     func getEntities(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject]? {
-        let fetchRequest = NSFetchRequest(entityName: entityName)
-        fetchRequest.includesPendingChanges = true
-        fetchRequest.predicate = predicate
+        var result:[NSManagedObject]?
         
-        var err: NSError? = nil
-        
-        var result = managedObjectContext.executeFetchRequest(fetchRequest, error: &err) as? [NSManagedObject]
-        
-        if (err != nil) {
-            println("Error in getEntities: \(err!.description)")
-        }
+        dispatch_sync(dispatch_get_main_queue(), {
+            let fetchRequest = NSFetchRequest(entityName: entityName)
+            fetchRequest.includesPendingChanges = true
+            fetchRequest.predicate = predicate
+            
+            var err: NSError? = nil
+            
+            result = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &err) as? [NSManagedObject]
+            
+            if (err != nil) {
+                println("Error in getEntities: \(err!.description)")
+            }
+        })
         
         return result
     }
