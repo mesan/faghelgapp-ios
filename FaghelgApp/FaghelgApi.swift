@@ -130,11 +130,9 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
 
         let shortName = imageUrl.componentsSeparatedByString("/").last!
         var uiImage: UIImage?
-        dispatch_sync(dispatch_get_main_queue(), {
-            if let imageFromDatabase = self.imageDAO.getImage(shortName) {
-                uiImage = UIImage(data: imageFromDatabase.imageData)
-            }
-        })
+        if let imageFromDatabase = self.imageDAO.getImage(shortName) {
+            uiImage = UIImage(data: imageFromDatabase.imageData)
+        }
         
         if uiImage != nil {
             callback(uiImage)
@@ -155,23 +153,10 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         var err: NSError? = nil
         
         if let imageData = NSData(contentsOfURL: url!,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err) {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.saveBilde(imageData, shortName: shortName)
-            })
-
+            imageDAO.saveImage(imageData, shortName: shortName)
             return imageData
         }
         
         return nil
     }
-    
-    func saveBilde(imageData: NSData, shortName: String) {
-        var bilde: Bilde = Bilde(entity: NSEntityDescription.entityForName("Bilde", inManagedObjectContext: managedObjectContext!)!, insertIntoManagedObjectContext: managedObjectContext)
-        
-        bilde.shortName = shortName
-        bilde.imageData = imageData
-        imageDAO.persist(bilde)
-    }
-    
-
 }

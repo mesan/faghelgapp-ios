@@ -12,12 +12,12 @@ class ProgramDAO : BaseDAO {
     
     func getProgram() -> Program? {
         var program = Program()
-    
+        
         if let events = getEntities("Event") as? [Event] {
             program.addEvents(events)
             return program
         }
-    
+        
         return nil
     }
     
@@ -31,19 +31,21 @@ class ProgramDAO : BaseDAO {
     }
     
     func saveProgram(program: Program) {
-        clearProgram()
-        for event in program.events {
-            saveEvent(event)
-        }
-        
-        var error: NSError? = nil
-        var success = managedObjectContext.save(&error)
-        if !success {
-            println("Error while saving program: \(error!.description)")
+        managedObjectContext.performBlockAndWait { () -> Void in
+            self.clearProgram()
+            for event in program.events {
+                self.saveEvent(event)
+            }
+            
+            var error: NSError? = nil
+            var success = self.managedObjectContext.save(&error)
+            if !success {
+                println("Error while saving program: \(error!.description)")
+            }
         }
     }
     
-    func saveEvent(event: Event) {
+    private func saveEvent(event: Event) {
         managedObjectContext.insertObject(event)
         if let responsible = event.responsible {
             var person = savePerson(responsible)
@@ -51,7 +53,7 @@ class ProgramDAO : BaseDAO {
         }
     }
     
-    func savePerson(person: Person) -> Person? {
+    private func savePerson(person: Person) -> Person? {
         var savedPerson: Person? = nil
         if let shortName = person.shortName {
             if let personFromDatabase = personDAO.getPerson(person.shortName!) {

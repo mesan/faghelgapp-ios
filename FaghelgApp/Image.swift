@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-class Bilde: NSManagedObject {
+class Image: NSManagedObject {
     
     @NSManaged var imageData: NSData
     @NSManaged var shortName: String

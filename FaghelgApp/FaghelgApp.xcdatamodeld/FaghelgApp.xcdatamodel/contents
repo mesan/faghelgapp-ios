@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Bilde" representedClassName="FaghelgApp.Bilde" syncable="YES">
-        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C109" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="FaghelgApp.Event" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
@@ -13,6 +9,10 @@
         <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="responsible" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Image" representedClassName="FaghelgApp.Image" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Info" representedClassName="FaghelgApp.Info" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,7 +33,7 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bilde" positionX="-36" positionY="99" width="128" height="30"/>
+        <element name="Image" positionX="-36" positionY="99" width="128" height="73"/>
         <element name="Event" positionX="36" positionY="108" width="128" height="165"/>
         <element name="Info" positionX="63" positionY="108" width="128" height="193"/>
         <element name="Person" positionX="169" positionY="-27" width="128" height="105"/>

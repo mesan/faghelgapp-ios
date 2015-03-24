@@ -31,7 +31,7 @@
 		9F8E0F3219DDC023006E12AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F8D4CBA19BE4A6100DA5A61 /* Main.storyboard */; };
 		9F9A43751A8A6E3500E678F1 /* ProgramDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A43741A8A6E3500E678F1 /* ProgramDAO.swift */; };
 		9F9A43771A8A774300E678F1 /* PersonDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A43761A8A774300E678F1 /* PersonDAO.swift */; };
-		9FF4906819DD90B800A42749 /* Bilde.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF4906719DD90B800A42749 /* Bilde.swift */; };
+		9FF4906819DD90B800A42749 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF4906719DD90B800A42749 /* Image.swift */; };
 		9FF648FC19C87424004BCFEB /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF648FB19C87424004BCFEB /* ProgramViewController.swift */; };
 		9FF6490D19C87E3E004BCFEB /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6490C19C87E3E004BCFEB /* Program.swift */; };
 		9FF6490F19C87EA9004BCFEB /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6490E19C87EA9004BCFEB /* Event.swift */; };
@@ -104,7 +104,7 @@
 		9F8D4CD319BE4B2000DA5A61 /* FaghelgApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaghelgApi.swift; sourceTree = "<group>"; };
 		9F9A43741A8A6E3500E678F1 /* ProgramDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDAO.swift; sourceTree = "<group>"; };
 		9F9A43761A8A774300E678F1 /* PersonDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDAO.swift; sourceTree = "<group>"; };
-		9FF4906719DD90B800A42749 /* Bilde.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bilde.swift; sourceTree = "<group>"; };
+		9FF4906719DD90B800A42749 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		9FF4906919DD91F000A42749 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		9FF648FB19C87424004BCFEB /* ProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramViewController.swift; sourceTree = "<group>"; };
 		9FF6490C19C87E3E004BCFEB /* Program.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				9F7A4B7F1A93C4F900F4C7FC /* Info.swift */,
-				9FF4906719DD90B800A42749 /* Bilde.swift */,
+				9FF4906719DD90B800A42749 /* Image.swift */,
 				9FF6490E19C87EA9004BCFEB /* Event.swift */,
 				9FF6490C19C87E3E004BCFEB /* Program.swift */,
 				9FF6491019C87FDB004BCFEB /* Person.swift */,
@@ -416,7 +416,7 @@
 				9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */,
 				963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */,
 				9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */,
-				9FF4906819DD90B800A42749 /* Bilde.swift in Sources */,
+				9FF4906819DD90B800A42749 /* Image.swift in Sources */,
 				9F8D4CD419BE4B2000DA5A61 /* FaghelgApi.swift in Sources */,
 				9F42F70B1AA5FD4B001C161E /* LogInViewController.swift in Sources */,
 				9FF6490F19C87EA9004BCFEB /* Event.swift in Sources */,
