@@ -53,11 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         messagesViewController.increaseBadgeValue();
         var aps = userInfo["aps"] as NSDictionary
         var alert = aps["alert"] as NSDictionary
+        var title = alert["title"] as String
         var body = alert["body"] as String
         var sender = userInfo["sender"] as String
         var timestamp = userInfo["timestamp"] as String
         
-        var message = Message(content: body, sender: sender, timestamp: timestamp)
+        var message = Message(title: title, content: body, sender: sender, timestamp: timestamp)
         messagesViewController.addMessage(message)
     }
     

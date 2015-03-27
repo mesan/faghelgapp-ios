@@ -1,7 +1,8 @@
 import UIKit
 
-class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
+class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textViewMessage: UITextView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -9,7 +10,8 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewD
     @IBOutlet weak var messageTableView: UITableView!
     
     var constraintValue: CGFloat?
-    var placeholderText: String?
+    var placeholderTextTitle: String?
+    var placeholderTextContent: String?
     
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var faghelgApi : FaghelgApi!
@@ -27,15 +29,22 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
         constraintValue = self.bottomConstraint.constant
-        placeholderText = textViewMessage.text
+        placeholderTextTitle = textFieldTitle.text
+        placeholderTextContent = textViewMessage.text
         
         textViewMessage.layer.borderColor = UIColor.lightGrayColor().CGColor
         textViewMessage.layer.borderWidth = 1.0
-        textViewMessage.layer.cornerRadius = 8
+        textViewMessage.layer.cornerRadius = 5
         textViewMessage.delegate = self
+        
+        textFieldTitle.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textFieldTitle.layer.borderWidth = 1.0
+        textFieldTitle.layer.cornerRadius = 5
         
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapReceived:")
         self.view.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.messageTableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,22 +110,38 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewD
         self.bottomConstraint.constant = constraintValue!
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField.text == placeholderTextTitle {
+            textField.text = nil
+        }
+        if textViewMessage.text.isEmpty {
+            fillInPlaceholderText(textViewMessage, text: placeholderTextContent!)
+        }
+        
+        textField.textColor = UIColor.blackColor()
+    }
+    
     func textViewDidBeginEditing(textView: UITextView) {
-        if textViewMessage.text == placeholderText {
+        if textViewMessage.text == placeholderTextContent {
             textViewMessage.text = nil
         }
+        
+        if textFieldTitle.text.isEmpty {
+            fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
+        }
+        
+        textView.textColor = UIColor.blackColor()
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            faghelgApi.sendPushIos(textView.text)
+            var message = Message(title: textFieldTitle.text, content: textView.text)
+            faghelgApi.sendPushIos(message)
             
             textView.resignFirstResponder()
-            textView.text = placeholderText
+            fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
+            fillInPlaceholderText(textViewMessage, text: placeholderTextContent!)
         }
-        
-        
-        // TODO: legg til meldingen i tabellen med klokkeslett og avsender
         
         return true
     }
@@ -124,6 +149,30 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewD
     func tapReceived(tapGestureRecognizer: UITapGestureRecognizer) {
         if textViewMessage.isFirstResponder() && tapGestureRecognizer.view != textViewMessage {
             textViewMessage.resignFirstResponder()
+            if textViewMessage.text.isEmpty {
+                fillInPlaceholderText(textViewMessage, text: placeholderTextContent!)
+            }
+        }
+        
+        if textFieldTitle.isFirstResponder() && tapGestureRecognizer.view != textFieldTitle {
+            textFieldTitle.resignFirstResponder()
+            if textFieldTitle.text.isEmpty {
+                fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
+            }
+        }
+    }
+    
+    private func fillInPlaceholderText(textInput: UITextInput, text: String) {
+        if textInput is UITextView {
+            var textView = textInput as UITextView
+            textView.text = text
+            textView.textColor = UIColor.lightGrayColor()
+        }
+        
+        if textInput is UITextField {
+            var textField = textInput as UITextField
+            textField.text = text
+            textField.textColor = UIColor.lightGrayColor()
         }
     }
     
@@ -142,7 +191,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewD
     func viewIsShowing() -> Bool {
         return self.isViewLoaded() && self.view.window != nil
     }
-
+    
     
     func addMessage(message: Message) {
         messages.append(message)
@@ -170,5 +219,9 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewD
         
         // return the cell
         return messageCell
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
 }

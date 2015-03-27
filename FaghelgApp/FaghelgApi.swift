@@ -11,6 +11,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     
     // Andersmac@mesan
     let HOST = "http://10.22.200.151:8080";
+    let CDN = "http://faghelg.s3-website-eu-west-1.amazonaws.com"
     
     // Simulator local
     //let HOST = "http://localhost:8080"
@@ -135,6 +136,10 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         return request
     }
     
+    func getImageForShortname(shortname: String, callback: (UIImage?) -> Void) {
+        getImage(CDN + "/" + shortname + ".png", callback: callback)
+    }
+    
     func getImage(imageUrl: String, callback: (UIImage?) -> Void) {
         var managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         
@@ -195,7 +200,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         })
     }
     
-    func sendPushIos(message: String) {
+    func sendPushIos(message: Message) {
         var request = makeRequest("/push", HTTPMethod: "POST", withAuthentication: true)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -203,7 +208,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         dateStringFormatter.dateFormat = "dd.MM.YYYY HH:mm"
         var timestamp = dateStringFormatter.stringFromDate(NSDate())
         
-        var params = ["content": message] as Dictionary<String, String>
+        var params = ["content": message.content!, "title": message.title!] as Dictionary<String, String>
         
         var err: NSError?
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
