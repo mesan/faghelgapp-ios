@@ -8,13 +8,18 @@ protocol FaghelgApiProtocol {
 class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     // Production
     // let HOST = "http://faghelg.herokuapp.com";
+
+    // Branch
+    let HOST = "http://faghelg-branch.herokuapp.com"
     
     // Andersmac@mesan
-    let HOST = "http://10.22.200.151:8080";
-    let CDN = "http://faghelg.s3-website-eu-west-1.amazonaws.com"
+    //let HOST = "http://10.22.200.151:8080";
+    
     
     // Simulator local
     //let HOST = "http://localhost:8080"
+    
+    let CDN = "http://faghelg.s3-website-eu-west-1.amazonaws.com"
     
     var data: NSMutableData = NSMutableData()
     var delegate: FaghelgApiProtocol?

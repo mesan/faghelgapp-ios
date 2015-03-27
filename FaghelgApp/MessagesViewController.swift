@@ -20,6 +20,10 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     var token: String?
     
+    
+    // TODO: området for å skrive en ny melding bør bare vises når man skal skrive. Tar for mye plass ellers.
+    // TODO: holde på meldingene i meldingslista hvis appen blir drept
+    // TODO: gå rett til meldinger-tabben når man åpner appen fra en notification
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +44,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         textFieldTitle.layer.borderColor = UIColor.lightGrayColor().CGColor
         textFieldTitle.layer.borderWidth = 1.0
         textFieldTitle.layer.cornerRadius = 5
+        textFieldTitle.autocapitalizationType = UITextAutocapitalizationType.Sentences
         
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapReceived:")
         self.view.addGestureRecognizer(tapGestureRecognizer)
