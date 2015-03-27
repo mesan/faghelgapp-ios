@@ -1,0 +1,174 @@
+import UIKit
+
+class MessagesViewController: UIViewController, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var textViewMessage: UITextView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet var parentView: UIView!
+    @IBOutlet weak var messageTableView: UITableView!
+    
+    var constraintValue: CGFloat?
+    var placeholderText: String?
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var faghelgApi : FaghelgApi!
+    
+    var messages: [Message] = []
+    
+    var token: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        
+        constraintValue = self.bottomConstraint.constant
+        placeholderText = textViewMessage.text
+        
+        textViewMessage.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textViewMessage.layer.borderWidth = 1.0
+        textViewMessage.layer.cornerRadius = 8
+        textViewMessage.delegate = self
+        
+        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapReceived:")
+        self.view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        tabBarItem.badgeValue = nil
+        
+        // Prompt the user to log in if he has no accesstoken
+        token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
+        if token == nil {
+            promptLogin()
+        }
+    }
+    
+    func promptLogin() {
+        var authority:NSString = "https://login.windows.net/common"
+        var clientID:NSString = "685ff077-c1ca-4d18-b364-7746b4560cea"
+        var redirectURI:NSURL = NSURL(string: "https://faghelg.herokuapp.com")!
+        
+        //Use ADAL to authenticate the user against Azure Active Directory
+        var er:ADAuthenticationError? = nil
+        var authContext:ADAuthenticationContext = ADAuthenticationContext(authority: authority, error: &er)
+        authContext.acquireTokenWithResource("https://faghelg.herokuapp.com", clientId: clientID, redirectUri: redirectURI, completionBlock: { (result: ADAuthenticationResult!) in
+            
+            if result.error != nil {
+                // Go back to the first ViewController
+                self.tabBarController?.selectedIndex = 0
+            }
+            if result.accessToken != nil {
+                NSUserDefaults.standardUserDefaults().setObject(result.accessToken, forKey: "token")
+                NSUserDefaults.standardUserDefaults().synchronize()
+                self.registerForPush(result.accessToken)
+            }
+        })
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func registerForPush(accessToken: String) {
+        var types: UIUserNotificationType = UIUserNotificationType.Badge |
+            UIUserNotificationType.Alert |
+            UIUserNotificationType.Sound
+        
+        var settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
+        
+        UIApplication.sharedApplication().registerUserNotificationSettings( settings )
+        var deviceToken = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? String
+        faghelgApi.registerForPush(PushDevice(token: deviceToken!, owner: TokenUtil.getUsernameFromToken(accessToken)!))
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        var info = notification.userInfo!
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        if let height = tabBarController?.tabBar.frame.size.height {
+            self.bottomConstraint.constant = keyboardFrame.size.height - height + constraintValue!
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var info = notification.userInfo!
+        
+        self.bottomConstraint.constant = constraintValue!
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        if textViewMessage.text == placeholderText {
+            textViewMessage.text = nil
+        }
+    }
+    
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            faghelgApi.sendPushIos(textView.text)
+            
+            textView.resignFirstResponder()
+            textView.text = placeholderText
+        }
+        
+        
+        // TODO: legg til meldingen i tabellen med klokkeslett og avsender
+        
+        return true
+    }
+    
+    func tapReceived(tapGestureRecognizer: UITapGestureRecognizer) {
+        if textViewMessage.isFirstResponder() && tapGestureRecognizer.view != textViewMessage {
+            textViewMessage.resignFirstResponder()
+        }
+    }
+    
+    func increaseBadgeValue() {
+        if !viewIsShowing() {
+            if let badgeValue = tabBarItem.badgeValue?.toInt() {
+                var newValue = badgeValue + 1
+                tabBarItem.badgeValue = String(newValue)
+            }
+            else {
+                tabBarItem.badgeValue = String(1)
+            }
+        }
+    }
+    
+    func viewIsShowing() -> Bool {
+        return self.isViewLoaded() && self.view.window != nil
+    }
+
+    
+    func addMessage(message: Message) {
+        messages.append(message)
+        
+        // Reload data only if the message view has been loaded
+        if self.isViewLoaded() {
+            // reload view using main thread
+            NSOperationQueue.mainQueue().addOperationWithBlock(){
+                self.messageTableView.reloadData()
+            }
+        }
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // get cell from tableView
+        let messageCell: MessageCell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as MessageCell
+        
+        let message = messages[indexPath.row]
+        
+        messageCell.setMessage(message)
+        
+        // return the cell
+        return messageCell
+    }
+}

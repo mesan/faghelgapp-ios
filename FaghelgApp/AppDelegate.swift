@@ -52,20 +52,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .stringByTrimmingCharactersInSet( characterSet )
             .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
         
-        println( deviceTokenString )
+        NSUserDefaults.standardUserDefaults().setObject(deviceTokenString, forKey: "deviceToken")
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     
     func application( application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error: NSError! ) {
         println( error.localizedDescription )
     }
-
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        println(userInfo)
-    }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        println(userInfo)
         completionHandler(UIBackgroundFetchResult.NewData);
+        
+        var tabBarController = self.window?.rootViewController as UITabBarController
+        
+        // TODO: Denne koden vil breake hvis meldingstaben ikke ligger til slutt lenger
+        var messagesViewController = tabBarController.viewControllers?.last as MessagesViewController
+        messagesViewController.increaseBadgeValue();
+        var aps = userInfo["aps"] as NSDictionary
+        var alert = aps["alert"] as NSDictionary
+        var body = alert["body"] as String
+        var sender = userInfo["sender"] as String
+        var timestamp = userInfo["timestamp"] as String
+        
+        var message = Message(content: body, sender: sender, timestamp: timestamp)
+        messagesViewController.addMessage(message)
     }
     
     // MARK: - Core Data stack
@@ -129,7 +139,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-
 }
 

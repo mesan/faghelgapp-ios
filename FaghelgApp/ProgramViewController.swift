@@ -40,10 +40,10 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
 
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+
+        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         faghelgApi.getProgram(showProgram)
     }
     
@@ -70,12 +70,16 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         let today = self.currentDayOfWeek()
-        dispatch_async(dispatch_get_main_queue(), {
+        dispatch_sync(dispatch_get_main_queue(), {
             self.setupDayFilter(today)
             self.filterEvents()
             self.tableView.reloadData()
             
-            self.scrollToCurrentEvent()
+            if !self.filteredEvents.isEmpty {
+                self.scrollToCurrentEvent()
+            }
+            
+            //TODO: else: Gi beskjed om at vi ikke har nett 
         })
     }
     

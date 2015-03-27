@@ -392,7 +392,7 @@
         <!--Meldinger-->
         <scene sceneID="TAP-K7-Ynf">
             <objects>
-                <viewController id="C3R-gn-uol" customClass="LogInViewController" customModule="FaghelgApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C3R-gn-uol" customClass="MessagesViewController" customModule="FaghelgApp" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7cl-nG-bSa"/>
                         <viewControllerLayoutGuide type="bottom" id="DBh-J4-kAH"/>
@@ -404,11 +404,8 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="91" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="j2Y-29-IDx">
                                 <rect key="frame" x="0.0" y="20" width="320" height="408"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="408" id="jwz-4O-zbt"/>
-                                </constraints>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="91" id="w0t-IY-4EI">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="91" id="w0t-IY-4EI" customClass="MessageCell" customModule="FaghelgApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w0t-IY-4EI" id="Vqt-lY-EAk">
@@ -461,8 +458,17 @@
                                                 <constraint firstItem="tOz-CK-dAC" firstAttribute="top" secondItem="6SO-Qq-YwE" secondAttribute="bottom" constant="6" id="rxA-33-ivd"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="message" destination="tOz-CK-dAC" id="LER-Am-8Xf"/>
+                                            <outlet property="sender" destination="6SO-Qq-YwE" id="y21-Or-zis"/>
+                                            <outlet property="timestamp" destination="u1j-AL-Htt" id="DBl-wX-FqT"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="C3R-gn-uol" id="Q0k-wu-U7F"/>
+                                    <outlet property="delegate" destination="C3R-gn-uol" id="E5b-Cf-LdS"/>
+                                </connections>
                             </tableView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Skriv inn din #yolo her..." translatesAutoresizingMaskIntoConstraints="NO" id="SdZ-4g-P7Q">
                                 <rect key="frame" x="16" y="443" width="288" height="60"/>
@@ -489,6 +495,7 @@
                     <tabBarItem key="tabBarItem" title="Meldinger" image="messages" id="ozi-vc-p8e"/>
                     <connections>
                         <outlet property="bottomConstraint" destination="jRi-Pl-gvV" id="HQ3-Ww-8fV"/>
+                        <outlet property="messageTableView" destination="j2Y-29-IDx" id="K0V-H2-DC2"/>
                         <outlet property="parentView" destination="IIi-oZ-ufD" id="qK9-GD-Bdz"/>
                         <outlet property="tabBarItem" destination="ozi-vc-p8e" id="uJH-3g-BFC"/>
                         <outlet property="textViewMessage" destination="SdZ-4g-P7Q" id="lMs-uV-6GR"/>
