@@ -194,7 +194,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     
     func addMessage(message: Message) {
-        messages.append(message)
+        messages.insert(message, atIndex: 0)
         
         // Reload data only if the message view has been loaded
         if self.isViewLoaded() {
