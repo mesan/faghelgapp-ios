@@ -1,9 +1,11 @@
-import UIKit
+import CoreData
 
 class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textViewMessage: UITextView!
+    @IBOutlet weak var buttonLogin: UIButton!
+    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet var parentView: UIView!
@@ -14,7 +16,8 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var placeholderTextContent: String?
     
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    var faghelgApi : FaghelgApi!
+    var faghelgApi: FaghelgApi!
+    var messageDAO: MessageDAO!
     
     var messages: [Message] = []
     
@@ -28,6 +31,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         super.viewDidLoad()
         
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        messageDAO = MessageDAO(managedObjectContext: appDelegate.managedObjectContext!)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
@@ -50,16 +54,45 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
         self.messageTableView.rowHeight = UITableViewAutomaticDimension
+        
+        initMessages()
+    }
+    
+    func initMessages() {
+        if let messagesFromDatabase = messageDAO.getMessages() {
+            self.messages = messagesFromDatabase
+            self.messageTableView.reloadData()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
         tabBarItem.badgeValue = nil
-        
-        // Prompt the user to log in if he has no accesstoken
-        token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
-        if token == nil {
-            promptLogin()
+        checkForToken()
+    }
+    
+    func checkForToken() {
+        if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String {
+            showTextViewsHideLoginButton()
         }
+        else {
+            showLoginButtonHideTextViews()
+        }
+    }
+    
+    func showLoginButtonHideTextViews() {
+        buttonLogin.hidden = false
+        textViewMessage.hidden = true
+        textFieldTitle.hidden = true
+    }
+    
+    func showTextViewsHideLoginButton() {
+        buttonLogin.hidden = true
+        textViewMessage.hidden = false
+        textFieldTitle.hidden = false
+    }
+    
+    @IBAction func buttonLoginClicked(sender: AnyObject) {
+        promptLogin()
     }
     
     func promptLogin() {
@@ -80,6 +113,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 NSUserDefaults.standardUserDefaults().setObject(result.accessToken, forKey: "token")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 self.registerForPush(result.accessToken)
+                self.showTextViewsHideLoginButton()
             }
         })
     }
@@ -90,13 +124,6 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     func registerForPush(accessToken: String) {
-        var types: UIUserNotificationType = UIUserNotificationType.Badge |
-            UIUserNotificationType.Alert |
-            UIUserNotificationType.Sound
-        
-        var settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
-        
-        UIApplication.sharedApplication().registerUserNotificationSettings( settings )
         var deviceToken = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? String
         faghelgApi.registerForPush(PushDevice(token: deviceToken!, owner: TokenUtil.getUsernameFromToken(accessToken)!))
     }
@@ -140,8 +167,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            var message = Message(title: textFieldTitle.text, content: textView.text)
-            faghelgApi.sendPushIos(message)
+            faghelgApi.sendPush(textFieldTitle.text, content: textView.text)
             
             textView.resignFirstResponder()
             fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)

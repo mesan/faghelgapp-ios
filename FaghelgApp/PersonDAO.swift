@@ -8,14 +8,12 @@ class PersonDAO: BaseDAO {
     }
     
     func getPersons() -> [Person]? {
-        
         if let persons = getEntities("Person") as? [Person] {
             var sortedPersons = sorted(persons){ $0.fullName < $1.fullName }
             return sortedPersons
         }
 
         return nil
-
     }
     
     func getPerson(shortName: String) -> Person? {

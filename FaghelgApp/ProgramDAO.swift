@@ -26,7 +26,6 @@ class ProgramDAO : BaseDAO {
             for event in program.events {
                 managedObjectContext.deleteObject(event as NSManagedObject)
             }
-            managedObjectContext.save(nil)
         }
     }
     
@@ -35,12 +34,6 @@ class ProgramDAO : BaseDAO {
             self.clearProgram()
             for event in program.events {
                 self.saveEvent(event)
-            }
-            
-            var error: NSError? = nil
-            var success = self.managedObjectContext.save(&error)
-            if !success {
-                println("Error while saving program: \(error!.description)")
             }
         }
     }

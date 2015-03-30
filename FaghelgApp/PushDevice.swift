@@ -1,9 +1,9 @@
 class PushDevice {
     var token: String!
-    var owner: String!
+    var owner: String?
     let os: String = "iOS"
     
-    init(token: String, owner: String) {
+    init(token: String, owner: String? = nil) {
         self.token = token
         self.owner = owner
     }

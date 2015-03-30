@@ -26,6 +26,12 @@
         <attribute name="locationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="toDoList" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Message" representedClassName="FaghelgApp.Message" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Person" representedClassName="FaghelgApp.Person" syncable="YES">
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,9 +39,10 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Image" positionX="-36" positionY="99" width="128" height="73"/>
         <element name="Event" positionX="36" positionY="108" width="128" height="165"/>
+        <element name="Image" positionX="-36" positionY="99" width="128" height="73"/>
         <element name="Info" positionX="63" positionY="108" width="128" height="193"/>
         <element name="Person" positionX="169" positionY="-27" width="128" height="105"/>
+        <element name="Message" positionX="63" positionY="117" width="128" height="103"/>
     </elements>
 </model>

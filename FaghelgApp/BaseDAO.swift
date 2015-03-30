@@ -8,15 +8,8 @@ class BaseDAO {
         self.managedObjectContext = managedObjectContext
     }
     
-    func persist(entity: NSManagedObject) {
-        var err: NSError? = nil
-        
+    func insert(entity: NSManagedObject) {
         self.managedObjectContext.insertObject(entity)
-        self.managedObjectContext.save(&err)
-        
-        if (err != nil) {
-            println("Error in persist: \(err!.description)")
-        }
     }
     
     func getEntities(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject]? {

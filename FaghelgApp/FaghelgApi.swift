@@ -10,7 +10,11 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     // let HOST = "http://faghelg.herokuapp.com";
 
     // Branch
-    let HOST = "http://faghelg-branch.herokuapp.com"
+    // let HOST = "http://faghelg-branch.herokuapp.com"
+    
+    
+    // Andersmac@home
+    let HOST = "http://192.168.0.198:8080"
     
     // Andersmac@mesan
     //let HOST = "http://10.22.200.151:8080";
@@ -89,7 +93,6 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                     let employee = JsonParser.personFromJson(jsonDict, managedObjectContext: self.managedObjectContext!)
                     employees!.append(employee)
                     self.personDAO.savePerson(employee)
-                    self.managedObjectContext?.save(nil);
                 }
             } else {
                 employees = self.personDAO.getPersons()
@@ -117,15 +120,13 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             
             if (jsonResult != nil) {
                 info = JsonParser.infoFromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
-                self.infoDAO.persist(info!)
+                self.infoDAO.insert(info!)
             } else {
                 info = self.infoDAO.getInfo()
             }
             
             callback(info)
         })
-
-        
     }
     
     func makeRequest(path: String, HTTPMethod: String, withAuthentication: Bool) -> NSMutableURLRequest {
@@ -181,6 +182,18 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         return nil
     }
     
+    func registerForPushWithoutLogin(pushDevice: PushDevice) {
+        var request = makeRequest("/push?registrationId=\(pushDevice.token)&os=\(pushDevice.os)", HTTPMethod: "GET", withAuthentication: false)
+
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler: { (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+            var HTTPResponse = response as NSHTTPURLResponse
+            if !(HTTPResponse.statusCode == 201) {
+                println("Failed registering for push")
+            }
+        })
+        
+    }
+    
     func registerForPush(pushDevice: PushDevice) {
         if let registeredForPush = NSUserDefaults.standardUserDefaults().objectForKey("registeredForPush") as? Bool {
             if (registeredForPush) {
@@ -205,7 +218,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         })
     }
     
-    func sendPushIos(message: Message) {
+    func sendPush(title: String, content: String) {
         var request = makeRequest("/push", HTTPMethod: "POST", withAuthentication: true)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -213,7 +226,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         dateStringFormatter.dateFormat = "dd.MM.YYYY HH:mm"
         var timestamp = dateStringFormatter.stringFromDate(NSDate())
         
-        var params = ["content": message.content!, "title": message.title!] as Dictionary<String, String>
+        var params = ["content": content, "title": title] as Dictionary<String, String>
         
         var err: NSError?
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)

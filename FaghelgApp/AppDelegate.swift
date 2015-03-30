@@ -5,23 +5,29 @@ import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-                            
+    
     var window: UIWindow?
-
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+        
         Fabric.with([Crashlytics()])
         
         application.registerForRemoteNotifications()
         
+        if let launchOpts = launchOptions {
+            if let notificationPayload = launchOpts.objectForKey(UIApplicationLaunchOptionsRemoteNotificationKey) as? NSDictionary {
+                showMessagesViewController()
+            }
+        }
+        
         return true
     }
-
+    
     func applicationDidBecomeActive(application: UIApplication) {
         // Remove badge
         application.applicationIconBadgeNumber = 0
     }
-
+    
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         self.saveContext()
@@ -37,28 +43,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().setObject(deviceTokenString, forKey: "deviceToken")
         NSUserDefaults.standardUserDefaults().synchronize()
+        
+        var types: UIUserNotificationType = UIUserNotificationType.Badge |
+            UIUserNotificationType.Alert |
+            UIUserNotificationType.Sound
+        
+        var settings: UIUserNotificationSettings = UIUserNotificationSettings( forTypes: types, categories: nil )
+        application.registerUserNotificationSettings( settings )
+        
+        var faghelgApi = FaghelgApi(managedObjectContext: managedObjectContext!)
+        faghelgApi.registerForPushWithoutLogin(PushDevice(token: deviceTokenString))
     }
     
     func application( application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error: NSError! ) {
         println( error.localizedDescription )
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         completionHandler(UIBackgroundFetchResult.NewData);
         
+        var messageDAO = MessageDAO(managedObjectContext: managedObjectContext!)
+        
+        var message = Message.fromPushPayload(userInfo, insertIntoManagedObjectContext: managedObjectContext!)
+        messageDAO.insert(message)
+        
+        addMessageToMessagesViewController(message)
+        if application.applicationState == UIApplicationState.Inactive || application.applicationState == UIApplicationState.Background {
+            showMessagesViewController()
+        }
+    }
+    
+    func showMessagesViewController() {
+        var tabBarController = self.window?.rootViewController as UITabBarController
+        if let lastIndex = tabBarController.viewControllers?.count {
+            tabBarController.selectedIndex = lastIndex - 1
+        }
+    }
+    
+    func addMessageToMessagesViewController(message: Message) {
         var tabBarController = self.window?.rootViewController as UITabBarController
         
         // TODO: Denne koden vil breake hvis meldingstaben ikke ligger til slutt lenger
         var messagesViewController = tabBarController.viewControllers?.last as MessagesViewController
         messagesViewController.increaseBadgeValue();
-        var aps = userInfo["aps"] as NSDictionary
-        var alert = aps["alert"] as NSDictionary
-        var title = alert["title"] as String
-        var body = alert["body"] as String
-        var sender = userInfo["sender"] as String
-        var timestamp = userInfo["timestamp"] as String
-        
-        var message = Message(title: title, content: body, sender: sender, timestamp: timestamp)
+
         messagesViewController.addMessage(message)
     }
     

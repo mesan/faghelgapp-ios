@@ -25,7 +25,7 @@ class ImageDAO : BaseDAO {
             image.shortName = shortName
             image.imageData = imageData
             
-            self.persist(image)
+            self.insert(image)
         }
     }
 }

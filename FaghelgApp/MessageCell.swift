@@ -21,7 +21,7 @@ class MessageCell: UITableViewCell {
         self.content.sizeToFit()
         self.layoutIfNeeded()
         
-        faghelgApi.getImageForShortname(message.sender!, callback: showImage)
+        faghelgApi.getImageForShortname(message.sender, callback: showImage)
     }
     
     func showImage(image: UIImage?) {
