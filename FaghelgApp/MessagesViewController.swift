@@ -99,8 +99,6 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func showLoginButton() {
         buttonLogin.hidden = false
         buttonCreateMessage.hidden = true
-        viewCreateMessage.hidden = true
-        hideCreateMessageView()
     }
     
     func showCreateMessageButton() {
@@ -112,14 +110,11 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func hideCreateMessageView() {
         buttonCreateMessage.hidden = false
         viewCreateMessage.hidden = true
-        //bottomConstraint.constant = constraintValue!
     }
     
     func showCreateMessageView() {
         buttonCreateMessage.hidden = true
         viewCreateMessage.hidden = false
-        //bottomConstraint.constant = constraintValue! + viewCreateMessage.layer.frame.height
-        viewCreateMessage.layoutSubviews()
     }
     
     @IBAction func buttonLoginClicked(sender: AnyObject) {

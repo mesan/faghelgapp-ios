@@ -526,11 +526,11 @@
                                     <outlet property="delegate" destination="C3R-gn-uol" id="E5b-Cf-LdS"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KS-pT-gvW">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KS-pT-gvW">
                                 <rect key="frame" x="0.0" y="356" width="320" height="163"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Melding..." translatesAutoresizingMaskIntoConstraints="NO" id="SdZ-4g-P7Q">
-                                        <rect key="frame" x="16" y="78" width="288" height="77"/>
+                                        <rect key="frame" x="16" y="78" width="288" height="75"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="3VS-my-ram"/>
@@ -573,7 +573,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="bpW-sv-Vfu" firstAttribute="leading" secondItem="8KS-pT-gvW" secondAttribute="leading" constant="148" id="1K5-b5-HLz"/>
-                                    <constraint firstAttribute="bottom" secondItem="SdZ-4g-P7Q" secondAttribute="bottom" constant="8" id="4IF-eN-p1k"/>
+                                    <constraint firstAttribute="bottom" secondItem="SdZ-4g-P7Q" secondAttribute="bottom" constant="10" id="4IF-eN-p1k"/>
                                     <constraint firstItem="bpW-sv-Vfu" firstAttribute="top" secondItem="8KS-pT-gvW" secondAttribute="top" constant="8" id="92S-hH-x2a"/>
                                     <constraint firstItem="SdZ-4g-P7Q" firstAttribute="leading" secondItem="8KS-pT-gvW" secondAttribute="leading" constant="16" id="9Vc-fe-fp1"/>
                                     <constraint firstItem="H11-Rl-wu5" firstAttribute="top" secondItem="bpW-sv-Vfu" secondAttribute="bottom" constant="8" id="Yai-Sm-bAC"/>
@@ -586,7 +586,7 @@
                                 </constraints>
                             </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTd-OL-DZE">
-                                <rect key="frame" x="132" y="469" width="42" height="42"/>
+                                <rect key="frame" x="132" y="467" width="42" height="42"/>
                                 <state key="normal" image="send">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -595,7 +595,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zb-6B-3Kr">
-                                <rect key="frame" x="51" y="475" width="219" height="30"/>
+                                <rect key="frame" x="51" y="469" width="219" height="30"/>
                                 <state key="normal" title="Logg inn for å sende meldinger">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -607,28 +607,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="sTd-OL-DZE" secondAttribute="centerX" constant="7" id="5A4-wN-vLm"/>
-                            <constraint firstItem="1zb-6B-3Kr" firstAttribute="leading" secondItem="IIi-oZ-ufD" secondAttribute="leadingMargin" constant="35" id="6HB-cT-65h"/>
                             <constraint firstAttribute="trailingMargin" secondItem="1zb-6B-3Kr" secondAttribute="trailing" constant="34" id="8Yb-VG-fpn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8KS-pT-gvW" secondAttribute="trailing" constant="-16" id="Ult-Ab-5jf"/>
-                            <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="sTd-OL-DZE" secondAttribute="bottom" constant="8" id="Xio-4G-eDP"/>
+                            <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="sTd-OL-DZE" secondAttribute="bottom" constant="10" id="Xio-4G-eDP"/>
                             <constraint firstItem="j2Y-29-IDx" firstAttribute="trailing" secondItem="IIi-oZ-ufD" secondAttribute="trailingMargin" constant="16" id="aKV-UZ-ZaW"/>
                             <constraint firstItem="8KS-pT-gvW" firstAttribute="leading" secondItem="IIi-oZ-ufD" secondAttribute="leadingMargin" constant="-16" id="aRZ-6g-bls"/>
-                            <constraint firstItem="1zb-6B-3Kr" firstAttribute="top" secondItem="7cl-nG-bSa" secondAttribute="bottom" constant="455" id="euc-lX-vSz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1zb-6B-3Kr" secondAttribute="trailing" constant="34" id="fVT-gp-1Nv"/>
+                            <constraint firstItem="1zb-6B-3Kr" firstAttribute="top" relation="lessThanOrEqual" secondItem="7cl-nG-bSa" secondAttribute="bottom" constant="455" id="euc-lX-vSz"/>
                             <constraint firstItem="1zb-6B-3Kr" firstAttribute="leading" secondItem="IIi-oZ-ufD" secondAttribute="leadingMargin" constant="35" id="hd9-QT-TB2"/>
                             <constraint firstItem="j2Y-29-IDx" firstAttribute="top" secondItem="7cl-nG-bSa" secondAttribute="bottom" id="pBm-Iq-bPP"/>
                             <constraint firstItem="j2Y-29-IDx" firstAttribute="leading" secondItem="DBh-J4-kAH" secondAttribute="trailing" constant="-320" id="pDw-Cn-vOF"/>
                             <constraint firstItem="j2Y-29-IDx" firstAttribute="leading" secondItem="IIi-oZ-ufD" secondAttribute="leadingMargin" constant="-16" id="qOL-S8-Oc9"/>
-                            <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="1zb-6B-3Kr" secondAttribute="bottom" constant="14" id="tEO-Kc-Taw"/>
+                            <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="1zb-6B-3Kr" secondAttribute="bottom" constant="20" id="tEO-Kc-Taw"/>
                             <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="8KS-pT-gvW" secondAttribute="bottom" id="w0I-DL-owm"/>
                             <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="j2Y-29-IDx" secondAttribute="bottom" constant="58" id="yi6-0J-5Qq"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="6HB-cT-65h"/>
-                                <exclude reference="fVT-gp-1Nv"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Meldinger" image="messages" id="ozi-vc-p8e"/>
                     <connections>
