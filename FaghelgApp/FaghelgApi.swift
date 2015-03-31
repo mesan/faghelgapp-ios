@@ -10,11 +10,11 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     // let HOST = "http://faghelg.herokuapp.com";
 
     // Branch
-    //let HOST = "http://faghelg-branch.herokuapp.com"
+    let HOST = "http://faghelg-branch.herokuapp.com"
     
     
     // Andersmac@home
-    let HOST = "http://192.168.0.198:8080"
+    //let HOST = "http://192.168.0.198:8080"
     
     // Andersmac@mesan
     //let HOST = "http://10.22.200.151:8080";
