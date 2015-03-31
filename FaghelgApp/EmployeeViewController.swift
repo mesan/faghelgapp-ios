@@ -15,6 +15,12 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         faghelgApi.getEmployees(showEmployees)
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        if employees.isEmpty {
+            faghelgApi.getEmployees(showEmployees)
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

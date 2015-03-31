@@ -56,9 +56,12 @@ class EventTableViewCell: UITableViewCell {
         
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            faghelgApi.getImage(event.eventImageUrl, self.showImage)
-        })
+        
+        if let eventImageUrl = event.eventImageUrl {
+            dispatch_async(backgroundQueue, {
+                faghelgApi.getImage(eventImageUrl, self.showImage)
+            })
+        }
         
     }
     

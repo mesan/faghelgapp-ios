@@ -8,7 +8,7 @@ class PersonDAO: BaseDAO {
     }
     
     func getPersons() -> [Person]? {
-        if let persons = getEntities("Person") as? [Person] {
+        if let persons = getEntities("Person", includesPendingChanges: true) as? [Person] {
             var sortedPersons = sorted(persons){ $0.fullName < $1.fullName }
             return sortedPersons
         }
@@ -17,7 +17,7 @@ class PersonDAO: BaseDAO {
     }
     
     func getPerson(shortName: String) -> Person? {
-        return getEntities("Person", predicate: NSPredicate(format: "shortName = %@", shortName))?.first as? Person
+        return getEntities("Person", includesPendingChanges: true, predicate: NSPredicate(format: "shortName = %@", shortName))?.first as? Person
     }
     
     func savePerson(person: Person) -> Person? {

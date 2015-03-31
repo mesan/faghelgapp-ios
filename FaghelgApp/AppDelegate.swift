@@ -65,7 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var messageDAO = MessageDAO(managedObjectContext: managedObjectContext!)
         
         var message = Message.fromPushPayload(userInfo, insertIntoManagedObjectContext: managedObjectContext!)
-        messageDAO.insert(message)
         
         addMessageToMessagesViewController(message)
         if application.applicationState == UIApplicationState.Inactive || application.applicationState == UIApplicationState.Background {

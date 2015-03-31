@@ -8,15 +8,11 @@ class BaseDAO {
         self.managedObjectContext = managedObjectContext
     }
     
-    func insert(entity: NSManagedObject) {
-        self.managedObjectContext.insertObject(entity)
-    }
-    
-    func getEntities(entityName: String, predicate: NSPredicate? = nil) -> [NSManagedObject]? {
+    func getEntities(entityName: String, includesPendingChanges: Bool, predicate: NSPredicate? = nil) -> [NSManagedObject]? {
         var result:[NSManagedObject]?
         
         let fetchRequest = NSFetchRequest(entityName: entityName)
-        fetchRequest.includesPendingChanges = true
+        fetchRequest.includesPendingChanges = includesPendingChanges
         fetchRequest.predicate = predicate
         
         var err: NSError? = nil

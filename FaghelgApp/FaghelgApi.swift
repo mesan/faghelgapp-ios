@@ -10,7 +10,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     // let HOST = "http://faghelg.herokuapp.com";
 
     // Branch
-    // let HOST = "http://faghelg-branch.herokuapp.com"
+    //let HOST = "http://faghelg-branch.herokuapp.com"
     
     
     // Andersmac@home
@@ -60,8 +60,8 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
             
             if (jsonResult != nil) {
-                program = JsonParser.programFromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
-                self.programDAO.saveProgram(program!)
+                program = Program.fromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
+                self.programDAO.clearOldProgram()
             } else {
                 program = self.programDAO.getProgram()
             }
@@ -90,9 +90,8 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                 employees = [Person]()
                 for jsonObject in jsonResult {
                     var jsonDict = jsonObject as NSDictionary
-                    let employee = JsonParser.personFromJson(jsonDict, managedObjectContext: self.managedObjectContext!)
+                    let employee = Person.fromJson(jsonDict, insertIntoManagedObjectContext: self.managedObjectContext!)
                     employees!.append(employee)
-                    self.personDAO.savePerson(employee)
                 }
             } else {
                 employees = self.personDAO.getPersons()
@@ -103,25 +102,24 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         })
     }
 
-    func getInfo(callback: (Info?) -> Void) {
+    func getInfo(callback: (Info) -> Void) {
         var request = makeRequest("/info", HTTPMethod: "GET", withAuthentication: false)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var info: Info?
             
             if error != nil {
-                info = self.infoDAO.getInfo()
-                callback(info)
+                if let info = self.infoDAO.getInfo() {
+                    callback(info)
+                }
                 return
             }
             
+            var info: Info!
             var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
-            let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
-            
-            if (jsonResult != nil) {
-                info = JsonParser.infoFromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
-                self.infoDAO.insert(info!)
-            } else {
+            if let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary {
+                info = Info.fromJson(jsonResult, insertIntoManagedObjectContext: self.managedObjectContext!)
+            }
+            else {
                 info = self.infoDAO.getInfo()
             }
             
@@ -175,7 +173,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         var err: NSError? = nil
         
         if let imageData = NSData(contentsOfURL: url!,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err) {
-            imageDAO.saveImage(imageData, shortName: shortName)
+            var image = Image(imageData: imageData, shortName: shortName, insertIntoManagedObjectContext: managedObjectContext)
             return imageData
         }
         
@@ -186,9 +184,14 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         var request = makeRequest("/push?registrationId=\(pushDevice.token)&os=\(pushDevice.os)", HTTPMethod: "GET", withAuthentication: false)
 
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler: { (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var HTTPResponse = response as NSHTTPURLResponse
-            if !(HTTPResponse.statusCode == 201) {
-                println("Failed registering for push")
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                if !(HTTPResponse.statusCode == 201) {
+                    println("Failed registering for push")
+                }
+            }
+            else {
+                // TODO: Alert the user
+                println("Can't register for push. No internet connection")
             }
         })
         

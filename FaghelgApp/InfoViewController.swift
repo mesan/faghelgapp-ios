@@ -7,7 +7,7 @@ class InfoViewController: UIViewController {
     
     @IBOutlet weak var infoImage: UIImageView!
     @IBOutlet weak var locationName: UILabel!
-    @IBOutlet weak var desc: UILabel!
+    @IBOutlet weak var locationDescription: UILabel!
     @IBOutlet weak var hotelName: UILabel!
     @IBOutlet weak var hotelDescription: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -16,7 +16,9 @@ class InfoViewController: UIViewController {
         super.viewDidLoad()
         
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         faghelgApi.getInfo(showInfo)
     }
     
@@ -25,20 +27,20 @@ class InfoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func showInfo(info: Info?) {
+    func showInfo(info: Info) {
         // reload view using main thread
         NSOperationQueue.mainQueue().addOperationWithBlock(){
-            self.locationName.text = info!.locationName
-            self.desc.text = info!.locationDescription
-            self.hotelName.text = info!.hotelName
-            self.hotelDescription.text = info!.hotelDescription
+            self.locationName.text = info.locationName
+            self.locationDescription.text = info.locationDescription
+            self.hotelName.text = info.hotelName
+            self.hotelDescription.text = info.hotelDescription
         }
         
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         
         dispatch_async(backgroundQueue, {
-            self.faghelgApi.getImage(info!.imageUrl, self.showImage)
+            self.faghelgApi.getImage(info.imageUrl, self.showImage)
         })
     }
     

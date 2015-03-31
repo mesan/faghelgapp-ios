@@ -24,7 +24,6 @@
 		9F7031841A93B0CD00B44342 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7031831A93B0CD00B44342 /* InfoViewController.swift */; };
 		9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */; };
 		9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7824531A8A77EA00208C2D /* BaseDAO.swift */; };
-		9F78245D1A8A7FBD00208C2D /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F78245C1A8A7FBD00208C2D /* JsonParser.swift */; };
 		9F7A4B801A93C4F900F4C7FC /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A4B7F1A93C4F900F4C7FC /* Info.swift */; };
 		9F8D4CB319BE4A6100DA5A61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D4CB219BE4A6100DA5A61 /* AppDelegate.swift */; };
 		9F8D4CBE19BE4A6100DA5A61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F8D4CBD19BE4A6100DA5A61 /* Images.xcassets */; };
@@ -98,7 +97,6 @@
 		9F7031831A93B0CD00B44342 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9F7824531A8A77EA00208C2D /* BaseDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
-		9F78245C1A8A7FBD00208C2D /* JsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		9F7A4B7F1A93C4F900F4C7FC /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		9F8D4CAD19BE4A6100DA5A61 /* FaghelgApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaghelgApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8D4CB119BE4A6100DA5A61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 		9F78245B1A8A7FAF00208C2D /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				9F78245C1A8A7FBD00208C2D /* JsonParser.swift */,
 				9F4B8DE71AC5513C0022144A /* TokenUtil.swift */,
 			);
 			name = Util;
@@ -428,7 +425,6 @@
 				9F4B8DE61AC54FAB0022144A /* PushDevice.swift in Sources */,
 				9F4B8DE81AC5513C0022144A /* TokenUtil.swift in Sources */,
 				9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */,
-				9F78245D1A8A7FBD00208C2D /* JsonParser.swift in Sources */,
 				9F7A4B801A93C4F900F4C7FC /* Info.swift in Sources */,
 				9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */,
 				963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */,

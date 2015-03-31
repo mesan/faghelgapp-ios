@@ -47,6 +47,12 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         faghelgApi.getProgram(showProgram)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        if allEvents.isEmpty {
+            faghelgApi.getProgram(showProgram)
+        }
+    }
+    
     func showProgram(program: Program?) {
         if (program == nil) {
             return

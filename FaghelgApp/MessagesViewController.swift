@@ -2,9 +2,12 @@ import CoreData
 
 class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var viewCreateMessage: UIView!
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textViewMessage: UITextView!
     @IBOutlet weak var buttonLogin: UIButton!
+    @IBOutlet weak var buttonCreateMessage: UIButton!
+    @IBOutlet weak var buttonMinimize: UIButton!
     
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -12,6 +15,8 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var messageTableView: UITableView!
     
     var constraintValue: CGFloat?
+    var oldVerticalSpace: CGFloat?
+    
     var placeholderTextTitle: String?
     var placeholderTextContent: String?
     
@@ -36,7 +41,6 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
         
-        constraintValue = self.bottomConstraint.constant
         placeholderTextTitle = textFieldTitle.text
         placeholderTextContent = textViewMessage.text
         
@@ -56,43 +60,77 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         self.messageTableView.rowHeight = UITableViewAutomaticDimension
         
         initMessages()
+        constraintValue = bottomConstraint.constant
     }
     
     func initMessages() {
-        if let messagesFromDatabase = messageDAO.getMessages() {
+        var messages = [Message]()
+        messages.append(Message(title: "Test 1", content: "test 1", sender: "andersu", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 2", content: "test 2", sender: "andersa", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 3", content: "test 3", sender: "oddr", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 4", content: "test 4", sender: "kajas", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        /*if let messagesFromDatabase = messageDAO.getMessages() {
             self.messages = messagesFromDatabase
             self.messageTableView.reloadData()
-        }
+        }*/
+        self.messages = messages
+        self.messageTableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
         tabBarItem.badgeValue = nil
         checkForToken()
+        if messages.isEmpty {
+            initMessages()
+        }
     }
     
     func checkForToken() {
         if let token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String {
-            showTextViewsHideLoginButton()
+            showCreateMessageButton()
         }
         else {
-            showLoginButtonHideTextViews()
+            showLoginButton()
         }
     }
     
-    func showLoginButtonHideTextViews() {
+    func showLoginButton() {
         buttonLogin.hidden = false
-        textViewMessage.hidden = true
-        textFieldTitle.hidden = true
+        buttonCreateMessage.hidden = true
+        viewCreateMessage.hidden = true
+        hideCreateMessageView()
     }
     
-    func showTextViewsHideLoginButton() {
+    func showCreateMessageButton() {
         buttonLogin.hidden = true
-        textViewMessage.hidden = false
-        textFieldTitle.hidden = false
+        buttonCreateMessage.hidden = false
+        hideCreateMessageView()
+    }
+    
+    func hideCreateMessageView() {
+        buttonCreateMessage.hidden = false
+        viewCreateMessage.hidden = true
+        //bottomConstraint.constant = constraintValue!
+    }
+    
+    func showCreateMessageView() {
+        buttonCreateMessage.hidden = true
+        viewCreateMessage.hidden = false
+        //bottomConstraint.constant = constraintValue! + viewCreateMessage.layer.frame.height
+        viewCreateMessage.layoutSubviews()
     }
     
     @IBAction func buttonLoginClicked(sender: AnyObject) {
         promptLogin()
+    }
+    
+    @IBAction func buttonCreateMessageClicked(sender: AnyObject) {
+        showCreateMessageView()
+    }
+    
+    @IBAction func buttonMinimizeClicked(sender: AnyObject) {
+        hideCreateMessageView()
+        hideKeyboard()
     }
     
     func promptLogin() {
@@ -113,7 +151,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
                 NSUserDefaults.standardUserDefaults().setObject(result.accessToken, forKey: "token")
                 NSUserDefaults.standardUserDefaults().synchronize()
                 self.registerForPush(result.accessToken)
-                self.showTextViewsHideLoginButton()
+                self.showCreateMessageButton()
             }
         })
     }
@@ -172,9 +210,20 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
             textView.resignFirstResponder()
             fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
             fillInPlaceholderText(textViewMessage, text: placeholderTextContent!)
+            hideCreateMessageView()
         }
         
         return true
+    }
+    
+    func hideKeyboard() {
+        if textViewMessage.isFirstResponder() {
+            textViewMessage.resignFirstResponder()
+        }
+        
+        if textFieldTitle.isFirstResponder() {
+            textFieldTitle.resignFirstResponder()
+        }
     }
     
     func tapReceived(tapGestureRecognizer: UITapGestureRecognizer) {
