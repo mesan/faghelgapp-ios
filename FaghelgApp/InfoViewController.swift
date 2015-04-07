@@ -3,8 +3,11 @@ import UIKit
 class InfoViewController: UIViewController {
 
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    var faghelgApi : FaghelgApi!
+    var faghelgApi: FaghelgApi!
     
+    var info: Info?
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var infoImage: UIImageView!
     @IBOutlet weak var locationName: UILabel!
     @IBOutlet weak var locationDescription: UILabel!
@@ -19,7 +22,10 @@ class InfoViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        faghelgApi.getInfo(showInfo)
+        if info == nil {
+            activityIndicator.startAnimating()
+            faghelgApi.getInfo(showInfo)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -28,6 +34,7 @@ class InfoViewController: UIViewController {
     }
     
     func showInfo(info: Info) {
+        self.info = info
         // reload view using main thread
         NSOperationQueue.mainQueue().addOperationWithBlock(){
             self.locationName.text = info.locationName
@@ -47,6 +54,7 @@ class InfoViewController: UIViewController {
     func showImage(image: UIImage?) {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.infoImage.image = image
+            self.activityIndicator.stopAnimating()
         })
     }
 }

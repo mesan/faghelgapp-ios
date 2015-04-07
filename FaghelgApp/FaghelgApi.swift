@@ -146,26 +146,20 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     
     func getImage(imageUrl: String, callback: (UIImage?) -> Void) {
         var managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-        
-
         let shortName = imageUrl.componentsSeparatedByString("/").last!
         var uiImage: UIImage?
+        
         if let imageFromDatabase = self.imageDAO.getImage(shortName) {
             uiImage = UIImage(data: imageFromDatabase.imageData)
         }
         
-        if uiImage != nil {
-            callback(uiImage)
-            return
+        if uiImage == nil {
+            if let imageData = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
+                uiImage = UIImage(data: imageData)!
+            }
         }
         
-        
-        if let imageData = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
-            callback(UIImage(data: imageData)!)
-            return
-        }
-        
-        callback(UIImage(named: "ukjent"))
+        callback(uiImage)
     }
     
     func downloadImageFromWeb(imageUrl: String, shortName: String, managedObjectContext: NSManagedObjectContext) -> NSData? {

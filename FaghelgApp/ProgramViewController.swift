@@ -28,6 +28,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var faghelgApi: FaghelgApi!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dayFilter: UISegmentedControl!
     
@@ -49,6 +50,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidAppear(animated: Bool) {
         if allEvents.isEmpty {
+            activityIndicator.startAnimating()
             faghelgApi.getProgram(showProgram)
         }
     }
@@ -85,7 +87,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
                 self.scrollToCurrentEvent()
             }
             
-            //TODO: else: Gi beskjed om at vi ikke har nett 
+            self.activityIndicator.stopAnimating()
         })
     }
     

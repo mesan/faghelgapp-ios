@@ -1,7 +1,7 @@
 import UIKit
 
 class EmployeeCell: UITableViewCell {
-
+    
     @IBOutlet weak var fullName: UILabel!
     var shortName: String!
     @IBOutlet weak var employeeImage: UIImageView!
@@ -23,10 +23,10 @@ class EmployeeCell: UITableViewCell {
         employeeImage.layer.borderWidth = 1.0
         employeeImage.layer.borderColor = UIColor.whiteColor().CGColor
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -44,9 +44,10 @@ class EmployeeCell: UITableViewCell {
     }
     
     func showImage(image: UIImage?) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.employeeImage.image = image
-        })
-    }
-
+        if image != nil {
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.employeeImage.image = image
+            })
+        }
+    }    
 }

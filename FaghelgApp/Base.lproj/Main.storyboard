@@ -61,33 +61,26 @@
                                     <outlet property="delegate" destination="L0a-cQ-NrB" id="XQU-Ec-tK1"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6o9-JA-AbE">
+                                <rect key="frame" x="150" y="274" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IUg-Nl-SkW" firstAttribute="bottom" secondItem="J4Y-Dd-ZGn" secondAttribute="top" id="AOb-U6-ZaP"/>
                             <constraint firstItem="J4Y-Dd-ZGn" firstAttribute="top" secondItem="IUg-Nl-SkW" secondAttribute="bottom" id="JPz-ps-zYf"/>
                             <constraint firstItem="IUg-Nl-SkW" firstAttribute="top" secondItem="Gjr-3t-HJV" secondAttribute="bottom" id="YmI-ka-kfj"/>
                             <constraint firstItem="IUg-Nl-SkW" firstAttribute="top" secondItem="Gjr-3t-HJV" secondAttribute="bottom" id="YoB-xC-jNe"/>
+                            <constraint firstAttribute="centerX" secondItem="6o9-JA-AbE" secondAttribute="centerX" constant="-8.5" id="aFk-GB-ZQL"/>
                             <constraint firstItem="J4Y-Dd-ZGn" firstAttribute="top" secondItem="IUg-Nl-SkW" secondAttribute="bottom" id="cP9-M3-NcD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="IUg-Nl-SkW" secondAttribute="trailing" constant="-16" id="duY-wj-fbR"/>
-                            <constraint firstItem="IUg-Nl-SkW" firstAttribute="trailing" secondItem="J4Y-Dd-ZGn" secondAttribute="trailing" id="eSm-nX-JYZ"/>
                             <constraint firstItem="IUg-Nl-SkW" firstAttribute="leading" secondItem="xsS-nd-9Vb" secondAttribute="leadingMargin" constant="-16" id="hyC-AO-5M6"/>
-                            <constraint firstItem="IUg-Nl-SkW" firstAttribute="leading" secondItem="Gjr-3t-HJV" secondAttribute="leading" id="kXt-kL-2Al"/>
-                            <constraint firstItem="IUg-Nl-SkW" firstAttribute="top" secondItem="Gjr-3t-HJV" secondAttribute="bottom" id="pIB-M9-DXM"/>
-                            <constraint firstItem="IUg-Nl-SkW" firstAttribute="top" secondItem="Gjr-3t-HJV" secondAttribute="bottom" id="qGj-6F-shT"/>
+                            <constraint firstAttribute="centerY" secondItem="6o9-JA-AbE" secondAttribute="centerY" constant="-8.5" id="yjS-BA-XA0"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="AOb-U6-ZaP"/>
-                                <exclude reference="eSm-nX-JYZ"/>
-                                <exclude reference="kXt-kL-2Al"/>
-                                <exclude reference="pIB-M9-DXM"/>
-                                <exclude reference="qGj-6F-shT"/>
-                            </mask>
-                        </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Ansatte" image="person" id="Olf-iv-P0Q"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="6o9-JA-AbE" id="Re9-gA-Loe"/>
                         <outlet property="employeeList" destination="IUg-Nl-SkW" id="c4Y-QJ-cBf"/>
                     </connections>
                 </viewController>
@@ -246,6 +239,10 @@
                                     <action selector="filter:" destination="aJl-tZ-Sgq" eventType="valueChanged" id="i8j-QG-Nz9"/>
                                 </connections>
                             </segmentedControl>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="H13-Ni-lly">
+                                <rect key="frame" x="150" y="274" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -253,13 +250,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="RUv-3G-xlZ" secondAttribute="trailing" constant="-16" id="6zA-zp-2DN"/>
                             <constraint firstItem="AC8-Vx-6mJ" firstAttribute="top" secondItem="AiD-6n-SHs" secondAttribute="bottom" id="Ct5-NO-0MF"/>
                             <constraint firstItem="RUv-3G-xlZ" firstAttribute="leading" secondItem="Xga-kC-ddd" secondAttribute="leadingMargin" constant="-16" id="DF4-1T-TqL"/>
+                            <constraint firstAttribute="centerX" secondItem="H13-Ni-lly" secondAttribute="centerX" constant="-8.5" id="Ips-iR-rkz"/>
                             <constraint firstItem="AiD-6n-SHs" firstAttribute="leading" secondItem="Xga-kC-ddd" secondAttribute="leading" id="dhn-H9-rij"/>
                             <constraint firstAttribute="trailing" secondItem="AiD-6n-SHs" secondAttribute="trailing" id="g0C-Av-ODG"/>
+                            <constraint firstAttribute="centerY" secondItem="H13-Ni-lly" secondAttribute="centerY" constant="-8.5" id="qV9-N9-DJ6"/>
                             <constraint firstItem="AiD-6n-SHs" firstAttribute="top" secondItem="RUv-3G-xlZ" secondAttribute="bottom" id="qtK-WF-TBk"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Program" image="clock" id="9ub-0h-1v7"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="H13-Ni-lly" id="f7G-g5-1MN"/>
                         <outlet property="dayFilter" destination="RUv-3G-xlZ" id="yLL-br-4ne"/>
                         <outlet property="tableView" destination="AiD-6n-SHs" id="o07-He-zic"/>
                     </connections>
@@ -292,12 +292,12 @@
                                                     <constraint firstAttribute="height" constant="200" id="OlX-Zl-h6j"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fredrikstad" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-oG-brm">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YHf-oG-brm">
                                                 <rect key="frame" x="16" y="216" width="288" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Beskrivelse av byen" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFI-5K-DaX">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFI-5K-DaX">
                                                 <rect key="frame" x="16" y="251" width="288" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="ka1-92-dlN"/>
@@ -306,7 +306,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Masse beskrivelse av hotellet" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4U7-GS-m4f">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="wordWrap" numberOfLines="99" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4U7-GS-m4f">
                                                 <rect key="frame" x="16" y="320" width="288" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="dX0-Aa-f0A"/>
@@ -315,7 +315,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Quality Hotel Fredrikstad" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-TV-9ma">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZK1-TV-9ma">
                                                 <rect key="frame" x="16" y="291" width="288" height="21"/>
                                                 <accessibility key="accessibilityConfiguration" label="dada"/>
                                                 <constraints>
@@ -354,11 +354,17 @@
                                     <constraint firstAttribute="trailing" secondItem="jQV-03-QCd" secondAttribute="trailing" id="w0G-Pn-d7x"/>
                                 </constraints>
                             </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="CNL-gT-AeD">
+                                <rect key="frame" x="141" y="266" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Naz-wj-S01" firstAttribute="top" secondItem="FiS-gz-pLG" secondAttribute="bottom" id="3ow-AB-T0y"/>
                             <constraint firstAttribute="width" secondItem="jQV-03-QCd" secondAttribute="width" id="EJw-fn-lAv"/>
+                            <constraint firstAttribute="centerX" secondItem="CNL-gT-AeD" secondAttribute="centerX" constant="0.5" id="NfZ-ry-PtF"/>
+                            <constraint firstAttribute="centerY" secondItem="CNL-gT-AeD" secondAttribute="centerY" constant="-0.5" id="Sew-eT-L66"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FiS-gz-pLG" secondAttribute="trailing" constant="-16" id="bJD-Rj-elq"/>
                             <constraint firstItem="FiS-gz-pLG" firstAttribute="top" secondItem="d2K-2z-aGI" secondAttribute="bottom" id="c06-6z-Xtv"/>
                             <constraint firstItem="FiS-gz-pLG" firstAttribute="leading" secondItem="VRh-tI-EX0" secondAttribute="leadingMargin" constant="-16" id="ybJ-HK-eFC"/>
@@ -366,6 +372,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Info" image="info" id="XfM-mk-4dH"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="CNL-gT-AeD" id="hNO-zF-07s"/>
                         <outlet property="hotelDescription" destination="4U7-GS-m4f" id="hS1-OV-aaa"/>
                         <outlet property="hotelName" destination="ZK1-TV-9ma" id="6bd-uT-EXq"/>
                         <outlet property="infoImage" destination="DMJ-sb-iVe" id="o5i-ry-O5U"/>
@@ -407,7 +414,7 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUU-sY-ugq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUU-sY-ugq">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
