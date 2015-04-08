@@ -1,4 +1,5 @@
 import CoreData
+import AVFoundation
 
 class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -70,13 +71,14 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         }
         
         // For testing:
-        /*var messages = [Message]()
+        var messages = [Message]()
         messages.append(Message(title: "Test 1", content: "test 1", sender: "andersu", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
         messages.append(Message(title: "Test 2", content: "test 2", sender: "andersa", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
         messages.append(Message(title: "Test 3", content: "test 3", sender: "oddr", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
         messages.append(Message(title: "Test 4", content: "test 4", sender: "kajas", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 4", content: "test 5 balblablalblablablalblbalba", sender: "haraldk", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
         self.messages = messages
-        self.messageTableView.reloadData()*/
+        self.messageTableView.reloadData()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -208,9 +210,22 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
             fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
             fillInPlaceholderText(textViewMessage, text: placeholderTextContent!)
             hideCreateMessageView()
+            playWhooshSound()
         }
         
         return true
+    }
+    
+    func playWhooshSound() {
+        var mysoundname = "flyby"
+        
+        // Load
+        let soundURL = NSBundle.mainBundle().URLForResource(mysoundname, withExtension: "wav")
+        var mySound: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(soundURL, &mySound)
+        
+        // Play
+        AudioServicesPlaySystemSound(mySound);
     }
     
     func hideKeyboard() {

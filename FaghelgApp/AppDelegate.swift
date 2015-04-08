@@ -20,7 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+        setTabBarTintColor()
+        
         return true
+    }
+    
+    func setTabBarTintColor() {
+        var tabBarController = self.window?.rootViewController as UITabBarController
+        var tabBar = tabBarController.tabBar
+        var mesanRed = UIColor(red: 197.0/256, green: 14.0/256, blue: 31.0/256, alpha: 1.0)
+        tabBar.tintColor = mesanRed
     }
     
     func applicationDidBecomeActive(application: UIApplication) {

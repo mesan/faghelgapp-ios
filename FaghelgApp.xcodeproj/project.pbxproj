@@ -22,16 +22,17 @@
 		9F4B8DE61AC54FAB0022144A /* PushDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4B8DE51AC54FAB0022144A /* PushDevice.swift */; };
 		9F4B8DE81AC5513C0022144A /* TokenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4B8DE71AC5513C0022144A /* TokenUtil.swift */; };
 		9F7031841A93B0CD00B44342 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7031831A93B0CD00B44342 /* InfoViewController.swift */; };
+		9F7057981AD569D9008058A6 /* flyby.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F7057971AD569D9008058A6 /* flyby.wav */; };
 		9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */; };
 		9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7824531A8A77EA00208C2D /* BaseDAO.swift */; };
 		9F7A4B801A93C4F900F4C7FC /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A4B7F1A93C4F900F4C7FC /* Info.swift */; };
 		9F8D4CB319BE4A6100DA5A61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D4CB219BE4A6100DA5A61 /* AppDelegate.swift */; };
-		9F8D4CBE19BE4A6100DA5A61 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F8D4CBD19BE4A6100DA5A61 /* Images.xcassets */; };
 		9F8D4CCA19BE4A6100DA5A61 /* FaghelgAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D4CC919BE4A6100DA5A61 /* FaghelgAppTests.swift */; };
 		9F8D4CD419BE4B2000DA5A61 /* FaghelgApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8D4CD319BE4B2000DA5A61 /* FaghelgApi.swift */; };
 		9F8E0F3219DDC023006E12AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F8D4CBA19BE4A6100DA5A61 /* Main.storyboard */; };
 		9F9A43751A8A6E3500E678F1 /* ProgramDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A43741A8A6E3500E678F1 /* ProgramDAO.swift */; };
 		9F9A43771A8A774300E678F1 /* PersonDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9A43761A8A774300E678F1 /* PersonDAO.swift */; };
+		9FBD797B1AD559EE00E09F34 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBD797A1AD559EE00E09F34 /* Images.xcassets */; };
 		9FC52E641AC961EA00BB20D4 /* MessageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC52E631AC961EA00BB20D4 /* MessageDAO.swift */; };
 		9FC52E661AC9790700BB20D4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC52E651AC9790700BB20D4 /* Message.swift */; };
 		9FF4906819DD90B800A42749 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF4906719DD90B800A42749 /* Image.swift */; };
@@ -95,6 +96,7 @@
 		9F4B8DE51AC54FAB0022144A /* PushDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushDevice.swift; sourceTree = "<group>"; };
 		9F4B8DE71AC5513C0022144A /* TokenUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUtil.swift; sourceTree = "<group>"; };
 		9F7031831A93B0CD00B44342 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		9F7057971AD569D9008058A6 /* flyby.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = flyby.wav; path = ../../../Downloads/flyby.wav; sourceTree = "<group>"; };
 		9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9F7824531A8A77EA00208C2D /* BaseDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
 		9F7A4B7F1A93C4F900F4C7FC /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
@@ -102,13 +104,13 @@
 		9F8D4CB119BE4A6100DA5A61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F8D4CB219BE4A6100DA5A61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F8D4CBB19BE4A6100DA5A61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9F8D4CBD19BE4A6100DA5A61 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9F8D4CC319BE4A6100DA5A61 /* FaghelgAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FaghelgAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F8D4CC819BE4A6100DA5A61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F8D4CC919BE4A6100DA5A61 /* FaghelgAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaghelgAppTests.swift; sourceTree = "<group>"; };
 		9F8D4CD319BE4B2000DA5A61 /* FaghelgApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaghelgApi.swift; sourceTree = "<group>"; };
 		9F9A43741A8A6E3500E678F1 /* ProgramDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramDAO.swift; sourceTree = "<group>"; };
 		9F9A43761A8A774300E678F1 /* PersonDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDAO.swift; sourceTree = "<group>"; };
+		9FBD797A1AD559EE00E09F34 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = FaghelgApp/Images.xcassets; sourceTree = "<group>"; };
 		9FC52E631AC961EA00BB20D4 /* MessageDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageDAO.swift; sourceTree = "<group>"; };
 		9FC52E651AC9790700BB20D4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9FF4906719DD90B800A42749 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -170,6 +172,14 @@
 			path = ADALiOS;
 			sourceTree = "<group>";
 		};
+		9F7057961AD569CF008058A6 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9F7057971AD569D9008058A6 /* flyby.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		9F70970919C8A85200D805CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +213,8 @@
 		9F8D4CA419BE4A6100DA5A61 = {
 			isa = PBXGroup;
 			children = (
+				9F7057961AD569CF008058A6 /* Sounds */,
+				9FBD797A1AD559EE00E09F34 /* Images.xcassets */,
 				9F42F7451AA6123E001C161E /* ADALiOS */,
 				9F42F7061AA5E1DE001C161E /* Crashlytics.framework */,
 				9F42F7071AA5E1DE001C161E /* Fabric.framework */,
@@ -236,7 +248,6 @@
 				9FF6490B19C87E25004BCFEB /* Domain */,
 				9F8D4CD319BE4B2000DA5A61 /* FaghelgApi.swift */,
 				9F8D4CB219BE4A6100DA5A61 /* AppDelegate.swift */,
-				9F8D4CBD19BE4A6100DA5A61 /* Images.xcassets */,
 				9F8D4CB019BE4A6100DA5A61 /* Supporting Files */,
 			);
 			path = FaghelgApp;
@@ -385,10 +396,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7057981AD569D9008058A6 /* flyby.wav in Resources */,
 				9F8E0F3219DDC023006E12AA /* Main.storyboard in Resources */,
+				9FBD797B1AD559EE00E09F34 /* Images.xcassets in Resources */,
 				9F42F7271AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard in Resources */,
 				9F42F7261AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard in Resources */,
-				9F8D4CBE19BE4A6100DA5A61 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,9 +581,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -587,7 +599,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "075bad62-91b5-4eb5-931d-c99fb6b5a6b5";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -601,8 +613,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MESAN AS";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MESAN AS";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -617,7 +629,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2526244b-ccaf-467e-907a-3a823b553371";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

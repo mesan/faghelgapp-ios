@@ -43,6 +43,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.separatorInset = UIEdgeInsetsZero
 
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         faghelgApi.getProgram(showProgram)
