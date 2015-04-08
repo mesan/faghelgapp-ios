@@ -568,17 +568,6 @@
                                             <action selector="buttonMinimizeClicked:" destination="C3R-gn-uol" eventType="touchUpInside" id="coS-0D-l00"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zb-6B-3Kr">
-                                        <rect key="frame" x="54" y="117" width="213" height="46"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Logg inn for å sende meldinger">
-                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonLoginClicked:" destination="C3R-gn-uol" eventType="touchUpInside" id="Ypt-wU-ANg"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -586,14 +575,12 @@
                                     <constraint firstAttribute="bottom" secondItem="SdZ-4g-P7Q" secondAttribute="bottom" constant="10" id="4IF-eN-p1k"/>
                                     <constraint firstItem="bpW-sv-Vfu" firstAttribute="top" secondItem="8KS-pT-gvW" secondAttribute="top" constant="8" id="92S-hH-x2a"/>
                                     <constraint firstItem="SdZ-4g-P7Q" firstAttribute="leading" secondItem="8KS-pT-gvW" secondAttribute="leading" constant="16" id="9Vc-fe-fp1"/>
-                                    <constraint firstAttribute="centerX" secondItem="1zb-6B-3Kr" secondAttribute="centerX" id="XAW-tf-VQq"/>
                                     <constraint firstItem="H11-Rl-wu5" firstAttribute="top" secondItem="bpW-sv-Vfu" secondAttribute="bottom" constant="8" id="Yai-Sm-bAC"/>
                                     <constraint firstAttribute="trailing" secondItem="bpW-sv-Vfu" secondAttribute="trailing" constant="148" id="iVy-D6-8zN"/>
                                     <constraint firstItem="H11-Rl-wu5" firstAttribute="leading" secondItem="8KS-pT-gvW" secondAttribute="leading" constant="16" id="lXG-IF-Hbf"/>
                                     <constraint firstAttribute="trailing" secondItem="SdZ-4g-P7Q" secondAttribute="trailing" constant="16" id="mUt-BA-i6L"/>
                                     <constraint firstItem="SdZ-4g-P7Q" firstAttribute="top" secondItem="H11-Rl-wu5" secondAttribute="bottom" constant="8" id="neU-Sa-iPv"/>
                                     <constraint firstAttribute="height" constant="163" id="plr-nA-g5o"/>
-                                    <constraint firstAttribute="bottom" secondItem="1zb-6B-3Kr" secondAttribute="bottom" id="qDX-ex-Se7"/>
                                     <constraint firstAttribute="trailing" secondItem="H11-Rl-wu5" secondAttribute="trailing" constant="16" id="uXu-Uk-mdc"/>
                                 </constraints>
                             </view>
@@ -607,11 +594,21 @@
                                     <action selector="buttonCreateMessageClicked:" destination="C3R-gn-uol" eventType="touchUpInside" id="TSE-mA-zNN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zb-6B-3Kr">
+                                <rect key="frame" x="54" y="470" width="213" height="46"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Logg inn for å sende meldinger">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonLoginClicked:" destination="C3R-gn-uol" eventType="touchUpInside" id="Ypt-wU-ANg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="sTd-OL-DZE" secondAttribute="bottom" constant="10" id="8kc-UZ-qxI"/>
-                            <constraint firstItem="1zb-6B-3Kr" firstAttribute="top" secondItem="j2Y-29-IDx" secondAttribute="bottom" constant="4" id="K7b-Ix-VSX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8KS-pT-gvW" secondAttribute="trailing" constant="-16" id="Ult-Ab-5jf"/>
                             <constraint firstItem="j2Y-29-IDx" firstAttribute="trailing" secondItem="IIi-oZ-ufD" secondAttribute="trailingMargin" constant="16" id="aKV-UZ-ZaW"/>
                             <constraint firstItem="8KS-pT-gvW" firstAttribute="leading" secondItem="IIi-oZ-ufD" secondAttribute="leadingMargin" constant="-16" id="aRZ-6g-bls"/>
