@@ -24,9 +24,9 @@ class Event: NSManagedObject {
     }
     
     class func fromJson(jsonDict: NSDictionary, insertIntoManagedObjectContext context: NSManagedObjectContext) -> Event {
-        let startTime = jsonDict["start"] as Double
+        let startTime = jsonDict["start"] as! Double
         let start = NSDate(timeIntervalSince1970: startTime)
-        let endTime = jsonDict["end"] as Double
+        let endTime = jsonDict["end"] as! Double
         let end = NSDate(timeIntervalSince1970: endTime)
         let title = jsonDict["title"] as? String
         let eventImageUrl = jsonDict["eventImageUrl"] as? String

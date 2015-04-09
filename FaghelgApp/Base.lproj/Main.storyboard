@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ASg-Ih-XTD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ASg-Ih-XTD">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -21,6 +21,7 @@
                             <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IUg-Nl-SkW">
                                 <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="90" id="wN1-zy-G26" customClass="EmployeeCell" customModule="FaghelgApp" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -81,7 +82,7 @@
                     <tabBarItem key="tabBarItem" title="Ansatte" image="person" id="Olf-iv-P0Q"/>
                     <connections>
                         <outlet property="activityIndicator" destination="6o9-JA-AbE" id="Re9-gA-Loe"/>
-                        <outlet property="employeeList" destination="IUg-Nl-SkW" id="c4Y-QJ-cBf"/>
+                        <outlet property="tableView" destination="IUg-Nl-SkW" id="eek-Kf-4r7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="az3-b4-jPY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -103,6 +104,7 @@
                             <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="AiD-6n-SHs">
                                 <rect key="frame" x="0.0" y="48" width="320" height="471"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventCell" rowHeight="160" id="5Ja-OC-bSU" customClass="EventTableViewCell" customModule="FaghelgApp" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -157,7 +159,7 @@
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="1000" id="FuC-eb-cAF"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.7725490196" green="0.054901960780000002" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="20 min" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7v-hE-bpJ">
@@ -400,6 +402,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="118" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="j2Y-29-IDx">
                                 <rect key="frame" x="0.0" y="28" width="320" height="441"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" rowHeight="118" id="w0t-IY-4EI" customClass="MessageCell" customModule="FaghelgApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -410,7 +413,6 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#yolo #gratisøl" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOz-CK-dAC">
                                                     <rect key="frame" x="75" y="27" width="237" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
-                                                    <color key="textColor" red="0.7725490196" green="0.054901960780000002" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="andersu" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SO-Qq-YwE">
@@ -463,7 +465,6 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="zed-yU-ChV"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                                                    <color key="textColor" red="0.7725490196" green="0.054901960780000002" blue="0.1215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -626,9 +627,9 @@
                         <outlet property="buttonCreateMessage" destination="sTd-OL-DZE" id="7Bm-Bt-dxg"/>
                         <outlet property="buttonLogin" destination="1zb-6B-3Kr" id="tYh-Ay-YwD"/>
                         <outlet property="buttonMinimize" destination="bpW-sv-Vfu" id="JLy-2D-mQn"/>
-                        <outlet property="messageTableView" destination="j2Y-29-IDx" id="K0V-H2-DC2"/>
                         <outlet property="parentView" destination="IIi-oZ-ufD" id="qK9-GD-Bdz"/>
                         <outlet property="tabBarItem" destination="ozi-vc-p8e" id="uJH-3g-BFC"/>
+                        <outlet property="tableView" destination="j2Y-29-IDx" id="rXD-Xj-1m8"/>
                         <outlet property="textFieldTitle" destination="H11-Rl-wu5" id="wgN-Vu-cTy"/>
                         <outlet property="textViewMessage" destination="SdZ-4g-P7Q" id="lMs-uV-6GR"/>
                         <outlet property="viewCreateMessage" destination="8KS-pT-gvW" id="zNX-9g-FrT"/>

@@ -15,7 +15,7 @@ class MessageCell: UITableViewCell {
         self.content.text = message.content
         self.timestamp.text = message.timestamp
         
-        var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         var faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         
         self.content.sizeToFit()

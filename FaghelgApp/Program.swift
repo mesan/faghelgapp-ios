@@ -28,8 +28,8 @@ class Program: NSObject {
         var numberOfEvents = jsonDict["numberOfEvents"] as? Int
         var events = [Event]()
         
-        var eventsDict: NSArray = jsonDict["events"] as NSArray
-        for eventDict in eventsDict as [NSDictionary] {
+        var eventsDict: NSArray = jsonDict["events"] as! NSArray
+        for eventDict in eventsDict as! [NSDictionary] {
             var event = Event.fromJson(eventDict, insertIntoManagedObjectContext: managedObjectContext)
             events.append(event)
         }

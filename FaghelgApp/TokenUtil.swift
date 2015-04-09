@@ -6,8 +6,8 @@ class TokenUtil {
         let arr = split(token) {$0 == "."}
 
         var base64String = arr[1] as String
-        if countElements(base64String) % 4 != 0 {
-            let padlen = 4 - countElements(base64String) % 4
+        if count(base64String) % 4 != 0 {
+            let padlen = 4 - count(base64String) % 4
             base64String += String(count: padlen, repeatedValue: Character("="))
         }
         
@@ -17,9 +17,9 @@ class TokenUtil {
             var error : NSError?
             let JSONData = str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             
-            let JSONDictionary: Dictionary = NSJSONSerialization.JSONObjectWithData(JSONData!, options: nil, error: &error) as NSDictionary
+            let JSONDictionary: Dictionary = NSJSONSerialization.JSONObjectWithData(JSONData!, options: nil, error: &error) as! [String: AnyObject]
 
-            var unique_name = JSONDictionary["unique_name"] as String
+            var unique_name = JSONDictionary["unique_name"] as! String
             var username = split(unique_name) {$0 == "@"}[0]
             
             return username

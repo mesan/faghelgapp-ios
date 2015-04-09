@@ -51,7 +51,7 @@ class EventTableViewCell: UITableViewCell {
         abstractLabel.text = event.desc
         titleLabel.text = event.title
         
-        var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         var faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
@@ -59,7 +59,7 @@ class EventTableViewCell: UITableViewCell {
         
         if let eventImageUrl = event.eventImageUrl {
             dispatch_async(backgroundQueue, {
-                faghelgApi.getImage(eventImageUrl, self.showImage)
+                faghelgApi.getImage(eventImageUrl, callback: self.showImage)
             })
         }
         

@@ -3,23 +3,23 @@ import UIKit
 class EmployeeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var employees: [Person] = []
-    var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var employeeList: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        faghelgApi.getEmployees(showEmployees)
+        faghelgApi.getEmployees({ self.showEmployees($0) })
     }
     
     override func viewDidAppear(animated: Bool) {
         if employees.isEmpty {
             activityIndicator.startAnimating()
-            faghelgApi.getEmployees(showEmployees)
+            faghelgApi.getEmployees({ self.showEmployees($0) })
         }
     }
     
@@ -40,7 +40,7 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
     // create table cells
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // get cell from tableView
-        let employeeCell: EmployeeCell = tableView.dequeueReusableCellWithIdentifier("Cell") as EmployeeCell
+        let employeeCell: EmployeeCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! EmployeeCell
         
         let person = employees[indexPath.row]
         
@@ -60,8 +60,29 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // reload view using main thread
         NSOperationQueue.mainQueue().addOperationWithBlock(){
-            self.employeeList.reloadData()
+            self.tableView.reloadData()
             self.activityIndicator.stopAnimating()
+        }
+    }
+    
+    // These two functions remove the whitespace in front of the separator
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("separatorInset")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if cell.respondsToSelector(Selector("layoutMargins")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if self.tableView.respondsToSelector(Selector("separatorInset")) {
+            self.tableView.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if self.tableView.respondsToSelector(Selector("layoutMargins")) {
+            self.tableView.layoutMargins = UIEdgeInsetsZero;
         }
     }
 }

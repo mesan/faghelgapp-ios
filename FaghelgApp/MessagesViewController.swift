@@ -13,7 +13,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet var parentView: UIView!
-    @IBOutlet weak var messageTableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     var constraintValue: CGFloat?
     var oldVerticalSpace: CGFloat?
@@ -21,7 +21,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     var placeholderTextTitle: String?
     var placeholderTextContent: String?
     
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
     var messageDAO: MessageDAO!
     
@@ -58,7 +58,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapReceived:")
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
-        self.messageTableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
         initMessages()
         constraintValue = bottomConstraint.constant
@@ -67,18 +67,20 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func initMessages() {
         if let messagesFromDatabase = messageDAO.getMessages() {
             self.messages = messagesFromDatabase
-            self.messageTableView.reloadData()
+            self.tableView.reloadData()
         }
         
         // For testing:
-        /*var messages = [Message]()
-        messages.append(Message(title: "Test 1", content: "test 1", sender: "andersu", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-        messages.append(Message(title: "Test 2", content: "test 2", sender: "andersa", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-        messages.append(Message(title: "Test 3", content: "test 3", sender: "oddr", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-        messages.append(Message(title: "Test 4", content: "test 4", sender: "kajas", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-        messages.append(Message(title: "Test 4", content: "test 5 balblablalblablablalblbalba", sender: "haraldk", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-        self.messages = messages
-        self.messageTableView.reloadData()*/
+        /*if self.messages.isEmpty {
+            var messages = [Message]()
+            messages.append(Message(title: "Test 1", content: "test 1", sender: "andersu", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+            messages.append(Message(title: "Test 2", content: "test 2", sender: "andersa", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+            messages.append(Message(title: "Test 3", content: "test 3", sender: "oddr", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+            messages.append(Message(title: "Test 4", content: "test 4", sender: "kajas", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+            messages.append(Message(title: "Test 5", content: "test 5 balblablalblablablalblbalba", sender: "haraldk", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+            self.messages = messages
+            self.tableView.reloadData()
+        }*/
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -133,8 +135,8 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     func promptLogin() {
-        var authority:NSString = "https://login.windows.net/common"
-        var clientID:NSString = "685ff077-c1ca-4d18-b364-7746b4560cea"
+        var authority = "https://login.windows.net/common"
+        var clientID = "685ff077-c1ca-4d18-b364-7746b4560cea"
         var redirectURI:NSURL = NSURL(string: "https://faghelg.herokuapp.com")!
         
         //Use ADAL to authenticate the user against Azure Active Directory
@@ -161,13 +163,14 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     func registerForPush(accessToken: String) {
-        var deviceToken = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? String
-        faghelgApi.registerForPush(PushDevice(token: deviceToken!, owner: TokenUtil.getUsernameFromToken(accessToken)!))
+        if let deviceToken = NSUserDefaults.standardUserDefaults().objectForKey("deviceToken") as? String {
+            faghelgApi.registerForPush(PushDevice(token: deviceToken, owner: TokenUtil.getUsernameFromToken(accessToken)!))
+        }
     }
     
     func keyboardWillShow(notification: NSNotification) {
         var info = notification.userInfo!
-        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as NSValue).CGRectValue()
+        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         if let height = tabBarController?.tabBar.frame.size.height {
             self.bottomConstraint.constant = keyboardFrame.size.height - height + constraintValue!
         }
@@ -256,13 +259,13 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     private func fillInPlaceholderText(textInput: UITextInput, text: String) {
         if textInput is UITextView {
-            var textView = textInput as UITextView
+            var textView = textInput as! UITextView
             textView.text = text
             textView.textColor = UIColor.lightGrayColor()
         }
         
         if textInput is UITextField {
-            var textField = textInput as UITextField
+            var textField = textInput as! UITextField
             textField.text = text
             textField.textColor = UIColor.lightGrayColor()
         }
@@ -292,7 +295,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         if self.isViewLoaded() {
             // reload view using main thread
             NSOperationQueue.mainQueue().addOperationWithBlock(){
-                self.messageTableView.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
@@ -303,7 +306,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // get cell from tableView
-        let messageCell: MessageCell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as MessageCell
+        let messageCell: MessageCell = tableView.dequeueReusableCellWithIdentifier("MessageCell") as! MessageCell
         
         let message = messages[indexPath.row]
         
@@ -316,4 +319,26 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
+    
+    // These two functions remove the whitespace in front of the separator
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("separatorInset")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if cell.respondsToSelector(Selector("layoutMargins")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if self.tableView.respondsToSelector(Selector("separatorInset")) {
+            self.tableView.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if self.tableView.respondsToSelector(Selector("layoutMargins")) {
+            self.tableView.layoutMargins = UIEdgeInsetsZero;
+        }
+    }
+    
 }

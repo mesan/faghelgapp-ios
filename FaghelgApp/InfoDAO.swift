@@ -10,6 +10,6 @@ class InfoDAO : BaseDAO {
         let fetchRequest = NSFetchRequest(entityName: "Info")
         fetchRequest.includesPendingChanges = true
         
-        return managedObjectContext.executeFetchRequest(fetchRequest, error: nil)?.first as Info?
+        return managedObjectContext.executeFetchRequest(fetchRequest, error: nil)?.first as! Info?
     }
 }

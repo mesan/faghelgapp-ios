@@ -89,7 +89,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             if (jsonResult != nil) {
                 employees = [Person]()
                 for jsonObject in jsonResult {
-                    var jsonDict = jsonObject as NSDictionary
+                    var jsonDict = jsonObject as! NSDictionary
                     let employee = Person.fromJson(jsonDict, insertIntoManagedObjectContext: self.managedObjectContext!)
                     employees!.append(employee)
                 }
@@ -117,7 +117,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             var info: Info!
             var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
             if let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary {
-                info = Info.fromJson(jsonResult, insertIntoManagedObjectContext: self.managedObjectContext!)
+                info = Info.fromJson(jsonResult!, insertIntoManagedObjectContext: self.managedObjectContext!)
             }
             else {
                 info = self.infoDAO.getInfo()
@@ -145,7 +145,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func getImage(imageUrl: String, callback: (UIImage?) -> Void) {
-        var managedObjectContext = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         let shortName = imageUrl.componentsSeparatedByString("/").last!
         var uiImage: UIImage?
         
@@ -207,7 +207,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var HTTPResponse = response as NSHTTPURLResponse
+            var HTTPResponse = response as! NSHTTPURLResponse
             if HTTPResponse.statusCode == 201 {
                 NSUserDefaults.standardUserDefaults().setObject(true, forKey: "registeredForPush")
                 NSUserDefaults.standardUserDefaults().synchronize()
@@ -229,7 +229,7 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var HTTPResponse = response as NSHTTPURLResponse
+            var HTTPResponse = response as! NSHTTPURLResponse
         })
     }
 }

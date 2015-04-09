@@ -31,12 +31,12 @@ class EmployeeCell: UITableViewCell {
     }
     
     func setEmployee(employee: Person) {
-        var appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         var faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         dispatch_async(backgroundQueue, {
-            faghelgApi.getImage(employee.profileImageUrl!, self.showImage)
+            faghelgApi.getImage(employee.profileImageUrl!, callback: self.showImage)
         })
         
         self.fullName.text = employee.fullName

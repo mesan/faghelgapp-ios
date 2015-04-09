@@ -8,14 +8,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         Fabric.with([Crashlytics()])
         
         application.registerForRemoteNotifications()
         
         if let launchOpts = launchOptions {
-            if let notificationPayload = launchOpts.objectForKey(UIApplicationLaunchOptionsRemoteNotificationKey) as? NSDictionary {
+            if let notificationPayload = launchOpts[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
                 showMessagesViewController()
             }
         }
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setTabBarTintColor() {
-        var tabBarController = self.window?.rootViewController as UITabBarController
+        var tabBarController = self.window?.rootViewController as! UITabBarController
         var tabBar = tabBarController.tabBar
         var mesanRed = UIColor(red: 197.0/256, green: 14.0/256, blue: 31.0/256, alpha: 1.0)
         tabBar.tintColor = mesanRed
@@ -64,14 +64,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         faghelgApi.registerForPushWithoutLogin(PushDevice(token: deviceTokenString))
     }
     
-    func application( application: UIApplication!, didFailToRegisterForRemoteNotificationsWithError error: NSError! ) {
+    func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError ) {
         println( error.localizedDescription )
     }
     
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: NSDictionary, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         completionHandler(UIBackgroundFetchResult.NewData);
-        
-        var messageDAO = MessageDAO(managedObjectContext: managedObjectContext!)
         
         var message = Message.fromPushPayload(userInfo, insertIntoManagedObjectContext: managedObjectContext!)
         
@@ -82,17 +80,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func showMessagesViewController() {
-        var tabBarController = self.window?.rootViewController as UITabBarController
+        var tabBarController = self.window?.rootViewController as! UITabBarController
         if let lastIndex = tabBarController.viewControllers?.count {
             tabBarController.selectedIndex = lastIndex - 1
         }
     }
     
     func addMessageToMessagesViewController(message: Message) {
-        var tabBarController = self.window?.rootViewController as UITabBarController
+        var tabBarController = self.window?.rootViewController as! UITabBarController
         
         // TODO: Denne koden vil breake hvis meldingstaben ikke ligger til slutt lenger
-        var messagesViewController = tabBarController.viewControllers?.last as MessagesViewController
+        var messagesViewController = tabBarController.viewControllers?.last as! MessagesViewController
         messagesViewController.increaseBadgeValue();
 
         messagesViewController.addMessage(message)
@@ -103,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "no.mesan.TestLagring" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -126,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain:"YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)            // Replace this with code to handle the error appropriately.
+            error = NSError(domain:"YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])            // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()

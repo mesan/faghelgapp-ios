@@ -19,12 +19,12 @@ class Message: NSManagedObject {
     }
     
     class func fromPushPayload(pushPayload: NSDictionary, insertIntoManagedObjectContext context: NSManagedObjectContext!) -> Message {
-        var aps = pushPayload["aps"] as NSDictionary
-        var alert = aps["alert"] as NSDictionary
-        var title = alert["title"] as String
-        var body = alert["body"] as String
-        var sender = pushPayload["sender"] as String
-        var timestamp = pushPayload["timestamp"] as String
+        var aps = pushPayload["aps"] as! NSDictionary
+        var alert = aps["alert"] as! NSDictionary
+        var title = alert["title"] as! String
+        var body = alert["body"] as! String
+        var sender = pushPayload["sender"]as! String
+        var timestamp = pushPayload["timestamp"] as! String
         
         return Message(title: title, content: body, sender: sender, timestamp: timestamp, insertIntoManagedObjectContext: context)
     }

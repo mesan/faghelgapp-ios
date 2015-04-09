@@ -25,7 +25,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
             }
         }
     }
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -43,7 +43,6 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
 
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.separatorInset = UIEdgeInsetsZero
 
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
         faghelgApi.getProgram(showProgram)
@@ -160,7 +159,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as EventTableViewCell
+        var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! EventTableViewCell
         
         var event : Event! = filteredEvents[indexPath.row] as Event
         cell.setEvent(event);
@@ -197,5 +196,26 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+    }
+    
+    // These two functions remove the whitespace in front of the separator
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if cell.respondsToSelector(Selector("separatorInset")) {
+            cell.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if cell.respondsToSelector(Selector("layoutMargins")) {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if self.tableView.respondsToSelector(Selector("separatorInset")) {
+            self.tableView.separatorInset = UIEdgeInsetsZero
+        }
+        
+        if self.tableView.respondsToSelector(Selector("layoutMargins")) {
+            self.tableView.layoutMargins = UIEdgeInsetsZero;
+        }
     }
 }

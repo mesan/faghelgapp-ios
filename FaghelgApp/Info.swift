@@ -31,14 +31,14 @@ class Info: NSManagedObject {
     }
     
     class func fromJson(jsonDict: NSDictionary, insertIntoManagedObjectContext context: NSManagedObjectContext) -> Info {
-        let imageUrl = jsonDict["imageUrl"] as String
-        let locationName = jsonDict["locationName"] as String
-        let locationDescription = jsonDict["locationDescription"] as String
-        let address = jsonDict["address"] as String
-        let lat = jsonDict["lat"] as String
-        let lng = jsonDict["lng"] as String
-        let hotelName = (jsonDict["hotelName"] as String).capitalizedString
-        let hotelDescription = jsonDict["hotelDescription"] as String
+        let imageUrl = jsonDict["imageUrl"] as! String
+        let locationName = jsonDict["locationName"] as! String
+        let locationDescription = jsonDict["locationDescription"] as! String
+        let address = jsonDict["address"]as! String
+        let lat = jsonDict["lat"] as! String
+        let lng = jsonDict["lng"]as! String
+        let hotelName = (jsonDict["hotelName"] as! String).capitalizedString
+        let hotelDescription = jsonDict["hotelDescription"]as! String
         
         var info = Info(address: address, locationDescription: locationDescription, imageUrl: imageUrl, lat: lat, lng: lng, locationName: locationName, hotelDescription: hotelDescription, hotelName: hotelName, toDoList: nil, directions: nil, insertIntoManagedObjectContext: context)
         
