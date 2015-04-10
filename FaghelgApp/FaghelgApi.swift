@@ -17,13 +17,13 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     //let HOST = "http://192.168.0.198:8080"
     
     // Andersmac@mesan
-    //let HOST = "http://10.22.200.151:8080";
+    //let HOST = "http://10.22.200.155:8080";
     
     
     // Simulator local
     //let HOST = "http://localhost:8080"
     
-    let CDN = "http://faghelg.s3-website-eu-west-1.amazonaws.com"
+    static let CDN = "http://faghelg.s3-website-eu-west-1.amazonaws.com"
     
     var data: NSMutableData = NSMutableData()
     var delegate: FaghelgApiProtocol?
@@ -140,38 +140,8 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
         return request
     }
     
-    func getImageForShortname(shortname: String, callback: (UIImage?) -> Void) {
-        getImage(CDN + "/" + shortname + ".png", callback: callback)
-    }
-    
-    func getImage(imageUrl: String, callback: (UIImage?) -> Void) {
-        var managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-        let shortName = imageUrl.componentsSeparatedByString("/").last!
-        var uiImage: UIImage?
-        
-        if let imageFromDatabase = self.imageDAO.getImage(shortName) {
-            uiImage = UIImage(data: imageFromDatabase.imageData)
-        }
-        
-        if uiImage == nil {
-            if let imageData = downloadImageFromWeb(imageUrl, shortName: shortName, managedObjectContext: managedObjectContext!) {
-                uiImage = UIImage(data: imageData)!
-            }
-        }
-        
-        callback(uiImage)
-    }
-    
-    func downloadImageFromWeb(imageUrl: String, shortName: String, managedObjectContext: NSManagedObjectContext) -> NSData? {
-        let url = NSURL(string:imageUrl);
-        var err: NSError? = nil
-        
-        if let imageData = NSData(contentsOfURL: url!,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err) {
-            var image = Image(imageData: imageData, shortName: shortName, insertIntoManagedObjectContext: managedObjectContext)
-            return imageData
-        }
-        
-        return nil
+    class func getUrlToImageFromShortname(shortname: String) -> String {
+        return CDN + "/" + shortname + ".png"
     }
     
     func registerForPushWithoutLogin(pushDevice: PushDevice) {

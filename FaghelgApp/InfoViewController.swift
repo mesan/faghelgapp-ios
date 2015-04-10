@@ -4,6 +4,7 @@ class InfoViewController: UIViewController {
 
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
+    var imageCache = ImageCache.sharedInstance
     
     var info: Info?
     
@@ -43,18 +44,34 @@ class InfoViewController: UIViewController {
             self.hotelDescription.text = info.hotelDescription
         }
         
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        
-        dispatch_async(backgroundQueue, {
-            self.faghelgApi.getImage(info.imageUrl, callback: self.showImage)
-        })
+        if let image = self.imageCache.images[info.imageUrl] {
+            self.showImage(image)
+        }
+        else {
+            // If the image does not exist, we need to download it
+            var imgURL: NSURL = NSURL(string: info.imageUrl)!
+            
+            // Download an NSData representation of the image at the URL
+            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    var image = UIImage(data: data)
+                    
+                    // Store the image in to our cache
+                    self.imageCache.images[info.imageUrl] = image
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.showImage(image)
+                    })
+                }
+                else {
+                    println("Error: \(error.localizedDescription)")
+                }
+            })
+        }
     }
     
     func showImage(image: UIImage?) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.infoImage.image = image
-            self.activityIndicator.stopAnimating()
-        })
+        self.infoImage.image = image
+        self.activityIndicator.stopAnimating()
     }
 }

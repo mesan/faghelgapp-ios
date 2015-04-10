@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-class ProgramDAO : BaseDAO {
+class ProgramDAO: BaseDAO {
     
     var personDAO: PersonDAO!
     

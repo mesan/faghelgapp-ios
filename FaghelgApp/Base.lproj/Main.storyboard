@@ -595,9 +595,12 @@
                                     <action selector="buttonCreateMessageClicked:" destination="C3R-gn-uol" eventType="touchUpInside" id="TSE-mA-zNN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zb-6B-3Kr">
-                                <rect key="frame" x="54" y="470" width="213" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1zb-6B-3Kr">
+                                <rect key="frame" x="54" y="469" width="213" height="50"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="iga-rn-fIO"/>
+                                </constraints>
                                 <state key="normal" title="Logg inn for å sende meldinger">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -610,6 +613,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="sTd-OL-DZE" secondAttribute="bottom" constant="10" id="8kc-UZ-qxI"/>
+                            <constraint firstItem="DBh-J4-kAH" firstAttribute="top" secondItem="1zb-6B-3Kr" secondAttribute="bottom" id="Nop-No-f5J"/>
+                            <constraint firstAttribute="centerX" secondItem="1zb-6B-3Kr" secondAttribute="centerX" id="ScF-H9-p2G"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8KS-pT-gvW" secondAttribute="trailing" constant="-16" id="Ult-Ab-5jf"/>
                             <constraint firstItem="j2Y-29-IDx" firstAttribute="trailing" secondItem="IIi-oZ-ufD" secondAttribute="trailingMargin" constant="16" id="aKV-UZ-ZaW"/>
                             <constraint firstItem="8KS-pT-gvW" firstAttribute="leading" secondItem="IIi-oZ-ufD" secondAttribute="leadingMargin" constant="-16" id="aRZ-6g-bls"/>

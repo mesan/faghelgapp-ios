@@ -23,16 +23,14 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
+    var imageCache = ImageCache.sharedInstance
     var messageDAO: MessageDAO!
     
     var messages: [Message] = []
     
     var token: String?
     
-    
-    // TODO: området for å skrive en ny melding bør bare vises når man skal skrive. Tar for mye plass ellers.
-    // TODO: holde på meldingene i meldingslista hvis appen blir drept
-    // TODO: gå rett til meldinger-tabben når man åpner appen fra en notification
+    // TODO: Sortering av meldinger kan bli feil for meldinger sendt i samme minutt
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -311,6 +309,34 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         let message = messages[indexPath.row]
         
         messageCell.setMessage(message)
+        
+        var url = FaghelgApi.getUrlToImageFromShortname(message.sender)
+        if let image = self.imageCache.images[url] {
+            messageCell.showImage(image)
+        }
+        else {
+            // If the image does not exist, we need to download it
+            var imgURL: NSURL = NSURL(string: url)!
+            
+            // Download an NSData representation of the image at the URL
+            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    var image = UIImage(data: data)
+                    
+                    // Store the image in to our cache
+                    self.imageCache.images[url] = image
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
+                            cellToUpdate.showImage(image)
+                        }
+                    })
+                }
+                else {
+                    println("Error: \(error.localizedDescription)")
+                }
+            })
+        }
         
         // return the cell
         return messageCell

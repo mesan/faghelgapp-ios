@@ -2,6 +2,7 @@ import UIKit
 
 class EmployeeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var imageCache = ImageCache.sharedInstance
     var employees: [Person] = []
     var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
@@ -42,9 +43,36 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         // get cell from tableView
         let employeeCell: EmployeeCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! EmployeeCell
         
-        let person = employees[indexPath.row]
+        let employee = employees[indexPath.row]
         
-        employeeCell.setEmployee(person)
+        employeeCell.setEmployee(employee)
+        
+        if let image = self.imageCache.images[employee.profileImageUrl!] {
+            employeeCell.showImage(image)
+        }
+        else {
+            // If the image does not exist, we need to download it
+            var imgURL: NSURL = NSURL(string: employee.profileImageUrl!)!
+            
+            // Download an NSData representation of the image at the URL
+            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    var image = UIImage(data: data)
+                    
+                    // Store the image in to our cache
+                    self.imageCache.images[employee.profileImageUrl!] = image
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
+                            cellToUpdate.showImage(image)
+                        }
+                    })
+                }
+                else {
+                    println("Error: \(error.localizedDescription)")
+                }
+            })
+        }
         
         // return the cell
         return employeeCell

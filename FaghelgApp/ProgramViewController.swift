@@ -27,6 +27,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
+    var imageCache = ImageCache.sharedInstance
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
@@ -164,6 +165,33 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         var event : Event! = filteredEvents[indexPath.row] as Event
         cell.setEvent(event);
         
+        if let image = self.imageCache.images[event.eventImageUrl!] {
+            cell.showImage(image)
+        }
+        else {
+            // If the image does not exist, we need to download it
+            var imgURL: NSURL = NSURL(string: event.eventImageUrl!)!
+            
+            // Download an NSData representation of the image at the URL
+            let request: NSURLRequest = NSURLRequest(URL: imgURL)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                if error == nil {
+                    var image = UIImage(data: data)
+                    
+                    // Store the image in to our cache
+                    self.imageCache.images[event.eventImageUrl!] = image
+                    dispatch_async(dispatch_get_main_queue(), {
+                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
+                            cellToUpdate.showImage(image)
+                        }
+                    })
+                }
+                else {
+                    println("Error: \(error.localizedDescription)")
+                }
+            })
+        }
+
         if (self.selectedIndexPath != nil && self.selectedIndexPath!.row == indexPath.row) {
             cell.showExtraInfoView(true)
         } else {
