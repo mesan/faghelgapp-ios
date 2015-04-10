@@ -31,13 +31,17 @@ class EventTableViewCell: UITableViewCell {
     func setEvent(event: Event) {
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "HH:mm"
-        timeLabel.text = dateStringFormatter.stringFromDate(event.start)
-        if (event.hostNames != nil) {
+        if event.start != nil {
+            timeLabel.text = dateStringFormatter.stringFromDate(event.start)
+        }
+
+        if event.hostNames != nil {
             nameLabel.text = event.hostNames
         }
         else {
             nameLabel.text = nil
         }
+        
         var durationSeconds:Double = event.end.timeIntervalSinceDate(event.start)
         var durationMinutes:Double = durationSeconds / 60
         var durationString: String? = String(format: "%.0f min", durationMinutes)

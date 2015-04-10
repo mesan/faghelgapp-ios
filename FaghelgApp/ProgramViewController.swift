@@ -15,13 +15,13 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var description : String {
             switch(self) {
-                case Sunday: return "Søndag"
-                case Monday: return "Mandag"
-                case Tuesday: return "Tirsdag"
-                case Wednesday: return "Onsdag"
-                case Thursday: return "Torsdag"
-                case Friday: return "Fredag"
-                case Saturday: return "Lørdag"
+            case Sunday: return "Søndag"
+            case Monday: return "Mandag"
+            case Tuesday: return "Tirsdag"
+            case Wednesday: return "Onsdag"
+            case Thursday: return "Torsdag"
+            case Friday: return "Fredag"
+            case Saturday: return "Lørdag"
             }
         }
     }
@@ -39,24 +39,28 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     let cellIdentifier = "eventCell"
     
     var selectedIndexPath: NSIndexPath?
-
+    
+    var program: Program?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        faghelgApi.getProgram(showProgram)
     }
     
     override func viewDidAppear(animated: Bool) {
         if allEvents.isEmpty {
             activityIndicator.startAnimating()
-            faghelgApi.getProgram(showProgram)
+            if program == nil {
+                faghelgApi.getProgram(showProgram)
+            }
         }
     }
     
     func showProgram(program: Program?) {
+        self.program = program
         if (program == nil) {
             return
         }
@@ -165,7 +169,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         var event : Event! = filteredEvents[indexPath.row] as Event
         cell.setEvent(event);
         
-        if let image = self.imageCache.images[event.eventImageUrl!] {
+        if let image = self.imageCache.getImage(event.eventImageUrl!) {
             cell.showImage(image)
         }
         else {
@@ -179,7 +183,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
                     var image = UIImage(data: data)
                     
                     // Store the image in to our cache
-                    self.imageCache.images[event.eventImageUrl!] = image
+                    self.imageCache.addImage(event.eventImageUrl!, image: image!)
                     dispatch_async(dispatch_get_main_queue(), {
                         if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
                             cellToUpdate.showImage(image)
@@ -191,7 +195,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
                 }
             })
         }
-
+        
         if (self.selectedIndexPath != nil && self.selectedIndexPath!.row == indexPath.row) {
             cell.showExtraInfoView(true)
         } else {

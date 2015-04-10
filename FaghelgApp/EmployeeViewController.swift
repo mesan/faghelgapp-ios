@@ -14,7 +14,6 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        faghelgApi.getEmployees({ self.showEmployees($0) })
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -47,7 +46,7 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         
         employeeCell.setEmployee(employee)
         
-        if let image = self.imageCache.images[employee.profileImageUrl!] {
+        if let image = self.imageCache.getImage(employee.profileImageUrl!) {
             employeeCell.showImage(image)
         }
         else {
@@ -60,9 +59,9 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
                 if error == nil {
                     var image = UIImage(data: data)
                     
-                    // Store the image in to our cache
-                    self.imageCache.images[employee.profileImageUrl!] = image
                     dispatch_async(dispatch_get_main_queue(), {
+                        // Store the image in to our cache
+                        self.imageCache.addImage(employee.profileImageUrl!, image: image!)
                         if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
                             cellToUpdate.showImage(image)
                         }

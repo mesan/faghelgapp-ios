@@ -15,6 +15,7 @@
 		9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D61A938EF300781E60 /* InfoDAO.swift */; };
 		9F3BED5A1ABAC17900D2C8BA /* libADALiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3BED581ABAC16200D2C8BA /* libADALiOS.a */; };
 		9F3E4BAA1AD7CC2B00FA24CD /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */; };
+		9F3E4BAC1AD7E3FF00FA24CD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E4BAB1AD7E3FF00FA24CD /* Reachability.swift */; };
 		9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7061AA5E1DE001C161E /* Crashlytics.framework */; };
 		9F42F7091AA5E1DE001C161E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7071AA5E1DE001C161E /* Fabric.framework */; };
 		9F42F70B1AA5FD4B001C161E /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42F70A1AA5FD4B001C161E /* MessagesViewController.swift */; };
@@ -77,6 +78,7 @@
 		9F0B07D61A938EF300781E60 /* InfoDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDAO.swift; sourceTree = "<group>"; };
 		9F3BED581ABAC16200D2C8BA /* libADALiOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libADALiOS.a; sourceTree = "<group>"; };
 		9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		9F3E4BAB1AD7E3FF00FA24CD /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9F42F7061AA5E1DE001C161E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		9F42F7071AA5E1DE001C161E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		9F42F70A1AA5FD4B001C161E /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			children = (
 				9F4B8DE71AC5513C0022144A /* TokenUtil.swift */,
 				9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */,
+				9F3E4BAB1AD7E3FF00FA24CD /* Reachability.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				9FF4906819DD90B800A42749 /* Image.swift in Sources */,
 				9F3E4BAA1AD7CC2B00FA24CD /* ImageCache.swift in Sources */,
 				9F8D4CD419BE4B2000DA5A61 /* FaghelgApi.swift in Sources */,
+				9F3E4BAC1AD7E3FF00FA24CD /* Reachability.swift in Sources */,
 				9F42F70B1AA5FD4B001C161E /* MessagesViewController.swift in Sources */,
 				9FF6490F19C87EA9004BCFEB /* Event.swift in Sources */,
 				9FF6490D19C87E3E004BCFEB /* Program.swift in Sources */,

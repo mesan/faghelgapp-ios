@@ -1,7 +1,7 @@
 import UIKit
 
 class InfoViewController: UIViewController {
-
+    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var faghelgApi: FaghelgApi!
     var imageCache = ImageCache.sharedInstance
@@ -44,9 +44,12 @@ class InfoViewController: UIViewController {
             self.hotelDescription.text = info.hotelDescription
         }
         
-        if let image = self.imageCache.images[info.imageUrl] {
-            self.showImage(image)
+        if let image = self.imageCache.getImage(info.imageUrl) {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.showImage(image)
+            })
         }
+            
         else {
             // If the image does not exist, we need to download it
             var imgURL: NSURL = NSURL(string: info.imageUrl)!
@@ -58,7 +61,7 @@ class InfoViewController: UIViewController {
                     var image = UIImage(data: data)
                     
                     // Store the image in to our cache
-                    self.imageCache.images[info.imageUrl] = image
+                    self.imageCache.addImage(info.imageUrl, image: image!)
                     dispatch_async(dispatch_get_main_queue(), {
                         self.showImage(image)
                     })

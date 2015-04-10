@@ -72,9 +72,10 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     
     func getEmployees(callback: ([Person]) -> Void) {
         var request = makeRequest("/persons", HTTPMethod: "GET", withAuthentication: false)
-        
+
+        var employees: [Person]?
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var employees: [Person]?
+
             
             if error != nil {
                 employees = self.personDAO.getPersons()
@@ -88,10 +89,18 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             
             if (jsonResult != nil) {
                 employees = [Person]()
+                let employeesFromDataBase = self.personDAO.getEntities("Person", includesPendingChanges: false) as! [Person]
+                
                 for jsonObject in jsonResult {
                     var jsonDict = jsonObject as! NSDictionary
-                    let employee = Person.fromJson(jsonDict, insertIntoManagedObjectContext: self.managedObjectContext!)
-                    employees!.append(employee)
+                    var shortName = jsonDict["shortName"] as! String
+                    var employee = self.personDAO.getPerson(shortName)
+                    
+                    if employee == nil {
+                        employee = Person.fromJson(jsonDict, insertIntoManagedObjectContext: self.managedObjectContext!)
+                    }
+                    
+                    employees!.append(employee!)
                 }
             } else {
                 employees = self.personDAO.getPersons()

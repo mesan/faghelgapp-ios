@@ -311,7 +311,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         messageCell.setMessage(message)
         
         var url = FaghelgApi.getUrlToImageFromShortname(message.sender)
-        if let image = self.imageCache.images[url] {
+        if let image = self.imageCache.getImage(url) {
             messageCell.showImage(image)
         }
         else {
@@ -325,7 +325,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
                     var image = UIImage(data: data)
                     
                     // Store the image in to our cache
-                    self.imageCache.images[url] = image
+                    self.imageCache.addImage(url, image: image!)
                     dispatch_async(dispatch_get_main_queue(), {
                         if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
                             cellToUpdate.showImage(image)
