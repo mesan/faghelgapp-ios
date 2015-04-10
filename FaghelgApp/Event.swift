@@ -41,7 +41,7 @@ class Event: NSManagedObject {
             var responsible = personDAO.getPerson(shortName)
             
             if responsible == nil {
-                responsible = Person.fromJson(jsonDict, insertIntoManagedObjectContext: context)
+                responsible = Person.fromJson(responsibleDict, insertIntoManagedObjectContext: context)
             }
         }
         
