@@ -68,6 +68,11 @@ class EventTableViewCell: UITableViewCell {
     }
     
     func showImage(image: UIImage?) {
-        self.eventImage.image = image
+        if image != nil {
+            self.eventImage.image = image
+        }
+        else {
+            self.eventImage.image = UIImage(named: "ukjent")
+        }
     }
 }

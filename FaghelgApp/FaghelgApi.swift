@@ -7,18 +7,16 @@ protocol FaghelgApiProtocol {
 
 class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     // Production
-    // let HOST = "http://faghelg.herokuapp.com";
+    let HOST = "https://faghelg.herokuapp.com";
 
     // Branch
-    let HOST = "http://faghelg-branch.herokuapp.com"
-    
+    // let HOST = "https://faghelg-branch.herokuapp.com"
     
     // Andersmac@home
     //let HOST = "http://192.168.0.198:8080"
     
     // Andersmac@mesan
     //let HOST = "http://10.22.200.155:8080";
-    
     
     // Simulator local
     //let HOST = "http://localhost:8080"

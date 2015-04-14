@@ -46,8 +46,21 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
-
+        
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        
+        initRefreshControl()
+    }
+    
+    func initRefreshControl() {
+        var refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged )
+        self.tableView.addSubview(refreshControl)
+    }
+    
+    func handleRefresh(refresh: UIRefreshControl) {
+        faghelgApi.getProgram(showProgram)
+        refresh.endRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -87,12 +100,13 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
             self.setupDayFilter(today)
             self.filterEvents()
             self.tableView.reloadData()
+            /*if !self.filteredEvents.isEmpty {
+            self.scrollToCurrentEvent()
+            }*/
             
-            if !self.filteredEvents.isEmpty {
-                self.scrollToCurrentEvent()
-            }
             
             self.activityIndicator.stopAnimating()
+
         })
     }
     
@@ -180,14 +194,15 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
                 if error == nil {
-                    var image = UIImage(data: data)
+                    let image = UIImage(data: data)
+                        
+                    if image != nil {
+                        // Store the image in to our cache
+                        self.imageCache.addImage(event.eventImageUrl!, image: image!)
+                    }
                     
-                    // Store the image in to our cache
-                    self.imageCache.addImage(event.eventImageUrl!, image: image!)
                     dispatch_async(dispatch_get_main_queue(), {
-                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
-                            cellToUpdate.showImage(image)
-                        }
+                        cell.showImage(image)
                     })
                 }
                 else {

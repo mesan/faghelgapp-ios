@@ -70,14 +70,14 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         // For testing:
         /*if self.messages.isEmpty {
-            var messages = [Message]()
-            messages.append(Message(title: "Test 1", content: "test 1", sender: "andersu", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-            messages.append(Message(title: "Test 2", content: "test 2", sender: "andersa", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-            messages.append(Message(title: "Test 3", content: "test 3", sender: "oddr", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-            messages.append(Message(title: "Test 4", content: "test 4", sender: "kajas", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-            messages.append(Message(title: "Test 5", content: "test 5 balblablalblablablalblbalba", sender: "haraldk", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
-            self.messages = messages
-            self.tableView.reloadData()
+        var messages = [Message]()
+        messages.append(Message(title: "Test 1", content: "test 1", sender: "andersu", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 2", content: "test 2", sender: "andersa", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 3", content: "test 3", sender: "oddr", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 4", content: "test 4", sender: "kajas", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        messages.append(Message(title: "Test 5", content: "test 5 balblablalblablablalblbalba", sender: "haraldk", timestamp: "31.03.2015 15:21", insertIntoManagedObjectContext: appDelegate.managedObjectContext))
+        self.messages = messages
+        self.tableView.reloadData()
         }*/
     }
     
@@ -322,15 +322,16 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
                 if error == nil {
-                    var image = UIImage(data: data)
-                    
-                    // Store the image in to our cache
-                    self.imageCache.addImage(url, image: image!)
-                    dispatch_async(dispatch_get_main_queue(), {
-                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
-                            cellToUpdate.showImage(image)
-                        }
-                    })
+                    if let image = UIImage(data: data) {
+                        
+                        // Store the image in to our cache
+                        self.imageCache.addImage(url, image: image)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
+                                cellToUpdate.showImage(image)
+                            }
+                        })
+                    }
                 }
                 else {
                     println("Error: \(error.localizedDescription)")

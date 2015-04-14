@@ -36,6 +36,11 @@ class EmployeeCell: UITableViewCell {
     }
     
     func showImage(image: UIImage?) {
-        self.employeeImage.image = image
+        if image != nil {
+            self.employeeImage.image = image
+        }
+        else {
+            self.employeeImage.image = UIImage(named: "ukjent")!
+        }
     }
 }

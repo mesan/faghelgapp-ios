@@ -14,6 +14,18 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         
         faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        initRefreshControl()
+    }
+    
+    func initRefreshControl() {
+        var refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged )
+        self.tableView.addSubview(refreshControl)
+    }
+    
+    func handleRefresh(refresh: UIRefreshControl) {
+        faghelgApi.getEmployees({ self.showEmployees($0) })
+        refresh.endRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -61,7 +73,10 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         // Store the image in to our cache
-                        self.imageCache.addImage(employee.profileImageUrl!, image: image!)
+                        if image != nil {
+                            self.imageCache.addImage(employee.profileImageUrl!, image: image!)
+                        }
+                        
                         if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
                             cellToUpdate.showImage(image)
                         }
