@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         if let launchOpts = launchOptions {
-            if let notificationPayload = launchOpts[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            if launchOpts[UIApplicationLaunchOptionsRemoteNotificationKey] != nil {
                 showMessagesViewController()
             }
         }

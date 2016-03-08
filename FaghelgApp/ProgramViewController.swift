@@ -178,9 +178,9 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! EventTableViewCell
+        let cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! EventTableViewCell
         
-        var event : Event! = filteredEvents[indexPath.row] as Event
+        let event : Event! = filteredEvents[indexPath.row] as Event
         cell.setEvent(event);
         
         if let image = self.imageCache.getImage(event.eventImageUrl!) {
@@ -188,7 +188,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         else {
             // If the image does not exist, we need to download it
-            var imgURL: NSURL = NSURL(string: event.eventImageUrl!)!
+            let imgURL: NSURL = NSURL(string: event.eventImageUrl!)!
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)

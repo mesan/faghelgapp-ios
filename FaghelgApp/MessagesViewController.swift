@@ -272,7 +272,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     func increaseBadgeValue() {
         if !viewIsShowing() {
             if let badgeValue = Int((tabBarItem.badgeValue)!) {
-                var newValue = badgeValue + 1
+                let newValue = badgeValue + 1
                 tabBarItem.badgeValue = String(newValue)
             }
             else {
@@ -310,13 +310,13 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         messageCell.setMessage(message)
         
-        var url = FaghelgApi.getUrlToImageFromShortname(message.sender)
+        let url = FaghelgApi.getUrlToImageFromShortname(message.sender)
         if let image = self.imageCache.getImage(url) {
             messageCell.showImage(image)
         }
         else {
             // If the image does not exist, we need to download it
-            var imgURL: NSURL = NSURL(string: url)!
+            let imgURL: NSURL = NSURL(string: url)!
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)

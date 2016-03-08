@@ -63,13 +63,13 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else {
             // If the image does not exist, we need to download it
-            var imgURL: NSURL = NSURL(string: employee.profileImageUrl!)!
+            let imgURL: NSURL = NSURL(string: employee.profileImageUrl!)!
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
                 if error == nil {
-                    var image = UIImage(data: data!)!
+                    let image = UIImage(data: data!)!
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         // Store the image in to our cache
