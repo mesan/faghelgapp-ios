@@ -45,9 +45,7 @@ class InfoViewController: UIViewController {
         }
         
         if let image = self.imageCache.getImage(info.imageUrl) {
-            dispatch_async(dispatch_get_main_queue(), {
-                self.showImage(image)
-            })
+            self.showImage(image)
         }
             
         else {
@@ -60,11 +58,10 @@ class InfoViewController: UIViewController {
                 if error == nil {
                     if let image = UIImage(data: data!) {
                         self.imageCache.addImage(info.imageUrl, image: image)
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.showImage(image) // TODO: Fjern spinner også når fail
-                        })
+                            self.showImage(image)
                     } else {
                         print("Error could not find image")
+                        self.showImage(nil)
                     }
                 }
                 else {
@@ -75,7 +72,13 @@ class InfoViewController: UIViewController {
     }
     
     func showImage(image: UIImage?) {
-        self.infoImage.image = image
-        self.activityIndicator.stopAnimating()
+        if image == nil {
+            // TODO: Set standard image
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.infoImage.image = image
+            self.activityIndicator.stopAnimating()
+        })
     }
 }
