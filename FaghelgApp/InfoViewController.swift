@@ -19,7 +19,7 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -52,22 +52,23 @@ class InfoViewController: UIViewController {
             
         else {
             // If the image does not exist, we need to download it
-            var imgURL: NSURL = NSURL(string: info.imageUrl)!
+            let imgURL: NSURL = NSURL(string: info.imageUrl)!
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
                 if error == nil {
-                    var image = UIImage(data: data)
-                    
-                    // Store the image in to our cache
-                    self.imageCache.addImage(info.imageUrl, image: image!)
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.showImage(image)
-                    })
+                    if let image = UIImage(data: data!) {
+                        self.imageCache.addImage(info.imageUrl, image: image)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.showImage(image) // TODO: Fjern spinner også når fail
+                        })
+                    } else {
+                        print("Error could not find image")
+                    }
                 }
                 else {
-                    println("Error: \(error.localizedDescription)")
+                    print("Error: \(error!.localizedDescription)")
                 }
             })
         }

@@ -15,14 +15,11 @@ class BaseDAO {
         fetchRequest.includesPendingChanges = includesPendingChanges
         fetchRequest.predicate = predicate
         
-        var err: NSError? = nil
-        
-        result = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &err) as? [NSManagedObject]
-        
-        if (err != nil) {
-            println("Error in getEntities: \(err!.description)")
-        }
-        
+        do {
+            result = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [NSManagedObject]
+        } catch let err as NSError {
+            print("Error in getEntities: \(err.description)")
+        } 
         return result
     }
 }

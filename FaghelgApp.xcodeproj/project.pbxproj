@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		1D1AC15119D0804500628488 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1AC15019D0804500628488 /* EmployeeCell.swift */; };
 		4524AAAE19D083A900CCF884 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */; };
+		8F2CA5391C8F341600CE700A /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 8F2CA5381C8F341600CE700A /* sounds */; };
+		8F2CA53B1C8F409800CE700A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */; };
+		8F2CA53D1C8F413E00CE700A /* flyby.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F2CA53C1C8F413E00CE700A /* flyby.wav */; };
 		96234E7719C88905006811D5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96234E7619C88905006811D5 /* CoreData.framework */; };
 		963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 963636AA19D06E1500021DA1 /* FaghelgApp.xcdatamodeld */; };
 		9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */; };
 		9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D61A938EF300781E60 /* InfoDAO.swift */; };
 		9F3BED5A1ABAC17900D2C8BA /* libADALiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3BED581ABAC16200D2C8BA /* libADALiOS.a */; };
 		9F3E4BAA1AD7CC2B00FA24CD /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */; };
-		9F3E4BAC1AD7E3FF00FA24CD /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E4BAB1AD7E3FF00FA24CD /* Reachability.swift */; };
 		9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7061AA5E1DE001C161E /* Crashlytics.framework */; };
 		9F42F7091AA5E1DE001C161E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7071AA5E1DE001C161E /* Fabric.framework */; };
 		9F42F70B1AA5FD4B001C161E /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42F70A1AA5FD4B001C161E /* MessagesViewController.swift */; };
@@ -24,7 +26,6 @@
 		9F4B8DE61AC54FAB0022144A /* PushDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4B8DE51AC54FAB0022144A /* PushDevice.swift */; };
 		9F4B8DE81AC5513C0022144A /* TokenUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F4B8DE71AC5513C0022144A /* TokenUtil.swift */; };
 		9F7031841A93B0CD00B44342 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7031831A93B0CD00B44342 /* InfoViewController.swift */; };
-		9F7057981AD569D9008058A6 /* flyby.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F7057971AD569D9008058A6 /* flyby.wav */; };
 		9F70970F19C8AA7700D805CB /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */; };
 		9F7824541A8A77EA00208C2D /* BaseDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7824531A8A77EA00208C2D /* BaseDAO.swift */; };
 		9F7A4B801A93C4F900F4C7FC /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7A4B7F1A93C4F900F4C7FC /* Info.swift */; };
@@ -71,6 +72,9 @@
 /* Begin PBXFileReference section */
 		1D1AC15019D0804500628488 /* EmployeeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
+		8F2CA5381C8F341600CE700A /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = FaghelgApp/sounds; sourceTree = "<group>"; };
+		8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		8F2CA53C1C8F413E00CE700A /* flyby.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = flyby.wav; path = FaghelgApp/sounds/flyby.wav; sourceTree = "<group>"; };
 		96234E7619C88905006811D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		963636AB19D06E1500021DA1 /* FaghelgApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FaghelgApp.xcdatamodel; sourceTree = "<group>"; };
 		9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
@@ -78,7 +82,6 @@
 		9F0B07D61A938EF300781E60 /* InfoDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDAO.swift; sourceTree = "<group>"; };
 		9F3BED581ABAC16200D2C8BA /* libADALiOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libADALiOS.a; sourceTree = "<group>"; };
 		9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
-		9F3E4BAB1AD7E3FF00FA24CD /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		9F42F7061AA5E1DE001C161E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		9F42F7071AA5E1DE001C161E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		9F42F70A1AA5FD4B001C161E /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +103,6 @@
 		9F4B8DE51AC54FAB0022144A /* PushDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushDevice.swift; sourceTree = "<group>"; };
 		9F4B8DE71AC5513C0022144A /* TokenUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenUtil.swift; sourceTree = "<group>"; };
 		9F7031831A93B0CD00B44342 /* InfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
-		9F7057971AD569D9008058A6 /* flyby.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = flyby.wav; path = ../../../Downloads/flyby.wav; sourceTree = "<group>"; };
 		9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		9F7824531A8A77EA00208C2D /* BaseDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseDAO.swift; sourceTree = "<group>"; };
 		9F7A4B7F1A93C4F900F4C7FC /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
@@ -176,14 +178,6 @@
 			path = ADALiOS;
 			sourceTree = "<group>";
 		};
-		9F7057961AD569CF008058A6 /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				9F7057971AD569D9008058A6 /* flyby.wav */,
-			);
-			name = Sounds;
-			sourceTree = "<group>";
-		};
 		9F70970919C8A85200D805CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +196,7 @@
 				9F8D4CBA19BE4A6100DA5A61 /* Main.storyboard */,
 				9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */,
 				9FF98A581AC2CCB900CB7280 /* MessageCell.swift */,
+				8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -211,7 +206,6 @@
 			children = (
 				9F4B8DE71AC5513C0022144A /* TokenUtil.swift */,
 				9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */,
-				9F3E4BAB1AD7E3FF00FA24CD /* Reachability.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -219,7 +213,8 @@
 		9F8D4CA419BE4A6100DA5A61 = {
 			isa = PBXGroup;
 			children = (
-				9F7057961AD569CF008058A6 /* Sounds */,
+				8F2CA53C1C8F413E00CE700A /* flyby.wav */,
+				8F2CA5381C8F341600CE700A /* sounds */,
 				9FBD797A1AD559EE00E09F34 /* Images.xcassets */,
 				9F42F7451AA6123E001C161E /* ADALiOS */,
 				9F42F7061AA5E1DE001C161E /* Crashlytics.framework */,
@@ -359,6 +354,8 @@
 		9F8D4CA519BE4A6100DA5A61 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Mesan;
 				TargetAttributes = {
@@ -402,7 +399,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F7057981AD569D9008058A6 /* flyby.wav in Resources */,
+				8F2CA53D1C8F413E00CE700A /* flyby.wav in Resources */,
+				8F2CA53B1C8F409800CE700A /* Launch Screen.storyboard in Resources */,
+				8F2CA5391C8F341600CE700A /* sounds in Resources */,
 				9F8E0F3219DDC023006E12AA /* Main.storyboard in Resources */,
 				9FBD797B1AD559EE00E09F34 /* Images.xcassets in Resources */,
 				9F42F7271AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard in Resources */,
@@ -452,7 +451,6 @@
 				9FF4906819DD90B800A42749 /* Image.swift in Sources */,
 				9F3E4BAA1AD7CC2B00FA24CD /* ImageCache.swift in Sources */,
 				9F8D4CD419BE4B2000DA5A61 /* FaghelgApi.swift in Sources */,
-				9F3E4BAC1AD7E3FF00FA24CD /* Reachability.swift in Sources */,
 				9F42F70B1AA5FD4B001C161E /* MessagesViewController.swift in Sources */,
 				9FF6490F19C87EA9004BCFEB /* Event.swift in Sources */,
 				9FF6490D19C87E3E004BCFEB /* Program.swift in Sources */,
@@ -591,12 +589,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Thomas Pettersen (M8AEARF2WB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FaghelgApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -621,12 +620,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MESAN AS";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FaghelgApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,7 +11,7 @@ class ImageCache {
     init() {
         managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
         imageDAO = ImageDAO(managedObjectContext: managedObjectContext!)
-        var imagesFromDatabase = imageDAO.getEntities("Image", includesPendingChanges: true) as! [Image]
+        let imagesFromDatabase = imageDAO.getEntities("Image", includesPendingChanges: true) as! [Image]
         for image in imagesFromDatabase {
             images[image.url] = UIImage(data: image.imageData)!
         }
@@ -28,7 +28,7 @@ class ImageCache {
     
     func addImage(url: String, image: UIImage) {
         dispatch_async(dispatch_get_main_queue(), {
-            var newImage = Image(imageData: UIImagePNGRepresentation(image), url: url, insertIntoManagedObjectContext: self.managedObjectContext)
+            let _ = Image(imageData: UIImagePNGRepresentation(image)!, url: url, insertIntoManagedObjectContext: self.managedObjectContext)
         })
         images[url] = image
     }

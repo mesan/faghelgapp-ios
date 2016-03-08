@@ -34,8 +34,8 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
-        messageDAO = MessageDAO(managedObjectContext: appDelegate.managedObjectContext!)
+        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext)
+        messageDAO = MessageDAO(managedObjectContext: appDelegate.managedObjectContext)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
@@ -53,7 +53,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         textFieldTitle.layer.cornerRadius = 5
         textFieldTitle.autocapitalizationType = UITextAutocapitalizationType.Sentences
         
-        var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapReceived:")
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapReceived:")
         self.view.addGestureRecognizer(tapGestureRecognizer)
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -133,13 +133,13 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     func promptLogin() {
-        var authority = "https://login.windows.net/common"
-        var clientID = "685ff077-c1ca-4d18-b364-7746b4560cea"
-        var redirectURI:NSURL = NSURL(string: "https://faghelg.herokuapp.com")!
+        let authority = "https://login.windows.net/common"
+        let clientID = "685ff077-c1ca-4d18-b364-7746b4560cea"
+        let redirectURI:NSURL = NSURL(string: "https://faghelg.herokuapp.com")!
         
         //Use ADAL to authenticate the user against Azure Active Directory
         var er:ADAuthenticationError? = nil
-        var authContext:ADAuthenticationContext = ADAuthenticationContext(authority: authority, error: &er)
+        let authContext:ADAuthenticationContext = ADAuthenticationContext(authority: authority, error: &er)
         authContext.acquireTokenWithResource("https://faghelg.herokuapp.com", clientId: clientID, redirectUri: redirectURI, completionBlock: { (result: ADAuthenticationResult!) in
             
             if result.error != nil {
@@ -168,7 +168,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     func keyboardWillShow(notification: NSNotification) {
         var info = notification.userInfo!
-        var keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         if let height = tabBarController?.tabBar.frame.size.height {
             self.bottomConstraint.constant = keyboardFrame.size.height - height + constraintValue!
         }
@@ -196,7 +196,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
             textViewMessage.text = nil
         }
         
-        if textFieldTitle.text.isEmpty {
+        if textFieldTitle.text!.isEmpty {
             fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
         }
         
@@ -205,7 +205,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            faghelgApi.sendPush(textFieldTitle.text, content: textView.text)
+            faghelgApi.sendPush(textFieldTitle.text!, content: textView.text)
             
             textView.resignFirstResponder()
             fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
@@ -218,12 +218,12 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     }
     
     func playWhooshSound() {
-        var mysoundname = "flyby"
+        let mysoundname = "flyby"
         
         // Load
         let soundURL = NSBundle.mainBundle().URLForResource(mysoundname, withExtension: "wav")
         var mySound: SystemSoundID = 0
-        AudioServicesCreateSystemSoundID(soundURL, &mySound)
+        AudioServicesCreateSystemSoundID(soundURL!, &mySound)
         
         // Play
         AudioServicesPlaySystemSound(mySound);
@@ -249,7 +249,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
         
         if textFieldTitle.isFirstResponder() && tapGestureRecognizer.view != textFieldTitle {
             textFieldTitle.resignFirstResponder()
-            if textFieldTitle.text.isEmpty {
+            if textFieldTitle.text!.isEmpty {
                 fillInPlaceholderText(textFieldTitle, text: placeholderTextTitle!)
             }
         }
@@ -257,13 +257,13 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     private func fillInPlaceholderText(textInput: UITextInput, text: String) {
         if textInput is UITextView {
-            var textView = textInput as! UITextView
+            let textView = textInput as! UITextView
             textView.text = text
             textView.textColor = UIColor.lightGrayColor()
         }
         
         if textInput is UITextField {
-            var textField = textInput as! UITextField
+            let textField = textInput as! UITextField
             textField.text = text
             textField.textColor = UIColor.lightGrayColor()
         }
@@ -271,7 +271,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
     
     func increaseBadgeValue() {
         if !viewIsShowing() {
-            if let badgeValue = tabBarItem.badgeValue?.toInt() {
+            if let badgeValue = Int((tabBarItem.badgeValue)!) {
                 var newValue = badgeValue + 1
                 tabBarItem.badgeValue = String(newValue)
             }
@@ -320,9 +320,9 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
                 if error == nil {
-                    if let image = UIImage(data: data) {
+                    if let image = UIImage(data: data!) {
                         
                         // Store the image in to our cache
                         self.imageCache.addImage(url, image: image)
@@ -334,7 +334,7 @@ class MessagesViewController: UIViewController, UITextViewDelegate, UITextFieldD
                     }
                 }
                 else {
-                    println("Error: \(error.localizedDescription)")
+                    print("Error: \(error!.localizedDescription)")
                 }
             })
         }

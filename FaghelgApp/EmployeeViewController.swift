@@ -13,12 +13,12 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext)
         initRefreshControl()
     }
     
     func initRefreshControl() {
-        var refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged )
         self.tableView.addSubview(refreshControl)
     }
@@ -67,15 +67,13 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
                 if error == nil {
-                    var image = UIImage(data: data)
+                    var image = UIImage(data: data!)!
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         // Store the image in to our cache
-                        if image != nil {
-                            self.imageCache.addImage(employee.profileImageUrl!, image: image!)
-                        }
+                        self.imageCache.addImage(employee.profileImageUrl!, image: image)
                         
                         if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
                             cellToUpdate.showImage(image)
@@ -83,7 +81,7 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
                     })
                 }
                 else {
-                    println("Error: \(error.localizedDescription)")
+                    print("Error: \(error!.localizedDescription)")
                 }
             })
         }

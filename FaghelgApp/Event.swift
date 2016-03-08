@@ -33,11 +33,11 @@ class Event: NSManagedObject {
         let desc = jsonDict["description"] as? String
         let hostNames = jsonDict["hostNames"] as? String
         
-        var responsible: Person? = nil;
+        let responsible: Person? = nil;
         if let responsibleDict = jsonDict["responsible"] as? NSDictionary {
-            var personDAO = PersonDAO(managedObjectContext: context)
+            let personDAO = PersonDAO(managedObjectContext: context)
             
-            var shortName = responsibleDict["shortName"] as! String
+            let shortName = responsibleDict["shortName"] as! String
             var responsible = personDAO.getPerson(shortName)
             
             if responsible == nil {
@@ -45,7 +45,7 @@ class Event: NSManagedObject {
             }
         }
         
-        var event = Event(start: start, end: end, desc: desc, title: title, hostNames: hostNames, eventImageUrl: eventImageUrl, responsible: responsible, insertIntoManagedObjectContext: context)
+        let event = Event(start: start, end: end, desc: desc, title: title, hostNames: hostNames, eventImageUrl: eventImageUrl, responsible: responsible, insertIntoManagedObjectContext: context)
         
         return event
     }

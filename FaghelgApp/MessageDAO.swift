@@ -8,7 +8,7 @@ class MessageDAO : BaseDAO {
     
     func getMessages() -> [Message]? {
         if let messages = getEntities("Message", includesPendingChanges: true) as? [Message] {
-            var sortedMessages = sorted(messages){ $0.timestamp > $1.timestamp }
+            let sortedMessages = messages.sort{ $0.timestamp > $1.timestamp }
             return sortedMessages
         }
         

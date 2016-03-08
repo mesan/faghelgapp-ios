@@ -9,10 +9,10 @@ class ImageDAO : BaseDAO {
     
     func getImage(url: String) -> Image? {
         var image: Image?
-        var nsFetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Image")
+        let nsFetchRequest: NSFetchRequest = NSFetchRequest(entityName: "Image")
         nsFetchRequest.includesPendingChanges = false
         nsFetchRequest.predicate = NSPredicate(format: "url = %@", url)
-        var images: NSArray = self.managedObjectContext.executeFetchRequest(nsFetchRequest, error: nil) as NSArray!
+        let images: NSArray = (try? self.managedObjectContext.executeFetchRequest(nsFetchRequest)) as NSArray!
         
         image = images.firstObject as? Image
         

@@ -11,7 +11,7 @@ class ProgramDAO: BaseDAO {
     }
     
     func getProgram() -> Program? {
-        var program = Program()
+        let program = Program()
         
         if let events = getEntities("Event", includesPendingChanges: false) as? [Event] {
             program.addEvents(events)

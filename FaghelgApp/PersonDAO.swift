@@ -9,7 +9,7 @@ class PersonDAO: BaseDAO {
     
     func getPersons() -> [Person]? {
         if let persons = getEntities("Person", includesPendingChanges: true) as? [Person] {
-            var sortedPersons = sorted(persons){ $0.fullName < $1.fullName }
+            let sortedPersons = persons.sort{ $0.fullName < $1.fullName }
             return sortedPersons
         }
 

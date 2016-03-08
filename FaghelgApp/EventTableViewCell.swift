@@ -42,9 +42,9 @@ class EventTableViewCell: UITableViewCell {
             nameLabel.text = nil
         }
         
-        var durationSeconds:Double = event.end.timeIntervalSinceDate(event.start)
-        var durationMinutes:Double = durationSeconds / 60
-        var durationString: String? = String(format: "%.0f min", durationMinutes)
+        let durationSeconds:Double = event.end.timeIntervalSinceDate(event.start)
+        let durationMinutes:Double = durationSeconds / 60
+        let durationString: String? = String(format: "%.0f min", durationMinutes)
         if (durationString != nil) {
             durationLabel.text = durationString
         }

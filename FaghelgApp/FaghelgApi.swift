@@ -43,9 +43,9 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func getProgram(callback: (Program?) -> Void) {
-        var request = makeRequest("/program", HTTPMethod: "GET", withAuthentication: false)
+        let request = makeRequest("/program", HTTPMethod: "GET", withAuthentication: false)
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             var program: Program?
             
             if error != nil {
@@ -54,65 +54,73 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                 return
             }
             
-            var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
-            let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary
-            
-            if (jsonResult != nil) {
-                program = Program.fromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
-                self.programDAO.clearOldProgram()
-            } else {
-                program = self.programDAO.getProgram()
+            do {
+                let jsonResult: NSDictionary! = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers) as? NSDictionary
+                if (jsonResult != nil) {
+                    program = Program.fromJson(jsonResult, managedObjectContext: self.managedObjectContext!)
+                    self.programDAO.clearOldProgram()
+                } else {
+                    program = self.programDAO.getProgram()
+                }
+
+            } catch {
+                //TODO: Error handling
             }
+            
             
             callback(program)
         })
     }
     
     func getEmployees(callback: ([Person]) -> Void) {
-        var request = makeRequest("/persons", HTTPMethod: "GET", withAuthentication: false)
+        let request = makeRequest("/persons", HTTPMethod: "GET", withAuthentication: false)
 
         var employees: [Person]?
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
 
             
             if error != nil {
                 employees = self.personDAO.getPersons()
-                var sortedEmployees = sorted(employees!){ $0.fullName < $1.fullName }
+                let sortedEmployees = (employees!).sort{ $0.fullName < $1.fullName }
                 callback(sortedEmployees)
                 return
             }
             
-            var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
-            let jsonResult: NSArray! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSArray
-            
-            if (jsonResult != nil) {
-                employees = [Person]()
-                let employeesFromDataBase = self.personDAO.getEntities("Person", includesPendingChanges: false) as! [Person]
+            do {
+                let jsonResult: NSArray! = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers) as? NSArray
                 
-                for jsonObject in jsonResult {
-                    var jsonDict = jsonObject as! NSDictionary
-                    var shortName = jsonDict["shortName"] as! String
-                    var employee = self.personDAO.getPerson(shortName)
+                if (jsonResult != nil) {
+                    employees = []
+                    //let employeesFromDataBase = self.personDAO.getEntities("Person", includesPendingChanges: false) as! [Person]
                     
-                    if employee == nil {
-                        employee = Person.fromJson(jsonDict, insertIntoManagedObjectContext: self.managedObjectContext!)
+                    for jsonObject in jsonResult {
+                        let jsonDict = jsonObject as! NSDictionary
+                        let shortName = jsonDict["shortName"] as! String
+                        var employee = self.personDAO.getPerson(shortName)
+                        
+                        if employee == nil {
+                            employee = Person.fromJson(jsonDict, insertIntoManagedObjectContext: self.managedObjectContext!)
+                        }
+                        
+                        employees!.append(employee!)
                     }
-                    
-                    employees!.append(employee!)
+                } else {
+                    employees = self.personDAO.getPersons()
                 }
-            } else {
-                employees = self.personDAO.getPersons()
+
+            } catch {
+                //TODO: Error handling
             }
             
-            var sortedEmployees = sorted(employees!){ $0.fullName < $1.fullName }
+            let sortedEmployees = (employees!).sort{ $0.fullName < $1.fullName }
             callback(sortedEmployees)
         })
     }
 
     func getInfo(callback: (Info) -> Void) {
-        var request = makeRequest("/info", HTTPMethod: "GET", withAuthentication: false)
+        let request = makeRequest("/info", HTTPMethod: "GET", withAuthentication: false)
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             
             if error != nil {
                 if let info = self.infoDAO.getInfo() {
@@ -121,27 +129,30 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
                 return
             }
             
-            var info: Info!
-            var error: AutoreleasingUnsafeMutablePointer<NSError?> = nil
-            if let jsonResult: NSDictionary! = NSJSONSerialization.JSONObjectWithData(data, options:NSJSONReadingOptions.MutableContainers, error: error) as? NSDictionary {
-                info = Info.fromJson(jsonResult!, insertIntoManagedObjectContext: self.managedObjectContext!)
-            }
-            else {
-                info = self.infoDAO.getInfo()
-            }
             
-            callback(info)
+            do {
+                var info: Info!
+                if let jsonResult: NSDictionary! = try NSJSONSerialization.JSONObjectWithData(data!, options:NSJSONReadingOptions.MutableContainers) as? NSDictionary {
+                    info = Info.fromJson(jsonResult!, insertIntoManagedObjectContext: self.managedObjectContext!)
+                }
+                else {
+                    info = self.infoDAO.getInfo()
+                }
+                callback(info)
+            } catch {
+                //TODO: Error handling
+            }
         })
     }
     
     func makeRequest(path: String, HTTPMethod: String, withAuthentication: Bool) -> NSMutableURLRequest {
-        var url = HOST + path
-        var request = NSMutableURLRequest()
+        let url = HOST + path
+        let request = NSMutableURLRequest()
         request.URL = NSURL(string: url)
         request.HTTPMethod = HTTPMethod
         
         if withAuthentication {
-            var token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
+            let token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
             request.setValue(token, forHTTPHeaderField: "Authorization")
         }
         return request
@@ -152,17 +163,17 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func registerForPushWithoutLogin(pushDevice: PushDevice) {
-        var request = makeRequest("/push?registrationId=\(pushDevice.token)&os=\(pushDevice.os)", HTTPMethod: "GET", withAuthentication: false)
+        let request = makeRequest("/push?registrationId=\(pushDevice.token)&os=\(pushDevice.os)", HTTPMethod: "GET", withAuthentication: false)
 
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler: { (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler: { (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             if let HTTPResponse = response as? NSHTTPURLResponse {
                 if !(HTTPResponse.statusCode == 201) {
-                    println("Failed registering for push")
+                    print("Failed registering for push")
                 }
             }
             else {
                 // TODO: Alert the user
-                println("Can't register for push. No internet connection")
+                print("Can't register for push. No internet connection")
             }
         })
         
@@ -176,15 +187,18 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
             }
         }
         
-        var request = makeRequest("/push/register", HTTPMethod: "POST", withAuthentication: true)
+        let request = makeRequest("/push/register", HTTPMethod: "POST", withAuthentication: true)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        var err: NSError?
-        var params = ["token": pushDevice.token, "owner": pushDevice.owner, "os": pushDevice.os]
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
+        let params = ["token": pushDevice.token, "owner": pushDevice.owner, "os": pushDevice.os]
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: [])
+        } catch {
+            request.HTTPBody = nil
+        }
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-            var HTTPResponse = response as! NSHTTPURLResponse
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+            let HTTPResponse = response as! NSHTTPURLResponse
             if HTTPResponse.statusCode == 201 {
                 NSUserDefaults.standardUserDefaults().setObject(true, forKey: "registeredForPush")
                 NSUserDefaults.standardUserDefaults().synchronize()
@@ -193,19 +207,21 @@ class FaghelgApi : NSObject, NSFetchedResultsControllerDelegate {
     }
     
     func sendPush(title: String, content: String) {
-        var request = makeRequest("/push", HTTPMethod: "POST", withAuthentication: true)
+        let request = makeRequest("/push", HTTPMethod: "POST", withAuthentication: true)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let dateStringFormatter = NSDateFormatter()
         dateStringFormatter.dateFormat = "dd.MM.YYYY HH:mm"
-        var timestamp = dateStringFormatter.stringFromDate(NSDate())
         
-        var params = ["content": content, "title": title] as Dictionary<String, String>
+        let params = ["content": content, "title": title] as Dictionary<String, String>
         
-        var err: NSError?
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: [])
+        } catch {
+            request.HTTPBody = nil
+        }
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue(), completionHandler:{ (response:NSURLResponse?, data: NSData?, error: NSError?) -> Void in
             var HTTPResponse = response as! NSHTTPURLResponse
         })
     }

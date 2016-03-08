@@ -25,12 +25,12 @@ class Program: NSObject {
     }
     
     class func fromJson(jsonDict: NSDictionary, managedObjectContext: NSManagedObjectContext) -> Program {
-        var numberOfEvents = jsonDict["numberOfEvents"] as? Int
+        let numberOfEvents = jsonDict["numberOfEvents"] as? Int
         var events = [Event]()
         
-        var eventsDict: NSArray = jsonDict["events"] as! NSArray
+        let eventsDict: NSArray = jsonDict["events"] as! NSArray
         for eventDict in eventsDict as! [NSDictionary] {
-            var event = Event.fromJson(eventDict, insertIntoManagedObjectContext: managedObjectContext)
+            let event = Event.fromJson(eventDict, insertIntoManagedObjectContext: managedObjectContext)
             events.append(event)
         }
         

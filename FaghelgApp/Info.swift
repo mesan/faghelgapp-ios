@@ -40,7 +40,7 @@ class Info: NSManagedObject {
         let hotelName = (jsonDict["hotelName"] as! String).capitalizedString
         let hotelDescription = jsonDict["hotelDescription"]as! String
         
-        var info = Info(address: address, locationDescription: locationDescription, imageUrl: imageUrl, lat: lat, lng: lng, locationName: locationName, hotelDescription: hotelDescription, hotelName: hotelName, toDoList: nil, directions: nil, insertIntoManagedObjectContext: context)
+        let info = Info(address: address, locationDescription: locationDescription, imageUrl: imageUrl, lat: lat, lng: lng, locationName: locationName, hotelDescription: hotelDescription, hotelName: hotelName, toDoList: nil, directions: nil, insertIntoManagedObjectContext: context)
         
         return info
     }

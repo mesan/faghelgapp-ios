@@ -20,7 +20,7 @@ class Person: NSManagedObject {
         let shortName = jsonDict["shortName"] as! String
         let profileImageUrl = jsonDict["profileImageUrl"] as! String
         
-        var person = Person(shortName: shortName, fullName: fullName, profileImageUrl: profileImageUrl, insertIntoManagedObjectContext: context)
+        let person = Person(shortName: shortName, fullName: fullName, profileImageUrl: profileImageUrl, insertIntoManagedObjectContext: context)
         
         return person
     }

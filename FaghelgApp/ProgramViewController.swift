@@ -47,13 +47,13 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext!)
+        faghelgApi = FaghelgApi(managedObjectContext: appDelegate.managedObjectContext)
         
         initRefreshControl()
     }
     
     func initRefreshControl() {
-        var refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: Selector("handleRefresh:"), forControlEvents: UIControlEvents.ValueChanged )
         self.tableView.addSubview(refreshControl)
     }
@@ -79,7 +79,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         self.allEvents = program!.events
-        self.allEvents.sort { (event1, event2) -> Bool in
+        self.allEvents.sortInPlace { (event1, event2) -> Bool in
             return event1.start.compare(event2.start) == NSComparisonResult.OrderedAscending
         }
         
@@ -87,10 +87,10 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.eventDates = []
         for event in self.allEvents {
-            let dateComponents = calendar?.components(NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitYear, fromDate: event.start)
+            let dateComponents = calendar?.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: event.start)
             let date = calendar?.dateFromComponents(dateComponents!)
             
-            if (!contains(self.eventDates, date!)) {
+            if (!self.eventDates.contains(date!)) {
                 self.eventDates.append(date!)
             }
         }
@@ -117,7 +117,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         
         var selectedIndex = 0
         for (var i = 0; i < eventDates.count; i++) {
-            let day = calendar?.component(NSCalendarUnit.CalendarUnitWeekday, fromDate: eventDates[i])
+            let day = calendar?.component(NSCalendarUnit.Weekday, fromDate: eventDates[i])
             self.dayFilter.insertSegmentWithTitle(Day(rawValue: day!)!.description, atIndex: i, animated: false)
             
             if (day == selectedDay.rawValue) {
@@ -131,18 +131,18 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
     func currentDayOfWeek() -> Day {
         let today = NSDate()
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let day = calendar?.component(NSCalendarUnit.CalendarUnitWeekday, fromDate: today)
+        let day = calendar?.component(NSCalendarUnit.Weekday, fromDate: today)
         
         return Day(rawValue: day!)!
     }
     
     func scrollToCurrentEvent() {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let currentHour = calendar?.component(NSCalendarUnit.CalendarUnitHour, fromDate: NSDate())
+        let currentHour = calendar?.component(NSCalendarUnit.Hour, fromDate: NSDate())
         
         var currentEventIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        for (index, event: Event) in enumerate(self.filteredEvents) {
-            let eventHour = calendar?.component(NSCalendarUnit.CalendarUnitHour, fromDate: event.start)
+        for (index, event): (Int, Event) in self.filteredEvents.enumerate() {
+            let eventHour = calendar?.component(NSCalendarUnit.Hour, fromDate: event.start)
             
             if (currentHour == eventHour) {
                 currentEventIndexPath = NSIndexPath(forRow: index, inSection: 0)
@@ -169,7 +169,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         let date = eventDates[dayFilter.selectedSegmentIndex]
         
         filteredEvents = allEvents.filter() { (event: Event) -> Bool in
-            return calendar?.compareDate(date, toDate: event.start, toUnitGranularity: NSCalendarUnit.CalendarUnitDay) == NSComparisonResult.OrderedSame
+            return calendar?.compareDate(date, toDate: event.start, toUnitGranularity: NSCalendarUnit.Day) == NSComparisonResult.OrderedSame
         }
     }
     
@@ -192,9 +192,9 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
             
             // Download an NSData representation of the image at the URL
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
                 if error == nil {
-                    let image = UIImage(data: data)
+                    let image = UIImage(data: data!)
                         
                     if image != nil {
                         // Store the image in to our cache
@@ -206,7 +206,7 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
                     })
                 }
                 else {
-                    println("Error: \(error.localizedDescription)")
+                    print("Error: \(error!.localizedDescription)")
                 }
             })
         }
