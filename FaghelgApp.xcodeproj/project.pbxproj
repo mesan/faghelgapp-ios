@@ -9,13 +9,16 @@
 /* Begin PBXBuildFile section */
 		1D1AC15119D0804500628488 /* EmployeeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1AC15019D0804500628488 /* EmployeeCell.swift */; };
 		4524AAAE19D083A900CCF884 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */; };
-		8F2CA5391C8F341600CE700A /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 8F2CA5381C8F341600CE700A /* sounds */; };
 		8F2CA53B1C8F409800CE700A /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */; };
 		8F2CA53D1C8F413E00CE700A /* flyby.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8F2CA53C1C8F413E00CE700A /* flyby.wav */; };
 		96234E7719C88905006811D5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96234E7619C88905006811D5 /* CoreData.framework */; };
 		963636AC19D06E1500021DA1 /* FaghelgApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 963636AA19D06E1500021DA1 /* FaghelgApp.xcdatamodeld */; };
 		9F0B07D21A8B7D3C00781E60 /* ImageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */; };
 		9F0B07D71A938EF300781E60 /* InfoDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0B07D61A938EF300781E60 /* InfoDAO.swift */; };
+		9F24E1301C959BEA00161E45 /* Program.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F24E12E1C959BEA00161E45 /* Program.storyboard */; };
+		9F24E1331C959C0E00161E45 /* Ansatte.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F24E1311C959C0E00161E45 /* Ansatte.storyboard */; };
+		9F24E1361C959C1F00161E45 /* Meldinger.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F24E1341C959C1F00161E45 /* Meldinger.storyboard */; };
+		9F24E1391C959C5300161E45 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F24E1371C959C5300161E45 /* Info.storyboard */; };
 		9F3BED5A1ABAC17900D2C8BA /* libADALiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3BED581ABAC16200D2C8BA /* libADALiOS.a */; };
 		9F3E4BAA1AD7CC2B00FA24CD /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */; };
 		9F42F7081AA5E1DE001C161E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F42F7061AA5E1DE001C161E /* Crashlytics.framework */; };
@@ -72,7 +75,6 @@
 /* Begin PBXFileReference section */
 		1D1AC15019D0804500628488 /* EmployeeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeCell.swift; sourceTree = "<group>"; };
 		4524AAAD19D083A900CCF884 /* EmployeeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
-		8F2CA5381C8F341600CE700A /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sounds; path = FaghelgApp/sounds; sourceTree = "<group>"; };
 		8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8F2CA53C1C8F413E00CE700A /* flyby.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = flyby.wav; path = FaghelgApp/sounds/flyby.wav; sourceTree = "<group>"; };
 		96234E7619C88905006811D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -80,6 +82,10 @@
 		9F0B07D11A8B7D3C00781E60 /* ImageDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDAO.swift; sourceTree = "<group>"; };
 		9F0B07D51A9389F800781E60 /* FaghelgApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FaghelgApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		9F0B07D61A938EF300781E60 /* InfoDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDAO.swift; sourceTree = "<group>"; };
+		9F24E12F1C959BEA00161E45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Program.storyboard; sourceTree = "<group>"; };
+		9F24E1321C959C0E00161E45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Ansatte.storyboard; sourceTree = "<group>"; };
+		9F24E1351C959C1F00161E45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Meldinger.storyboard; sourceTree = "<group>"; };
+		9F24E1381C959C5300161E45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Info.storyboard; sourceTree = "<group>"; };
 		9F3BED581ABAC16200D2C8BA /* libADALiOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libADALiOS.a; sourceTree = "<group>"; };
 		9F3E4BA91AD7CC2B00FA24CD /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		9F42F7061AA5E1DE001C161E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -150,6 +156,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F24E13A1C959C6600161E45 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9F8D4CBA19BE4A6100DA5A61 /* Main.storyboard */,
+				9F24E1371C959C5300161E45 /* Info.storyboard */,
+				9F24E1341C959C1F00161E45 /* Meldinger.storyboard */,
+				9F24E1311C959C0E00161E45 /* Ansatte.storyboard */,
+				9F24E12E1C959BEA00161E45 /* Program.storyboard */,
+				8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		9F42F7361AA611A0001C161E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,11 +211,10 @@
 		9F70970B19C8A89500D805CB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9F24E13A1C959C6600161E45 /* Storyboards */,
 				1D1AC15019D0804500628488 /* EmployeeCell.swift */,
-				9F8D4CBA19BE4A6100DA5A61 /* Main.storyboard */,
 				9F70970E19C8AA7700D805CB /* EventTableViewCell.swift */,
 				9FF98A581AC2CCB900CB7280 /* MessageCell.swift */,
-				8F2CA53A1C8F409800CE700A /* Launch Screen.storyboard */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -213,8 +231,7 @@
 		9F8D4CA419BE4A6100DA5A61 = {
 			isa = PBXGroup;
 			children = (
-				8F2CA53C1C8F413E00CE700A /* flyby.wav */,
-				8F2CA5381C8F341600CE700A /* sounds */,
+				9FFA15FC1C8F5C72002F30B5 /* Sounds */,
 				9FBD797A1AD559EE00E09F34 /* Images.xcassets */,
 				9F42F7451AA6123E001C161E /* ADALiOS */,
 				9F42F7061AA5E1DE001C161E /* Crashlytics.framework */,
@@ -306,6 +323,14 @@
 				9F4B8DE51AC54FAB0022144A /* PushDevice.swift */,
 			);
 			name = Domain;
+			sourceTree = "<group>";
+		};
+		9FFA15FC1C8F5C72002F30B5 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				8F2CA53C1C8F413E00CE700A /* flyby.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,11 +425,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F2CA53D1C8F413E00CE700A /* flyby.wav in Resources */,
+				9F24E1361C959C1F00161E45 /* Meldinger.storyboard in Resources */,
+				9F24E1331C959C0E00161E45 /* Ansatte.storyboard in Resources */,
 				8F2CA53B1C8F409800CE700A /* Launch Screen.storyboard in Resources */,
-				8F2CA5391C8F341600CE700A /* sounds in Resources */,
+				9F24E1301C959BEA00161E45 /* Program.storyboard in Resources */,
 				9F8E0F3219DDC023006E12AA /* Main.storyboard in Resources */,
 				9FBD797B1AD559EE00E09F34 /* Images.xcassets in Resources */,
 				9F42F7271AA609E2001C161E /* ADAL_iPad_Storyboard.storyboard in Resources */,
+				9F24E1391C959C5300161E45 /* Info.storyboard in Resources */,
 				9F42F7261AA609E2001C161E /* ADAL_iPhone_Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +514,38 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		9F24E12E1C959BEA00161E45 /* Program.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F24E12F1C959BEA00161E45 /* Base */,
+			);
+			name = Program.storyboard;
+			sourceTree = "<group>";
+		};
+		9F24E1311C959C0E00161E45 /* Ansatte.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F24E1321C959C0E00161E45 /* Base */,
+			);
+			name = Ansatte.storyboard;
+			sourceTree = "<group>";
+		};
+		9F24E1341C959C1F00161E45 /* Meldinger.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F24E1351C959C1F00161E45 /* Base */,
+			);
+			name = Meldinger.storyboard;
+			sourceTree = "<group>";
+		};
+		9F24E1371C959C5300161E45 /* Info.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F24E1381C959C5300161E45 /* Base */,
+			);
+			name = Info.storyboard;
+			sourceTree = "<group>";
+		};
 		9F8D4CBA19BE4A6100DA5A61 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -596,7 +656,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FaghelgApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -628,7 +688,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = FaghelgApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -19,17 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 showMessagesViewController()
             }
         }
-        
-        setTabBarTintColor()
+        application.setStatusBarStyle(UIStatusBarStyle.LightContent, animated: false)
         
         return true
-    }
-    
-    func setTabBarTintColor() {
-        let tabBarController = self.window?.rootViewController as! UITabBarController
-        let tabBar = tabBarController.tabBar
-        let mesanRed = UIColor(red: 197.0/256, green: 14.0/256, blue: 31.0/256, alpha: 1.0)
-        tabBar.tintColor = mesanRed
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
