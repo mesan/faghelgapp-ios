@@ -183,32 +183,35 @@ class ProgramViewController: UIViewController, UITableViewDataSource, UITableVie
         let event : Event! = filteredEvents[indexPath.row] as Event
         cell.setEvent(event);
         
-        if let image = self.imageCache.getImage(event.eventImageUrl!) {
+        if let eventImageUrl = event.eventImageUrl,
+        image = self.imageCache.getImage(eventImageUrl) {
             cell.showImage(image)
         }
         else {
             // If the image does not exist, we need to download it
-            let imgURL: NSURL = NSURL(string: event.eventImageUrl!)!
-            
-            // Download an NSData representation of the image at the URL
-            let request: NSURLRequest = NSURLRequest(URL: imgURL)
-            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
-                if error == nil {
-                    let image = UIImage(data: data!)
+            if let eventImageUrl = event.eventImageUrl,
+            imgURL = NSURL(string: eventImageUrl) {
+
+                // Download an NSData representation of the image at the URL
+                let request: NSURLRequest = NSURLRequest(URL: imgURL)
+                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
+                    if error == nil {
+                        let image = UIImage(data: data!)
+                            
+                        if image != nil {
+                            // Store the image in to our cache
+                            self.imageCache.addImage(event.eventImageUrl!, image: image!)
+                        }
                         
-                    if image != nil {
-                        // Store the image in to our cache
-                        self.imageCache.addImage(event.eventImageUrl!, image: image!)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            cell.showImage(image)
+                        })
                     }
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
-                        cell.showImage(image)
-                    })
-                }
-                else {
-                    print("Error: \(error!.localizedDescription)")
-                }
-            })
+                    else {
+                        print("Error: \(error!.localizedDescription)")
+                    }
+                })
+            }
         }
         
         if (self.selectedIndexPath != nil && self.selectedIndexPath!.row == indexPath.row) {

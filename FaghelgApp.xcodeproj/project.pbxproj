@@ -667,7 +667,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.mesan.apps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c16f5977-e466-4d19-95ad-aebe055779a3";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -698,7 +698,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "no.mesan.apps.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c16f5977-e466-4d19-95ad-aebe055779a3";
 				SWIFT_OBJC_BRIDGING_HEADER = "FaghelgApp/FaghelgApp-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

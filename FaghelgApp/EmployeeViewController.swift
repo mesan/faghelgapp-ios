@@ -69,16 +69,22 @@ class EmployeeViewController: UIViewController, UITableViewDataSource, UITableVi
             let request: NSURLRequest = NSURLRequest(URL: imgURL)
             NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse?,data: NSData?,error: NSError?) -> Void in
                 if error == nil {
-                    let image = UIImage(data: data!)!
+                    var image : UIImage? = UIImage(named: "contacts")!
+                    if data != nil {
+                        image = UIImage(data: data!)
+                    }
                     
-                    dispatch_async(dispatch_get_main_queue(), {
-                        // Store the image in to our cache
-                        self.imageCache.addImage(employee.profileImageUrl!, image: image)
-                        
-                        if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
-                            cellToUpdate.showImage(image)
-                        }
-                    })
+                    if image != nil {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            // Store the image in to our cache
+                            self.imageCache.addImage(employee.profileImageUrl!, image: image!)
+                            
+                            if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) as? EmployeeCell {
+                                cellToUpdate.showImage(image)
+                            }
+                        })
+                    }
+
                 }
                 else {
                     print("Error: \(error!.localizedDescription)")
